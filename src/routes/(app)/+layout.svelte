@@ -21,6 +21,7 @@
   const { data } = $props();
 
   let open = $state(false);
+  let openTray = $state(false);
 </script>
 
 <AuthGuard currentUser={data.currentUser}>
@@ -35,11 +36,27 @@
       },
       onDrop: (files) => {
         open = false;
-        console.log('dropped ', files);
+        openTray = true;
       }
     }}
   >
     <SmartDialog bind:open />
+    <Sheet.Root
+      open={openTray}
+      onOpenChange={(newState) => {
+        openTray = newState;
+      }}
+    >
+      <Sheet.Content class="w-full sm:max-w-full">
+        <Sheet.Header>
+          <Sheet.Title>Are you sure absolutely sure?</Sheet.Title>
+          <Sheet.Description>
+            This action cannot be undone. This will permanently delete your account and
+            remove your data from our servers.
+          </Sheet.Description>
+        </Sheet.Header>
+      </Sheet.Content>
+    </Sheet.Root>
     <Sidebar />
     <div class="flex flex-col pt-[72px] sm:gap-4 sm:pb-4 sm:pl-14">
       <header
