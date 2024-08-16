@@ -8,13 +8,14 @@
 
   const { data } = $props();
 
+  const formState = $state({
+    userNameOrEmail: '',
+    password: ''
+  });
+
   let isLoaded = $state(false);
   $effect(() => {
-    if (data.currentUser) {
-      goto('/');
-    } else {
-      isLoaded = true;
-    }
+    data.currentUser ? goto('/') : (isLoaded = true);
   });
 </script>
 
@@ -24,15 +25,18 @@
       <Card.Header>
         <Card.Title class="text-2xl">Login</Card.Title>
         <Card.Description>Enter your email below to login to your account.</Card.Description>
+        <Card.Description>
+          {formState.userNameOrEmail}
+        </Card.Description>
       </Card.Header>
       <Card.Content class="grid gap-4">
         <div class="grid gap-2">
-          <Label for="email">Username or email</Label>
-          <Input id="email" required />
+          <Label for="userNameOrEmail">Username or email</Label>
+          <Input id="userNameOrEmail" required bind:value={formState.userNameOrEmail} />
         </div>
         <div class="grid gap-2">
           <Label for="password">Password</Label>
-          <Input id="password" type="password" required />
+          <Input id="password" type="password" required bind:value={formState.password} />
         </div>
       </Card.Content>
       <Card.Footer>

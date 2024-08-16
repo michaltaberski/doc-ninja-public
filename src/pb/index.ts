@@ -3,8 +3,8 @@ import PocketBase from 'pocketbase';
 const pb = new PocketBase('https://db.doc.ninja');
 
 // Auth
-export const login = async (email: string, password: string) => {
-  return await pb.collection('users').authWithPassword(email, password);
+export const login = async (usernameOrEmail: string, password: string) => {
+  return await pb.collection('users').authWithPassword(usernameOrEmail, password);
 };
 
 export const logout = () => pb.authStore.clear();
