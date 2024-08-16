@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { invalidateAll } from '$app/navigation';
   import * as Breadcrumb from '$lib/components/ui/breadcrumb';
   import { Button } from '$lib/components/ui/button';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
@@ -6,6 +7,7 @@
   import * as Sheet from '$lib/components/ui/sheet';
   import * as Tooltip from '$lib/components/ui/tooltip';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
+  import { logout } from '@/pb/index.js';
   import {
     Home,
     LineChart,
@@ -216,7 +218,12 @@
             <DropdownMenu.Item>Settings</DropdownMenu.Item>
             <DropdownMenu.Item>Support</DropdownMenu.Item>
             <DropdownMenu.Separator />
-            <DropdownMenu.Item>Logout</DropdownMenu.Item>
+            <DropdownMenu.Item
+              onclick={() => {
+                logout();
+                invalidateAll();
+              }}>Logout</DropdownMenu.Item
+            >
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       </header>

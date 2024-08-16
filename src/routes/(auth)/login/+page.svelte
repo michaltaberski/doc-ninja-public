@@ -5,13 +5,22 @@
   import { Input } from '@/lib/components/ui/input';
   import { Label } from '@/lib/components/ui/label';
   import { login } from '@/pb';
+  import { createForm } from './create-form.svelte';
+  import { cn } from '@/lib/utils';
+  import { Loader } from 'lucide-svelte';
 
   const { data } = $props();
 
-  const formState = $state({
-    userNameOrEmail: '',
-    password: ''
-  });
+  const form = createForm(
+    { userNameOrEmail: '', password: '' },
+    {
+      onSubmit: async ({ userNameOrEmail, password }) => {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await login(userNameOrEmail, password);
+        await invalidateAll();
+      }
+    }
+  );
 
   let isLoaded = $state(false);
   $effect(() => {
@@ -29,22 +38,32 @@
       <Card.Content class="grid gap-4">
         <div class="grid gap-2">
           <Label for="userNameOrEmail">Username or email</Label>
-          <Input id="userNameOrEmail" required bind:value={formState.userNameOrEmail} />
+          <Input
+            id="userNameOrEmail"
+            required
+            bind:value={form.state.userNameOrEmail}
+            disabled={form.formMeta.isSubmitting}
+          />
         </div>
         <div class="grid gap-2">
           <Label for="password">Password</Label>
-          <Input id="password" type="password" required bind:value={formState.password} />
+          <Input
+            id="password"
+            type="password"
+            required
+            bind:value={form.state.password}
+            disabled={form.formMeta.isSubmitting}
+          />
         </div>
       </Card.Content>
       <Card.Footer>
         <Button
-          class="w-full"
-          onclick={async () => {
-            await login(formState.userNameOrEmail, formState.password);
-            invalidateAll();
-          }}
+          class="relative w-full"
+          onclick={form.handleSubmit}
+          disabled={form.formMeta.isSubmitting}
         >
-          Sign in
+          <span class={cn(form.formMeta.isSubmitting && 'hidden')}>Sign in</span>
+          <Loader class={cn(!form.formMeta.isSubmitting && 'hidden')} />
         </Button>
       </Card.Footer>
     </Card.Root>
