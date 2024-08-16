@@ -49,7 +49,12 @@
           <h1 class="text-xl font-semibold">DocNinja</h1>
           <Sheet.Root>
             <Sheet.Trigger asChild let:builder>
-              <Button builders={[builder]} size="icon" variant="outline" class="sm:hidden">
+              <Button
+                builders={[builder]}
+                size="icon"
+                variant="outline"
+                class="sm:hidden"
+              >
                 <PanelLeft class="h-5 w-5" />
                 <span class="sr-only">Toggle Menu</span>
               </Button>

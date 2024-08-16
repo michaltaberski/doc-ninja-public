@@ -4,7 +4,10 @@ export interface FileDropOptions {
   onDrop?: (files: FileList) => void;
 }
 
-export function fileDrop(node: HTMLElement, { onDragEnter, onDragLeave, onDrop }: FileDropOptions) {
+export function fileDrop(
+  node: HTMLElement,
+  { onDragEnter, onDragLeave, onDrop }: FileDropOptions
+) {
   let dragCounter = 0;
 
   // Handle the dragenter event

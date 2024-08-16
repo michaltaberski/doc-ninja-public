@@ -29,7 +29,9 @@
     <Table.Row>
       <Table.Cell>
         <div class="font-medium">Olivia Smith</div>
-        <div class="hidden text-sm text-muted-foreground md:inline">olivia@example.com</div>
+        <div class="hidden text-sm text-muted-foreground md:inline">
+          olivia@example.com
+        </div>
       </Table.Cell>
       <Table.Cell class="hidden sm:table-cell">Refund</Table.Cell>
       <Table.Cell class="hidden sm:table-cell">
@@ -89,7 +91,9 @@
     <Table.Row>
       <Table.Cell>
         <div class="font-medium">Olivia Smith</div>
-        <div class="hidden text-sm text-muted-foreground md:inline">olivia@example.com</div>
+        <div class="hidden text-sm text-muted-foreground md:inline">
+          olivia@example.com
+        </div>
       </Table.Cell>
       <Table.Cell class="hidden sm:table-cell">Refund</Table.Cell>
       <Table.Cell class="hidden sm:table-cell">

@@ -30,8 +30,8 @@
         <Card.Header class="pb-3">
           <Card.Title>Your Orders</Card.Title>
           <Card.Description class="max-w-lg text-balance leading-relaxed">
-            Introducing Our Dynamic Orders Dashboard for Seamless Management and Insightful
-            Analysis.
+            Introducing Our Dynamic Orders Dashboard for Seamless Management and
+            Insightful Analysis.
           </Card.Description>
         </Card.Header>
         <Card.Footer>
@@ -78,7 +78,12 @@
         <div class="ml-auto flex items-center gap-2">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild let:builder>
-              <Button variant="outline" size="sm" class="h-7 gap-1 text-sm" builders={[builder]}>
+              <Button
+                variant="outline"
+                size="sm"
+                class="h-7 gap-1 text-sm"
+                builders={[builder]}
+              >
                 <ListFilter class="h-3.5 w-3.5" />
                 <span class="sr-only sm:not-sr-only">Filter</span>
               </Button>
@@ -254,7 +259,9 @@
         <div class="ml-auto flex items-center gap-1">
           <Button size="sm" variant="outline" class="h-8 gap-1">
             <Truck class="h-3.5 w-3.5" />
-            <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap"> Track Order </span>
+            <span class="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
+              Track Order
+            </span>
           </Button>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild let:builder>

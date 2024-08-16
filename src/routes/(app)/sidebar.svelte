@@ -12,7 +12,9 @@
   import Logo from './doc-ninja-logo-2.svg';
 </script>
 
-<aside class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+<aside
+  class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex"
+>
   <div class="flex items-center justify-center border-b p-3">
     <a href="/">
       <img src={Logo} alt="DocNinja" class="h-8 w-8 transition hover:scale-110" />

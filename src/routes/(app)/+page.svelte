@@ -30,7 +30,12 @@
         <div class="ml-auto flex items-center gap-2">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild let:builder>
-              <Button variant="outline" size="sm" class="h-7 gap-1 text-sm" builders={[builder]}>
+              <Button
+                variant="outline"
+                size="sm"
+                class="h-7 gap-1 text-sm"
+                builders={[builder]}
+              >
                 <ListFilter class="h-3.5 w-3.5" />
                 <span class="sr-only sm:not-sr-only">Filter</span>
               </Button>

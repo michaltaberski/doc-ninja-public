@@ -6,7 +6,12 @@
   type $$Props = HTMLInputAttributes;
   type $$Events = InputEvents;
 
-  let { class: className, value = $bindable(), readonly, ...rest } = $props() as $$Props & $$Events;
+  let {
+    class: className,
+    value = $bindable(),
+    readonly,
+    ...rest
+  } = $props() as $$Props & $$Events;
 </script>
 
 <input
