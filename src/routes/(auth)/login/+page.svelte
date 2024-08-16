@@ -63,7 +63,7 @@
           disabled={form.formMeta.isSubmitting}
         >
           <span class={cn(form.formMeta.isSubmitting && 'hidden')}>Sign in</span>
-          <Loader class={cn(!form.formMeta.isSubmitting && 'hidden')} />
+          <Loader class={cn('animate-spin', !form.formMeta.isSubmitting && 'hidden')} />
         </Button>
       </Card.Footer>
     </Card.Root>

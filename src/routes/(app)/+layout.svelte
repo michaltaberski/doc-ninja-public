@@ -1,9 +1,7 @@
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
-  import * as Breadcrumb from '$lib/components/ui/breadcrumb';
   import { Button } from '$lib/components/ui/button';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-  import { Input } from '$lib/components/ui/input';
   import * as Sheet from '$lib/components/ui/sheet';
   import * as Tooltip from '$lib/components/ui/tooltip';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
@@ -16,9 +14,9 @@
     ShoppingCart,
     UsersRound,
     Settings,
-    Search,
     PanelLeft
   } from 'lucide-svelte';
+  import Logo from './doc-ninja-logo-2.svg';
 
   export let data;
 </script>
@@ -26,9 +24,14 @@
 <AuthGuard currentUser={data.currentUser}>
   <div class="flex min-h-screen w-full flex-col bg-muted/40">
     <aside class="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+      <div class="flex items-center justify-center border-b p-3">
+        <a href="/">
+          <img src={Logo} alt="DocNinja" class="h-8 w-8 transition hover:scale-110" />
+        </a>
+      </div>
       <nav class="flex flex-col items-center gap-4 px-2 py-4">
         <a
-          href="##"
+          href="/"
           class="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
           <Package2 class="h-4 w-4 transition-all group-hover:scale-110" />
@@ -37,7 +40,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -51,7 +54,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -65,7 +68,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -79,7 +82,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -93,7 +96,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -109,7 +112,7 @@
         <Tooltip.Root>
           <Tooltip.Trigger asChild let:builder>
             <a
-              href="##"
+              href="/"
               class="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               use:builder.action
               {...builder}
@@ -122,84 +125,63 @@
         </Tooltip.Root>
       </nav>
     </aside>
-    <div class="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+    <div class="flex flex-col pt-[72px] sm:gap-4 sm:pb-4 sm:pl-14">
       <header
-        class="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6"
+        class="fixed left-14 right-0 top-0 z-10 flex h-[57px] items-center justify-between gap-1 border-b bg-background px-4"
       >
-        <Sheet.Root>
-          <Sheet.Trigger asChild let:builder>
-            <Button builders={[builder]} size="icon" variant="outline" class="sm:hidden">
-              <PanelLeft class="h-5 w-5" />
-              <span class="sr-only">Toggle Menu</span>
-            </Button>
-          </Sheet.Trigger>
-          <Sheet.Content side="left" class="sm:max-w-xs">
-            <nav class="grid gap-6 text-lg font-medium">
-              <a
-                href="##"
-                class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-              >
-                <Package2 class="h-5 w-5 transition-all group-hover:scale-110" />
-                <span class="sr-only">Acme Inc</span>
-              </a>
-              <a
-                href="##"
-                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <Home class="h-5 w-5" />
-                Dashboard
-              </a>
-              <a href="##" class="flex items-center gap-4 px-2.5 text-foreground">
-                <ShoppingCart class="h-5 w-5" />
-                Orders
-              </a>
-              <a
-                href="##"
-                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <Package class="h-5 w-5" />
-                Products
-              </a>
-              <a
-                href="##"
-                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <UsersRound class="h-5 w-5" />
-                Customers
-              </a>
-              <a
-                href="##"
-                class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <LineChart class="h-5 w-5" />
-                Settings
-              </a>
-            </nav>
-          </Sheet.Content>
-        </Sheet.Root>
-        <h1 class="text-xl font-semibold">DocNinja</h1>
-        <Breadcrumb.Root class="hidden md:flex">
-          <Breadcrumb.List>
-            <Breadcrumb.Item>
-              <Breadcrumb.Link href="##">Dashboard</Breadcrumb.Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Separator />
-            <Breadcrumb.Item>
-              <Breadcrumb.Link href="##">Orders</Breadcrumb.Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Separator />
-            <Breadcrumb.Item>
-              <Breadcrumb.Page>Recent Orders</Breadcrumb.Page>
-            </Breadcrumb.Item>
-          </Breadcrumb.List>
-        </Breadcrumb.Root>
-        <div class="relative ml-auto flex-1 md:grow-0">
-          <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search..."
-            class="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
-          />
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-semibold">DocNinja</h1>
+          <Sheet.Root>
+            <Sheet.Trigger asChild let:builder>
+              <Button builders={[builder]} size="icon" variant="outline" class="sm:hidden">
+                <PanelLeft class="h-5 w-5" />
+                <span class="sr-only">Toggle Menu</span>
+              </Button>
+            </Sheet.Trigger>
+            <Sheet.Content side="left" class="sm:max-w-xs">
+              <nav class="grid gap-6 text-lg font-medium">
+                <a
+                  href="/"
+                  class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                >
+                  <Package2 class="h-5 w-5 transition-all group-hover:scale-110" />
+                  <span class="sr-only">Acme Inc</span>
+                </a>
+                <a
+                  href="/"
+                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Home class="h-5 w-5" />
+                  Dashboard
+                </a>
+                <a href="/" class="flex items-center gap-4 px-2.5 text-foreground">
+                  <ShoppingCart class="h-5 w-5" />
+                  Orders
+                </a>
+                <a
+                  href="/"
+                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <Package class="h-5 w-5" />
+                  Products
+                </a>
+                <a
+                  href="/"
+                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <UsersRound class="h-5 w-5" />
+                  Customers
+                </a>
+                <a
+                  href="/"
+                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                  <LineChart class="h-5 w-5" />
+                  Settings
+                </a>
+              </nav>
+            </Sheet.Content>
+          </Sheet.Root>
         </div>
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild let:builder>
