@@ -7,6 +7,7 @@
   import { File, ListFilter } from 'lucide-svelte';
 
   import DemoTable from './table.svelte';
+  import StatsCard from './stats-card.svelte';
 </script>
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -14,28 +15,14 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <Card.Root>
         <Card.Header class="pb-2">
-          <Card.Description>This Week</Card.Description>
-          <Card.Title class="text-4xl">$1329</Card.Title>
+          <Card.Description>Demo</Card.Description>
         </Card.Header>
-        <Card.Content>
-          <div class="text-xs text-muted-foreground">+25% from last week</div>
-        </Card.Content>
-        <Card.Footer>
-          <Progress value={25} aria-label="25% increase" />
-        </Card.Footer>
-      </Card.Root>
-      <Card.Root>
-        <Card.Header class="pb-2">
-          <Card.Description>This Month</Card.Description>
-          <Card.Title class="text-3xl">$5,329</Card.Title>
-        </Card.Header>
+
         <Card.Content>
           <div class="text-xs text-muted-foreground">+10% from last month</div>
         </Card.Content>
-        <Card.Footer>
-          <Progress value={12} aria-label="12% increase" />
-        </Card.Footer>
       </Card.Root>
+      <StatsCard />
     </div>
     <Tabs.Root value="week">
       <div class="flex items-center">
