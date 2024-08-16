@@ -18,7 +18,12 @@
     ChevronRight,
     CreditCard
   } from 'lucide-svelte';
-  import { login } from '@/pb';
+  import { logout } from '@/pb';
+  import { invalidateAll } from '$app/navigation';
+
+  export let data;
+
+  console.log(data);
 </script>
 
 <main
@@ -37,9 +42,9 @@
         <Card.Footer>
           <Button
             onclick={async () => {
-              const a = await login('michal', 'taberski123');
-              console.log(a);
-            }}>Create New Order</Button
+              logout();
+              invalidateAll();
+            }}>Logout</Button
           >
         </Card.Footer>
       </Card.Root>

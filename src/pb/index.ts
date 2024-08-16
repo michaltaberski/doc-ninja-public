@@ -9,6 +9,8 @@ export const login = async (email: string, password: string) => {
 
 export const logout = () => pb.authStore.clear();
 
+export const getCurrentUser = () => pb.authStore.model;
+
 export const getUsers = async () => {
   const records = await pb.collection('users').getFullList({
     sort: '-created'
