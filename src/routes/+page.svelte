@@ -1,22 +1,4 @@
 <script lang="ts">
-	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
-	import ChevronRight from 'lucide-svelte/icons/chevron-right';
-	import Copy from 'lucide-svelte/icons/copy';
-	import CreditCard from 'lucide-svelte/icons/credit-card';
-	import File from 'lucide-svelte/icons/file';
-	import Home from 'lucide-svelte/icons/house';
-	import LineChart from 'lucide-svelte/icons/chart-line';
-	import ListFilter from 'lucide-svelte/icons/list-filter';
-	import EllipsisVertical from 'lucide-svelte/icons/ellipsis-vertical';
-	import Package from 'lucide-svelte/icons/package';
-	import Package2 from 'lucide-svelte/icons/package-2';
-	import PanelLeft from 'lucide-svelte/icons/panel-left';
-	import Search from 'lucide-svelte/icons/search';
-	import Settings from 'lucide-svelte/icons/settings';
-	import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
-	import Truck from 'lucide-svelte/icons/truck';
-	import UsersRound from 'lucide-svelte/icons/users-round';
-
 	import { Badge } from '$lib/components/ui/badge';
 	import * as Breadcrumb from '$lib/components/ui/breadcrumb';
 	import { Button } from '$lib/components/ui/button';
@@ -30,6 +12,28 @@
 	import * as Table from '$lib/components/ui/table';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import * as Tooltip from '$lib/components/ui/tooltip';
+	import {
+		File,
+		Copy,
+		EllipsisVertical,
+		Home,
+		LineChart,
+		ListFilter,
+		Package,
+		Package2,
+		ShoppingCart,
+		Truck,
+		UsersRound,
+		Settings,
+		Search,
+		PanelLeft,
+		ChevronLeft,
+		ChevronRight,
+		CreditCard
+	} from 'lucide-svelte';
+	import { login } from '../pb/index.js';
+
+	export let data;
 </script>
 
 <div class="flex min-h-screen w-full flex-col bg-muted/40">
@@ -217,13 +221,7 @@
 						class="overflow-hidden rounded-full"
 						builders={[builder]}
 					>
-						<img
-							src="/images/placeholder-user.jpg"
-							width={36}
-							height={36}
-							alt="Avatar"
-							class="overflow-hidden rounded-full"
-						/>
+						<div class="h-9 w-9 overflow-hidden rounded-full bg-primary"></div>
 					</Button>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content align="end">
@@ -250,7 +248,12 @@
 							</Card.Description>
 						</Card.Header>
 						<Card.Footer>
-							<Button>Create New Order</Button>
+							<Button
+								onclick={async () => {
+									const a = await login('michal', 'taberski123');
+									console.log(a);
+								}}>Create New Order</Button
+							>
 						</Card.Footer>
 					</Card.Root>
 					<Card.Root>
