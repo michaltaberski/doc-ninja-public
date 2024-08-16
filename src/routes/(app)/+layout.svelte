@@ -15,12 +15,31 @@
     PanelLeft
   } from 'lucide-svelte';
   import Sidebar from './sidebar.svelte';
+  import { fileDrop } from './file-drop-action';
+  import SmartDialog from './smart-dialog.svelte';
 
-  export let data;
+  const { data } = $props();
+
+  let open = $state(false);
 </script>
 
 <AuthGuard currentUser={data.currentUser}>
-  <div class="flex min-h-screen w-full flex-col bg-muted/40">
+  <div
+    class="flex min-h-screen w-full flex-col bg-muted/40"
+    use:fileDrop={{
+      onDragEnter: () => {
+        open = true;
+      },
+      onDragLeave: () => {
+        open = false;
+      },
+      onDrop: (files) => {
+        open = false;
+        console.log('dropped ', files);
+      }
+    }}
+  >
+    <SmartDialog bind:open />
     <Sidebar />
     <div class="flex flex-col pt-[72px] sm:gap-4 sm:pb-4 sm:pl-14">
       <header

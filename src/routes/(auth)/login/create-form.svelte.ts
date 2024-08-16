@@ -18,8 +18,5 @@ export const createForm = <T extends object>(
       formMeta.isSubmitting = false;
     }
   };
-  $effect(() => {
-    console.log('effect', formMeta.isSubmitting);
-  });
   return { state: formState, handleSubmit, formMeta };
 };

@@ -2,7 +2,6 @@
   import { Button } from '$lib/components/ui/button';
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-  import { Progress } from '$lib/components/ui/progress';
   import * as Tabs from '$lib/components/ui/tabs';
   import { File, ListFilter } from 'lucide-svelte';
 
@@ -15,12 +14,9 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <Card.Root>
         <Card.Header class="pb-2">
-          <Card.Description>Demo</Card.Description>
+          <Card.Description>...</Card.Description>
         </Card.Header>
-
-        <Card.Content>
-          <div class="text-xs text-muted-foreground">+10% from last month</div>
-        </Card.Content>
+        <Card.Content>...</Card.Content>
       </Card.Root>
       <StatsCard />
     </div>
