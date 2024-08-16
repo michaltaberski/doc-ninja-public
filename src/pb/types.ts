@@ -1,7 +1,7 @@
 export type RowMeta<T> = {
-	collectionId: string;
-	collectionName: string;
-	id: string;
-	created: string;
-	updated: string;
+  collectionId: string;
+  collectionName: string;
+  id: string;
+  created: string;
+  updated: string;
 } & T;

@@ -4,14 +4,14 @@ const pb = new PocketBase('https://db.doc.ninja');
 
 // Auth
 export const login = async (email: string, password: string) => {
-	return await pb.collection('users').authWithPassword(email, password);
+  return await pb.collection('users').authWithPassword(email, password);
 };
 
 export const logout = () => pb.authStore.clear();
 
 export const getUsers = async () => {
-	const records = await pb.collection('users').getFullList({
-		sort: '-created'
-	});
-	return records;
+  const records = await pb.collection('users').getFullList({
+    sort: '-created'
+  });
+  return records;
 };
