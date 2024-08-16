@@ -20,6 +20,9 @@ importers:
       pocketbase:
         specifier: ^0.21.4
         version: 0.21.4
+      svelte-pdf-simple:
+        specifier: ^2.0.0
+        version: 2.0.0
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -1248,6 +1251,14 @@ packages:
     resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
     engines: {node: '>= 14.16'}
 
+  pdfjs-dist@2.13.216:
+    resolution: {integrity: sha512-qn/9a/3IHIKZarTK6ajeeFXBkG15Lg1Fx99PxU09PAU2i874X8mTcHJYyDJxu7WDfNhV6hM7bRQBZU384anoqQ==}
+    peerDependencies:
+      worker-loader: ^3.0.8
+    peerDependenciesMeta:
+      worker-loader:
+        optional: true
+
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
@@ -1558,6 +1569,9 @@ packages:
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
 
+  svelte-pdf-simple@2.0.0:
+    resolution: {integrity: sha512-XiRyw2vWt2VGBx7vpyUcEJ6Ug1T2yboVXVnsiqBmB8ApDxysfi/ju0OfHvHO3Yd6GJiX7hlloOHwIZn8d9FEPQ==}
+
   svelte-preprocess@5.1.4:
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
     engines: {node: '>= 16.0.0'}
@@ -1762,6 +1776,10 @@ packages:
         optional: true
       jsdom:
         optional: true
+
+  web-streams-polyfill@3.3.3:
+    resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
+    engines: {node: '>= 8'}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -2899,6 +2917,10 @@ snapshots:
 
   pathval@2.0.0: {}
 
+  pdfjs-dist@2.13.216:
+    dependencies:
+      web-streams-polyfill: 3.3.3
+
   picocolors@1.0.1: {}
 
   picomatch@2.3.1: {}
@@ -3157,6 +3179,12 @@ snapshots:
     dependencies:
       svelte: 5.0.0-next.222
 
+  svelte-pdf-simple@2.0.0:
+    dependencies:
+      pdfjs-dist: 2.13.216
+    transitivePeerDependencies:
+      - worker-loader
+
   svelte-preprocess@5.1.4(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@5.0.0-next.222)(typescript@5.5.4):
     dependencies:
       '@types/pug': 2.0.10
@@ -3348,6 +3376,8 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  web-streams-polyfill@3.3.3: {}
 
   which@2.0.2:
     dependencies:
