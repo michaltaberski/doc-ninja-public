@@ -17,6 +17,7 @@
   import Sidebar from './sidebar.svelte';
   import { fileDrop } from './file-drop-action';
   import SmartDialog from './smart-dialog.svelte';
+  import * as Card from '@/lib/components/ui/card';
 
   const { data } = $props();
 
@@ -47,7 +48,9 @@
         openTray = newState;
       }}
     >
-      <Sheet.Content class="w-full sm:max-w-full">
+      <Sheet.Content
+        class="w-full border bg-background pl-6 shadow-lg sm:max-w-2xl sm:rounded-lg"
+      >
         <Sheet.Header>
           <Sheet.Title>Are you sure absolutely sure?</Sheet.Title>
           <Sheet.Description>
