@@ -25,9 +25,6 @@
       <Card.Header>
         <Card.Title class="text-2xl">Login</Card.Title>
         <Card.Description>Enter your email below to login to your account.</Card.Description>
-        <Card.Description>
-          {formState.userNameOrEmail}
-        </Card.Description>
       </Card.Header>
       <Card.Content class="grid gap-4">
         <div class="grid gap-2">
@@ -43,10 +40,12 @@
         <Button
           class="w-full"
           onclick={async () => {
-            await login('michal', 'taberski123');
+            await login(formState.userNameOrEmail, formState.password);
             invalidateAll();
-          }}>Sign in</Button
+          }}
         >
+          Sign in
+        </Button>
       </Card.Footer>
     </Card.Root>
   </div>
