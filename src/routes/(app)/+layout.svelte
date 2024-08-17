@@ -17,12 +17,13 @@
   import Sidebar from './sidebar.svelte';
   import { fileDrop } from './file-drop-action';
   import SmartDialog from './smart-dialog.svelte';
-  import * as Card from '@/lib/components/ui/card';
+  import FilePreview from './file-preview.svelte';
 
   const { data } = $props();
 
   let open = $state(false);
   let openTray = $state(false);
+  let droppedFiles = $state<FileList | null>(null);
 </script>
 
 <AuthGuard currentUser={data.currentUser}>
@@ -31,6 +32,7 @@
     use:fileDrop={{
       onDragEnter: () => {
         open = true;
+        droppedFiles = null;
       },
       onDragLeave: () => {
         open = false;
@@ -38,6 +40,7 @@
       onDrop: (files) => {
         open = false;
         openTray = true;
+        droppedFiles = files;
       }
     }}
   >
@@ -54,8 +57,12 @@
         <Sheet.Header>
           <Sheet.Title>Are you sure absolutely sure?</Sheet.Title>
           <Sheet.Description>
-            This action cannot be undone. This will permanently delete your account and
-            remove your data from our servers.
+            {#if droppedFiles}
+              {#each [...droppedFiles] as file}
+                {file.name}
+                <FilePreview {file} />
+              {/each}
+            {/if}
           </Sheet.Description>
         </Sheet.Header>
       </Sheet.Content>

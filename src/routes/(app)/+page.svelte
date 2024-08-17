@@ -4,11 +4,11 @@
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
   import { File, ListFilter } from 'lucide-svelte';
-  import pathToPdf from './file1.pdf';
+  // import pathToPdf from './file1.pdf';
 
   import DemoTable from './table.svelte';
   import StatsCard from './stats-card.svelte';
-  import { PdfViewer } from 'svelte-pdf-simple';
+  // import { PdfViewer } from 'svelte-pdf-simple';
 </script>
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
