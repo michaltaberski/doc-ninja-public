@@ -42,7 +42,7 @@
         droppedFiles = files;
         setTimeout(() => {
           openTray = true;
-        }, 200);
+        }, 300);
       }
     }}
   >
