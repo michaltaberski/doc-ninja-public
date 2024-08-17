@@ -39,8 +39,10 @@
       },
       onDrop: (files) => {
         open = false;
-        openTray = true;
         droppedFiles = files;
+        setTimeout(() => {
+          openTray = true;
+        }, 200);
       }
     }}
   >
