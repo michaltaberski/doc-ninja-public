@@ -5,16 +5,39 @@
   import FilePreview from './file-preview.svelte';
   import { Input } from '@/lib/components/ui/input';
   import FormFiled from '@/lib/components/form-filed.svelte';
+  import type { Document } from '@/pb/types';
 
   let {
     open = $bindable(),
     onCancel,
+    onSave,
     fileList
   }: {
     open?: boolean;
     onCancel?: () => void;
+    onSave?: (documentProps: Document) => Promise<void>;
     fileList?: FileList;
   } = $props();
+
+  const documentProps = $state<Document>({
+    files: [...(fileList || [])],
+    supplier: '',
+    reference: '',
+    date: '',
+    validityPeriod: ''
+  });
+
+  console.log('fileList', documentProps.files);
+
+  let isSaving = $state(false);
+  const handleSave = async () => {
+    isSaving = true;
+    documentProps.files = [...(fileList || [])];
+    documentProps.date = new Date().toISOString();
+    await onSave?.(documentProps);
+    isSaving = false;
+    onCancel?.();
+  };
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -65,25 +88,25 @@
         </Sheet.Description>
       </div>
       <div class="flex flex-col gap-4 px-6">
-        <FormFiled label="Suplier" for="suplier">
-          <Input id="suplier" />
+        <FormFiled label="Supplier" for="supplier">
+          <Input id="supplier" bind:value={documentProps.supplier} />
         </FormFiled>
         <FormFiled label="Reference" for="reference">
-          <Input id="reference" />
+          <Input id="reference" bind:value={documentProps.reference} />
         </FormFiled>
         <div class="flex gap-6">
           <FormFiled label="Date" for="date">
-            <Input id="date" />
+            <Input id="date" bind:value={documentProps.date} />
           </FormFiled>
           <FormFiled label="Validity period" for="validity-period">
-            <Input id="validity-period" />
+            <Input id="validity-period" bind:value={documentProps.validityPeriod} />
           </FormFiled>
         </div>
       </div>
     </Sheet.Body>
     <Sheet.Footer class="border-t p-6">
       <Button variant="outline" onclick={onCancel}>Cancel</Button>
-      <Button>Save</Button>
+      <Button onclick={handleSave}>Save</Button>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>

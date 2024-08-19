@@ -4,7 +4,7 @@
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Sheet from '$lib/components/ui/sheet';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
-  import { logout } from '@/pb/index.js';
+  import { logout, saveDocument } from '@/pb/index.js';
   import {
     Home,
     LineChart,
@@ -53,6 +53,9 @@
       onCancel={() => {
         openTray = false;
         droppedFiles = null;
+      }}
+      onSave={async (documentProps) => {
+        await saveDocument(documentProps);
       }}
     />
     <Sidebar />
