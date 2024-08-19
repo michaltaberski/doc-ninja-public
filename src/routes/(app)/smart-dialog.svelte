@@ -12,7 +12,7 @@
   }}
   portal={null}
 >
-  <Dialog.Content showClose={false}>
+  <Dialog.Content showClose={false} class="outline-none">
     <Dialog.Header>
       <Dialog.Title>Drop file to add new document</Dialog.Title>
       <Dialog.Description>

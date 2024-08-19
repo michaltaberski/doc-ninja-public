@@ -8,6 +8,7 @@ import Header from './sheet-header.svelte';
 import Footer from './sheet-footer.svelte';
 import Title from './sheet-title.svelte';
 import Description from './sheet-description.svelte';
+import Body from './sheet-body.svelte';
 
 const Root = SheetPrimitive.Root;
 const Close = SheetPrimitive.Close;
@@ -21,6 +22,7 @@ export {
   Overlay,
   Content,
   Header,
+  Body,
   Footer,
   Title,
   Description,
@@ -32,13 +34,14 @@ export {
   Overlay as SheetOverlay,
   Content as SheetContent,
   Header as SheetHeader,
+  Body as SheetBody,
   Footer as SheetFooter,
   Title as SheetTitle,
   Description as SheetDescription
 };
 
 export const sheetVariants = tv({
-  base: 'bg-background fixed z-50 gap-4 p-6 shadow-lg',
+  base: 'bg-background fixed z-50 flex flex-col border shadow-lg',
   variants: {
     side: {
       top: 'inset-x-0 top-0 border-b',

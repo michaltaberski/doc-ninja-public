@@ -1,5 +1,5 @@
 <script lang="ts">
-  const { file } = $props<{ file: File }>();
+  const { file, class: className } = $props<{ file: File; class?: string }>();
 
   let imageSrc = $state<string | null | undefined>(null);
   $effect(() => {
@@ -15,7 +15,7 @@
 
 {#if file.type.startsWith('image/')}
   {#if imageSrc}
-    <img src={imageSrc} alt={file.name} />
+    <img src={imageSrc} alt={file.name} class={className} />
   {:else}
     <p>Loading...</p>
   {/if}
