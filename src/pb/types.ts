@@ -12,4 +12,5 @@ export type Document = {
   reference?: string;
   date?: string;
   validityPeriod?: string;
+  owner: string;
 };

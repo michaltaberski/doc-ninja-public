@@ -19,6 +19,13 @@ export const getUsers = async () => {
   return records;
 };
 
+export const getDocuments = async () => {
+  const records = await pb.collection('documents').getFullList({
+    sort: '-created'
+  });
+  return records;
+};
+
 export const saveDocument = async (document: Document) => {
   const formData = new FormData();
   document.files.forEach((file) => {
@@ -28,6 +35,6 @@ export const saveDocument = async (document: Document) => {
   formData.append('reference', document.reference || '');
   formData.append('date', document.date || '');
   formData.append('validityPeriod', document.validityPeriod || '');
-  console.log('formData', formData);
+  formData.append('owner', document.owner);
   return await pb.collection('documents').create<Document>(formData);
 };

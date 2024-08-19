@@ -24,10 +24,9 @@
     supplier: '',
     reference: '',
     date: '',
-    validityPeriod: ''
+    validityPeriod: '',
+    owner: ''
   });
-
-  console.log('fileList', documentProps.files);
 
   let isSaving = $state(false);
   const handleSave = async () => {

@@ -55,7 +55,13 @@
         droppedFiles = null;
       }}
       onSave={async (documentProps) => {
-        await saveDocument(documentProps);
+        if (data.currentUser) {
+          await saveDocument({
+            ...documentProps,
+            owner: data.currentUser.id
+          });
+          await invalidateAll();
+        }
       }}
     />
     <Sidebar />
@@ -149,6 +155,13 @@
         </DropdownMenu.Root>
       </header>
 
+      {#await data.documentsPromise}
+        Loading...
+      {:then documents}
+        <main class="flex-1">
+          {console.log(documents)}
+        </main>
+      {/await}
       <slot />
     </div>
   </div>

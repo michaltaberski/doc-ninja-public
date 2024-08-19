@@ -1,7 +1,8 @@
-import { getCurrentUser } from '@/pb';
+import { getCurrentUser, getDocuments } from '@/pb';
 
 export const ssr = false;
 export const load = async () => {
   const currentUser = getCurrentUser();
-  return { currentUser };
+  const documentsPromise = getDocuments();
+  return { currentUser, documentsPromise };
 };
