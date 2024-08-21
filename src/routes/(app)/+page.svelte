@@ -11,12 +11,8 @@
   import DataTable from '@/lib/components/data-table.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
-  const data = $state([
-    { id: 1, name: 'John Doe', email: '' },
-    { id: 2, name: 'Jane o', email: '' },
-    { id: 3, name: 'John Smith', email: '' },
-    { id: 4, name: 'Jane Smith', email: '' }
-  ]);
+  const { data } = $props();
+  const documents = $derived(data.documents);
 </script>
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -24,18 +20,7 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <Card.Root>
         <Card.Header class="pb-2">
-          <Card.Description>
-            <Button
-              onclick={() => {
-                data[0].name = 'John';
-              }}>John</Button
-            >
-            <Button
-              onclick={() => {
-                data[0].name = 'Barbara';
-              }}>Barbara</Button
-            >
-          </Card.Description>
+          <Card.Description>...</Card.Description>
         </Card.Header>
         <Card.Content>
           <!--
@@ -89,11 +74,11 @@
           </Card.Header>
           <Card.Content>
             <DataTable
-              {data}
+              data={documents}
               columns={[
-                { label: 'ID', key: 'id' },
-                { label: 'Name', key: 'name' },
-                { label: 'Email', key: 'email' }
+                { label: 'supplier', key: 'supplier' },
+                { label: 'reference', key: 'reference' },
+                { label: 'Email', key: 'owner' }
               ]}
             />
           </Card.Content>

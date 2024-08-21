@@ -1,24 +1,15 @@
 <script lang="ts" generics="T extends Record<string, any>">
   import * as Table from '$lib/components/ui/table';
-  import {
-    createDataTable,
-    type DataTableColumn,
-    type DataTableOptions
-  } from './data-table-utils.svelte';
+  import { createDataTable, type DataTableColumn } from './data-table-utils.svelte';
 
   type Props<T> = {
     columns: DataTableColumn<T>[];
     data: T[];
   };
 
-  let { columns, data }: Props<T> = $props();
+  const { columns, data }: Props<T> = $props();
 
-  const options: DataTableOptions<T> = $state({
-    data,
-    columns
-  });
-
-  const table = $derived(createDataTable(options));
+  const table = $derived(createDataTable({ data, columns }));
 </script>
 
 <Table.Root>

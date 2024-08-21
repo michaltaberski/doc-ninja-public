@@ -20,7 +20,7 @@ export const getUsers = async () => {
 };
 
 export const getDocuments = async () => {
-  const records = await pb.collection('documents').getFullList({
+  const records = await pb.collection('documents').getFullList<Document>({
     sort: '-created'
   });
   return records;
