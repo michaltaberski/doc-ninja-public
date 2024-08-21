@@ -8,6 +8,7 @@
 
   import DemoTable from './table.svelte';
   import StatsCard from './stats-card.svelte';
+  import DataTable from '@/lib/components/data-table.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 </script>
 
@@ -69,7 +70,7 @@
             <Card.Description>Recent orders from your store.</Card.Description>
           </Card.Header>
           <Card.Content>
-            <DemoTable />
+            <DataTable />
           </Card.Content>
         </Card.Root>
       </Tabs.Content>
@@ -78,7 +79,9 @@
           <Card.Header class="px-7">
             <Card.Title>Month</Card.Title>
           </Card.Header>
-          <Card.Content>...</Card.Content>
+          <Card.Content>
+            <DemoTable />
+          </Card.Content>
         </Card.Root>
       </Tabs.Content>
     </Tabs.Root>
