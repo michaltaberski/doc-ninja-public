@@ -75,6 +75,7 @@
           <Card.Content>
             <DataTable
               data={documents}
+              onRowClick={(rowId) => console.log(rowId)}
               columns={[
                 { label: 'supplier', key: 'supplier' },
                 { label: 'reference', key: 'reference' },

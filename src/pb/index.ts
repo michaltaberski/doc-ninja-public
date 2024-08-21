@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import type { Document } from './types';
+import type { Document, RowMeta } from './types';
 
 const pb = new PocketBase('https://db.doc.ninja');
 
@@ -20,7 +20,7 @@ export const getUsers = async () => {
 };
 
 export const getDocuments = async () => {
-  const records = await pb.collection('documents').getFullList<Document>({
+  const records = await pb.collection('documents').getFullList<RowMeta<Document>>({
     sort: '-created'
   });
   return records;

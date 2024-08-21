@@ -5,11 +5,16 @@
   type Props<T> = {
     columns: DataTableColumn<T>[];
     data: T[];
+    idKey?: keyof T;
+    onRowClick?: (rowId: string, rowData: T) => void;
   };
 
-  const { columns, data }: Props<T> = $props();
+  const { columns, data, idKey = 'id', onRowClick }: Props<T> = $props();
 
-  const table = $derived(createDataTable({ data, columns }));
+  const table = $derived(createDataTable({ data, columns, idKey }));
+  const dataByKey = $derived(
+    Object.fromEntries(data.map((row) => [row[idKey] as string, row]))
+  );
 </script>
 
 <Table.Root>
@@ -23,8 +28,8 @@
     </Table.Row>
   </Table.Header>
   <Table.Body>
-    {#each table.rows as row}
-      <Table.Row>
+    {#each table.rows as row (row.id)}
+      <Table.Row onclick={() => onRowClick?.(row.id, dataByKey[row.id])}>
         {#each row.cells as cell}
           <Table.Cell>
             {cell.value}

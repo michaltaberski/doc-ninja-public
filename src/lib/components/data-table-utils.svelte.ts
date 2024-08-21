@@ -3,6 +3,7 @@ type DataTableHeader = {
 };
 
 type DataTableRow<T> = {
+  id: string;
   cells: {
     value: T[keyof T];
   }[];
@@ -16,6 +17,7 @@ export type DataTableColumn<T> = {
 };
 
 export type DataTableOptions<T> = {
+  idKey: keyof T;
   columns: DataTableColumn<T>[];
   data: T[];
 };
@@ -33,6 +35,7 @@ export const createDataTable = <T extends Record<string, any>>(
 
   options.data.forEach((data) => {
     const row: DataTableRow<T> = {
+      id: data[options.idKey],
       cells: options.columns.map((column) => ({
         value: data[column.key]
       }))
