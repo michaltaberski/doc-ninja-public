@@ -10,6 +10,13 @@
   import StatsCard from './stats-card.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
+
+  const data = $state([
+    { id: 1, name: 'John Doe', email: '' },
+    { id: 2, name: 'Jane o', email: '' },
+    { id: 3, name: 'John Smith', email: '' },
+    { id: 4, name: 'Jane Smith', email: '' }
+  ]);
 </script>
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -17,7 +24,18 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <Card.Root>
         <Card.Header class="pb-2">
-          <Card.Description>...</Card.Description>
+          <Card.Description>
+            <Button
+              onclick={() => {
+                data[0].name = 'John';
+              }}>John</Button
+            >
+            <Button
+              onclick={() => {
+                data[0].name = 'Barbara';
+              }}>Barbara</Button
+            >
+          </Card.Description>
         </Card.Header>
         <Card.Content>
           <!--
@@ -70,7 +88,14 @@
             <Card.Description>Recent orders from your store.</Card.Description>
           </Card.Header>
           <Card.Content>
-            <DataTable />
+            <DataTable
+              {data}
+              columns={[
+                { label: 'ID', key: 'id' },
+                { label: 'Name', key: 'name' },
+                { label: 'Email', key: 'email' }
+              ]}
+            />
           </Card.Content>
         </Card.Root>
       </Tabs.Content>

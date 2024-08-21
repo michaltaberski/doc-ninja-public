@@ -1,28 +1,24 @@
-<script lang="ts">
+<script lang="ts" generics="T extends Record<string, any>">
   import * as Table from '$lib/components/ui/table';
-  import { createDataTable, type DataTableOptions } from './data-table-utils.svelte';
+  import {
+    createDataTable,
+    type DataTableColumn,
+    type DataTableOptions
+  } from './data-table-utils.svelte';
 
-  type User = { name: string; email: string };
-
-  const USERS_DEMO_DATA: User[] = [
-    { name: 'Liam Johnson', email: 'liam@example.com' },
-    { name: 'Olivia Smith', email: '' },
-    { name: 'Noah Williams', email: '' },
-    { name: 'Emma Brown', email: '' },
-    { name: 'Liam Johnson', email: '' },
-    { name: 'Olivia Smith', email: '' },
-    { name: 'Emma Brown', email: '' }
-  ];
-
-  const options: DataTableOptions<User> = {
-    data: USERS_DEMO_DATA,
-    columns: [
-      { key: 'name', label: 'Customer' },
-      { key: 'email', label: 'Email' }
-    ]
+  type Props<T> = {
+    columns: DataTableColumn<T>[];
+    data: T[];
   };
 
-  const table = createDataTable(options);
+  let { columns, data }: Props<T> = $props();
+
+  const options: DataTableOptions<T> = $state({
+    data,
+    columns
+  });
+
+  const table = $derived(createDataTable(options));
 </script>
 
 <Table.Root>
