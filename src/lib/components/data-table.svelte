@@ -32,7 +32,14 @@
       <Table.Row onclick={() => onRowClick?.(row.id, dataByKey[row.id])}>
         {#each row.cells as cell}
           <Table.Cell>
-            {cell.value}
+            {#if cell.snippet}
+              {@render cell.snippet({
+                value: cell.value,
+                row: dataByKey[row.id]
+              })}
+            {:else}
+              {cell.value}
+            {/if}
           </Table.Cell>
         {/each}
       </Table.Row>

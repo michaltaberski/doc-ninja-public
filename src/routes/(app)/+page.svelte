@@ -11,12 +11,17 @@
   import DemoTable from './table.svelte';
   import StatsCard from './stats-card.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
-  import Label from '@/lib/components/ui/label/label.svelte';
+  import type { RowMeta, Document } from '@/pb/types';
+  import { Badge } from '@/lib/components/ui/badge';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
   const documents = $derived(data.documents);
 </script>
+
+{#snippet demo({ value, row }: { value: string; row: RowMeta<Document> })}
+  <Badge class="text-xs" variant="outline">{dayjs(row.date).format('DD/MM/YYYY')}</Badge>
+{/snippet}
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -85,12 +90,13 @@
                 {
                   label: 'Date',
                   key: 'date',
-                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
+                  format: (value) => dayjs(value as string).format('DD/MM/YYYY'),
+                  snippet: demo
                 },
                 {
                   label: 'Updated',
                   key: 'updated',
-                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
+                  format: (value) => dayjs(value as string).format('DD/MM/YYYY HH:mm')
                 },
                 {
                   label: 'Created',
