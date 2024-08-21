@@ -19,7 +19,7 @@
   import SmartDialog from './smart-dialog.svelte';
   import NewDocumentSheet from '@/lib/components/new-document-sheet.svelte';
 
-  const { data } = $props();
+  const { data, children } = $props();
 
   let open = $state(false);
   let openTray = $state(false);
@@ -155,14 +155,7 @@
         </DropdownMenu.Root>
       </header>
 
-      {#await data.documentsPromise}
-        Loading...
-      {:then documents}
-        <main class="flex-1">
-          {console.log(documents)}
-        </main>
-      {/await}
-      <slot />
+      {@render children()}
     </div>
   </div>
 </AuthGuard>

@@ -3,12 +3,15 @@
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
+  import dayjs from 'dayjs';
+
   import { File, ListFilter } from 'lucide-svelte';
   // import pathToPdf from './file1.pdf';
 
   import DemoTable from './table.svelte';
   import StatsCard from './stats-card.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
+  import Label from '@/lib/components/ui/label/label.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
@@ -77,9 +80,23 @@
               data={documents}
               onRowClick={(rowId) => console.log(rowId)}
               columns={[
-                { label: 'supplier', key: 'supplier' },
-                { label: 'reference', key: 'reference' },
-                { label: 'Email', key: 'owner' }
+                { label: 'Supplier', key: 'supplier' },
+                { label: 'Reference', key: 'reference' },
+                {
+                  label: 'Date',
+                  key: 'date',
+                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
+                },
+                {
+                  label: 'Updated',
+                  key: 'updated',
+                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
+                },
+                {
+                  label: 'Created',
+                  key: 'created',
+                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
+                }
               ]}
             />
           </Card.Content>
