@@ -13,15 +13,33 @@
   import DataTable from '@/lib/components/data-table.svelte';
   import type { RowMeta, Document } from '@/pb/types';
   import { Badge } from '@/lib/components/ui/badge';
+  import PreviewDocumentSheet from '@/lib/components/preview-document-sheet.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
   const documents = $derived(data.documents);
+
+  let open = $state(false);
+  let previewId = $state<string | null>(null);
+  $effect(() => {
+    if (previewId) {
+      open = true;
+    }
+  });
+  $effect(() => {
+    if (!open) {
+      previewId = null;
+    }
+  });
+
+  const previewDocument = $derived(documents.find((doc) => doc.id === previewId));
 </script>
 
 {#snippet demo({ value, row }: { value: string; row: RowMeta<Document> })}
   <Badge class="text-xs" variant="outline">{dayjs(row.date).format('DD/MM/YYYY')}</Badge>
 {/snippet}
+
+<PreviewDocumentSheet bind:open document={previewDocument} />
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -83,7 +101,7 @@
           <Card.Content>
             <DataTable
               data={documents}
-              onRowClick={(rowId) => console.log(rowId)}
+              onRowClick={(rowId) => (previewId = rowId)}
               columns={[
                 { label: 'Supplier', key: 'supplier' },
                 { label: 'Reference', key: 'reference' },
