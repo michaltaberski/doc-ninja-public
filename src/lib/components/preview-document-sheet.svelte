@@ -4,6 +4,8 @@
   import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
   import FilePreview from './file-preview.svelte';
   import type { Document, RowMeta } from '@/pb/types';
+  import FormFiled from './form-filed.svelte';
+  import ReadonlyField from './readonly-field.svelte';
 
   let {
     open = $bindable(),
@@ -14,15 +16,34 @@
     document?: RowMeta<Document>;
     onCancel?: () => void;
   } = $props();
+
+  $effect(() => {
+    console.log(document);
+  });
+
+  const fileUrls = $derived(
+    (document?.files || []).map((fileName) =>
+      [
+        'https://db.doc.ninja/api/files',
+        document?.collectionId,
+        document?.id,
+        fileName
+      ].join('/')
+    )
+  );
+
+  $effect(() => {
+    console.log(fileUrls);
+  });
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header class="relative">
       <div class="flex max-h-96 min-h-80 border-b">
-        <!-- {#each [...(fileList || [])] as file}
-          <FilePreview {file} class="object-contain" />
-        {/each} -->
+        {#each fileUrls as fileUrl}
+          <img src={fileUrl} class="object-contain" />
+        {/each}
       </div>
       <div
         class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between border-b bg-background/40 px-4 py-2 backdrop-blur-md"
@@ -59,14 +80,16 @@
     <Sheet.Body>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-2xl">
-          {document ? document.reference : 'New Document'}
-          New Document</Sheet.Title
-        >
+          {document ? document.reference : ''}
+        </Sheet.Title>
         <Sheet.Description>
-          Fill out the form to add a new document to the library.
+          {document ? document.supplier : ''}
         </Sheet.Description>
       </div>
-      <div class="flex flex-col gap-4 px-6">...</div>
+      <div class="flex flex-col gap-4 px-6">
+        <ReadonlyField label="Reference">Demo</ReadonlyField>
+        <ReadonlyField label="Reference">Demo</ReadonlyField>
+      </div>
     </Sheet.Body>
     <Sheet.Footer class="border-t p-6">
       <Button variant="outline" onclick={onCancel}>Cancel</Button>
