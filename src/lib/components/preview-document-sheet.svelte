@@ -2,9 +2,7 @@
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
   import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
-  import FilePreview from './file-preview.svelte';
   import type { Document, RowMeta } from '@/pb/types';
-  import FormFiled from './form-filed.svelte';
   import ReadonlyField from './readonly-field.svelte';
 
   let {
@@ -31,10 +29,6 @@
       ].join('/')
     )
   );
-
-  $effect(() => {
-    console.log(fileUrls);
-  });
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -92,7 +86,7 @@
       </div>
     </Sheet.Body>
     <Sheet.Footer class="border-t p-6">
-      <Button variant="outline" onclick={onCancel}>Cancel</Button>
+      <Button variant="outline" onclick={() => (open = false)}>Cancel</Button>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>

@@ -7,10 +7,14 @@ export type RowMeta<T> = {
 } & T;
 
 export type Document = {
-  files: File[];
+  files: string[];
   supplier?: string;
   reference?: string;
   date?: string;
   validityPeriod?: string;
   owner: string;
+};
+
+export type NewDocument = Omit<Document, 'files'> & {
+  files: File[];
 };

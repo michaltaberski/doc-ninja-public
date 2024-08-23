@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-import type { Document, RowMeta } from './types';
+import type { Document, NewDocument, RowMeta } from './types';
 
 const pb = new PocketBase('https://db.doc.ninja');
 
@@ -26,7 +26,7 @@ export const getDocuments = async () => {
   return records;
 };
 
-export const saveDocument = async (document: Document) => {
+export const saveDocument = async (document: NewDocument) => {
   const formData = new FormData();
   document.files.forEach((file) => {
     formData.append('files', file);

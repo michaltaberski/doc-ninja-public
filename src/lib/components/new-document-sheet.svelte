@@ -5,7 +5,7 @@
   import FilePreview from './file-preview.svelte';
   import { Input } from '@/lib/components/ui/input';
   import FormFiled from '@/lib/components/form-filed.svelte';
-  import type { Document } from '@/pb/types';
+  import type { Document, NewDocument } from '@/pb/types';
 
   let {
     open = $bindable(),
@@ -15,11 +15,11 @@
   }: {
     open?: boolean;
     onCancel?: () => void;
-    onSave?: (documentProps: Document) => Promise<void>;
+    onSave?: (documentProps: NewDocument) => Promise<void>;
     fileList?: FileList;
   } = $props();
 
-  const documentProps = $state<Document>({
+  const documentProps = $state<NewDocument>({
     files: [...(fileList || [])],
     supplier: '',
     reference: '',
