@@ -41,13 +41,13 @@ export {
 };
 
 export const sheetVariants = tv({
-  base: 'bg-background fixed z-50 flex flex-col border shadow-lg',
+  base: 'fixed z-50 flex flex-col sm:p-6',
   variants: {
     side: {
-      top: 'inset-x-0 top-0 border-b',
-      bottom: 'inset-x-0 bottom-0 border-t',
-      left: 'inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-lg',
-      right: 'inset-y-0 right-6 top-6 bottom-6 w-3/4 border-l sm:max-w-lg'
+      top: 'inset-x-0 top-0',
+      bottom: 'inset-x-0 bottom-0',
+      left: 'inset-y-0 left-0 h-full w-3/4 sm:max-w-lg',
+      right: 'inset-y-0 right-0 top-0 bottom-0 w-3/4 sm:max-w-lg'
     }
   },
   defaultVariants: {
