@@ -1,30 +1,21 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import {
-    DownloadIcon,
-    ChevronRightIcon,
-    ChevronLeftIcon,
-    PencilIcon
-  } from 'lucide-svelte';
+  import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
-  import ReadonlyField from './readonly-field.svelte';
+  import DocumentForm from './document-form.svelte';
 
   let {
     open = $bindable(),
     document,
-    onEdit,
+    onSave,
     onCancel
   }: {
     open?: boolean;
-    document?: RowMeta<Document>;
+    document: RowMeta<Document>;
+    onSave?: (documentProps: Document) => Promise<void>;
     onCancel?: () => void;
-    onEdit?: () => void;
   } = $props();
-
-  $effect(() => {
-    console.log(document);
-  });
 
   const fileUrls = $derived(
     (document?.files || []).map((fileName) =>
@@ -36,6 +27,9 @@
       ].join('/')
     )
   );
+
+  let editableDocument = $state(document);
+  let saving = $state(false);
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -87,17 +81,15 @@
           {document ? document.supplier : ''}
         </Sheet.Description>
       </div>
-      <div class="flex flex-col gap-4 px-6">
-        <ReadonlyField label="Reference">Demo</ReadonlyField>
-        <ReadonlyField label="Reference">Demo</ReadonlyField>
-      </div>
+      {#if editableDocument}
+        <DocumentForm bind:document={editableDocument} disabled={saving} />
+      {/if}
     </Sheet.Body>
-    <Sheet.Footer class="flex border-t p-6 sm:justify-between">
-      <Button variant="default" onclick={onEdit}>
-        <PencilIcon class="mr-2 h-4 w-4" />
-        Edit
-      </Button>
-      <Button variant="outline" onclick={() => (open = false)}>Cancel</Button>
+    <Sheet.Footer class="flex border-t p-6">
+      <Button variant="outline" onclick={() => (open = false)} disabled={saving}
+        >Cancel</Button
+      >
+      <Button onclick={() => onSave?.(editableDocument)}>Save</Button>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>

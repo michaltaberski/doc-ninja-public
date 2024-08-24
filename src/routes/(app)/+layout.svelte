@@ -17,7 +17,7 @@
   import Sidebar from './sidebar.svelte';
   import { fileDrop } from './file-drop-action';
   import SmartDialog from './smart-dialog.svelte';
-  import NewDocumentSheet from '@/lib/components/new-document-sheet.svelte';
+  import NewDocumentSheet from '@/lib/components/document-sheet/new-document-sheet.svelte';
 
   const { data, children } = $props();
 
