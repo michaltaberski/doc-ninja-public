@@ -12,7 +12,7 @@
     onCancel
   }: {
     open?: boolean;
-    document: RowMeta<Document>;
+    document?: RowMeta<Document>;
     onSave?: (documentProps: Document) => Promise<void>;
     onCancel?: () => void;
   } = $props();
@@ -30,6 +30,9 @@
 
   let editableDocument = $state(document);
   let saving = $state(false);
+  $effect(() => {
+    editableDocument = document;
+  });
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -89,7 +92,7 @@
       <Button variant="outline" onclick={() => (open = false)} disabled={saving}
         >Cancel</Button
       >
-      <Button onclick={() => onSave?.(editableDocument)}>Save</Button>
+      <Button onclick={() => editableDocument && onSave?.(editableDocument)}>Save</Button>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>
