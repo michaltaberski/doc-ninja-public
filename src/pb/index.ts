@@ -38,3 +38,7 @@ export const saveDocument = async (document: NewDocument) => {
   formData.append('owner', document.owner);
   return await pb.collection('documents').create<Document>(formData);
 };
+
+export const updateDocument = async (id: string, document: Partial<Document>) => {
+  return await pb.collection('documents').update(id, document);
+};

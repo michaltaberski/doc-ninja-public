@@ -1,4 +1,4 @@
-export type RowMeta<T> = {
+export type RowMeta<T = object> = {
   collectionId: string;
   collectionName: string;
   id: string;

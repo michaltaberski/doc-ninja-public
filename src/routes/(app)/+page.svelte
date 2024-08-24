@@ -15,6 +15,8 @@
   import { Badge } from '@/lib/components/ui/badge';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
+  import { updateDocument } from '@/pb';
+  import { invalidateAll } from '$app/navigation';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
@@ -70,7 +72,9 @@
     bind:open={openEdit}
     document={editDocument}
     onSave={async (documentProps) => {
-      console.log(documentProps);
+      if (!editId) return;
+      await updateDocument(editId, documentProps);
+      await invalidateAll();
       openEdit = false;
     }}
     onCancel={() => {
