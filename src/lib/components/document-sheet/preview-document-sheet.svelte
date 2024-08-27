@@ -57,16 +57,6 @@
           <span class="text-sm text-muted-foreground">Page 1 of 10</span>
         </div>
         <div class="flex items-center gap-2">
-          <!--
-          <Slider
-            class="w-24 [&>span:first-child]:h-1 [&>span:first-child]:bg-muted-foreground [&_[role=slider]]:bg-primary [&_[role=slider]]:w-3 [&_[role=slider]]:h-3 [&_[role=slider]]:border-0 [&>span:first-child_span]:bg-primary [&_[role=slider]:focus-visible]:ring-0 [&_[role=slider]:focus-visible]:ring-offset-0 [&_[role=slider]:focus-visible]:scale-105 [&_[role=slider]:focus-visible]:transition-transform"
-            defaultValue={[50]}
-            max={100}
-            min={10}
-            step={10}
-            aria-label="Zoom"
-          />
-          -->
           <Button size="icon" variant="outline" onclick={onCancel}>
             <DownloadIcon class="h-4 w-4" />
             <span class="sr-only">Download PDF</span>
@@ -84,8 +74,10 @@
         </Sheet.Description>
       </div>
       <div class="flex flex-col gap-4 px-6">
-        <ReadonlyField label="Reference">Demo</ReadonlyField>
-        <ReadonlyField label="Reference">Demo</ReadonlyField>
+        <ReadonlyField label="Issue date">{document?.issueDate}</ReadonlyField>
+        <ReadonlyField label="Validity period"
+          >{document?.validityPeriod || '-'}</ReadonlyField
+        >
       </div>
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">

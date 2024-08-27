@@ -3,21 +3,16 @@
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
-  import dayjs from 'dayjs';
 
-  import { Edit, File, ListFilter } from 'lucide-svelte';
+  import { File, ListFilter } from 'lucide-svelte';
   // import pathToPdf from './file1.pdf';
 
   import DemoTable from './table.svelte';
-  import StatsCard from './stats-card.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
-  import type { RowMeta, Document } from '@/pb/types';
-  import { Badge } from '@/lib/components/ui/badge';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import Calendar from '@/lib/components/ui/calendar/calendar.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
@@ -55,15 +50,7 @@
     open = false;
   };
   const editDocument = $derived(documents.find((doc) => doc.id === editId));
-
-  let calendarValue = $state(undefined);
 </script>
-
-{#snippet demo({ value }: { value: string })}
-  <Badge class="text-xs" variant="outline">
-    {value}
-  </Badge>
-{/snippet}
 
 <PreviewDocumentSheet
   bind:open
@@ -93,24 +80,6 @@
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-    <div class="grid gap-4 sm:grid-cols-2">
-      <Card.Root>
-        <Card.Header class="pb-2">
-          <Card.Description>
-            <Calendar bind:value={calendarValue} />
-            calendarValue: {calendarValue}
-          </Card.Description>
-        </Card.Header>
-        <Card.Content>
-          <!--
-          <div class="h-[640px] border border-red-500 p-2">
-            <PdfViewer props={{ url: pathToPdf, scale: 2 }} class="border" />
-          </div>
-          -->
-        </Card.Content>
-      </Card.Root>
-      <StatsCard />
-    </div>
     <Tabs.Root value="week">
       <div class="flex items-center">
         <Tabs.List>
@@ -158,21 +127,7 @@
               columns={[
                 { label: 'Supplier', key: 'supplier' },
                 { label: 'Reference', key: 'reference' },
-                {
-                  label: 'Date',
-                  key: 'issueDate',
-                  snippet: demo
-                },
-                {
-                  label: 'Updated',
-                  key: 'updated',
-                  format: (value) => dayjs(value as string).format('DD/MM/YYYY HH:mm')
-                },
-                {
-                  label: 'Created',
-                  key: 'created',
-                  format: (value) => dayjs(value as string).format('DD/MM/YYYY')
-                }
+                { label: 'Date', key: 'issueDate' }
               ]}
             />
           </Card.Content>
