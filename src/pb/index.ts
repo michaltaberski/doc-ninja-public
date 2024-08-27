@@ -51,5 +51,5 @@ export const saveDocument = async (document: NewDocument) => {
 export const updateDocument = async (id: string, document: Partial<Document>) => {
   return await pb
     .collection('documents')
-    .update(id, { ...document, date: document.issueDate?.toString() || '' });
+    .update(id, { ...document, issueDate: document.issueDate?.toString() || '' });
 };
