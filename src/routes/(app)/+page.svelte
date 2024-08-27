@@ -15,7 +15,7 @@
   import { Badge } from '@/lib/components/ui/badge';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
-  import { updateDocument } from '@/pb';
+  import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
   import Calendar from '@/lib/components/ui/calendar/calendar.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
@@ -75,6 +75,11 @@
 <EditDocumentSheet
   bind:open={openEdit}
   document={editDocument}
+  onDelete={async (id) => {
+    await deleteDocument(id);
+    await invalidateAll();
+    openEdit = false;
+  }}
   onSave={async (documentProps) => {
     if (!editId) return;
     await updateDocument(editId, documentProps);

@@ -8,12 +8,14 @@
   let {
     open = $bindable(),
     document,
+    onDelete,
     onSave,
     onCancel
   }: {
     open?: boolean;
     document?: RowMeta<Document>;
     onSave?: (documentProps: Document) => Promise<void>;
+    onDelete?: (id: string) => Promise<void>;
     onCancel?: () => void;
   } = $props();
 
@@ -33,6 +35,8 @@
   $effect(() => {
     editableDocument = document;
   });
+
+  const documentId = $derived(document?.id);
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -88,11 +92,23 @@
         <DocumentForm bind:document={editableDocument} disabled={saving} />
       {/if}
     </Sheet.Body>
-    <Sheet.Footer class="flex border-t p-6">
-      <Button variant="outline" onclick={() => (open = false)} disabled={saving}>
-        Cancel
-      </Button>
-      <Button onclick={() => editableDocument && onSave?.(editableDocument)}>Save</Button>
+    <Sheet.Footer class="flex border-t p-6 sm:justify-between">
+      {#if documentId && onDelete}
+        <Button
+          variant="destructive"
+          onclick={() => {
+            onDelete(documentId);
+          }}>Delete</Button
+        >
+      {/if}
+      <div class="flex gap-2">
+        <Button variant="outline" onclick={() => (open = false)} disabled={saving}>
+          Cancel
+        </Button>
+        <Button onclick={() => editableDocument && onSave?.(editableDocument)}>
+          Save
+        </Button>
+      </div>
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>

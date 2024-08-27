@@ -53,3 +53,7 @@ export const updateDocument = async (id: string, document: Partial<Document>) =>
     .collection('documents')
     .update(id, { ...document, issueDate: document.issueDate?.toString() || '' });
 };
+
+export const deleteDocument = async (id: string) => {
+  return await pb.collection('documents').delete(id);
+};
