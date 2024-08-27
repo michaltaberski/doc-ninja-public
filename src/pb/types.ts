@@ -1,3 +1,5 @@
+import type { CalendarDate } from '@internationalized/date';
+
 export type RowMeta<T = object> = {
   collectionId: string;
   collectionName: string;
@@ -10,7 +12,7 @@ export type Document = {
   files: string[];
   supplier?: string;
   reference?: string;
-  date?: string;
+  date?: CalendarDate;
   validityPeriod?: string;
   owner: string;
 };

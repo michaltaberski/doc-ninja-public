@@ -1,5 +1,6 @@
 import PocketBase from 'pocketbase';
 import type { Document, NewDocument, RowMeta } from './types';
+import { parseDate } from '@internationalized/date';
 
 const pb = new PocketBase('https://db.doc.ninja');
 
@@ -20,9 +21,17 @@ export const getUsers = async () => {
 };
 
 export const getDocuments = async () => {
-  const records = await pb.collection('documents').getFullList<RowMeta<Document>>({
-    sort: '-created'
-  });
+  const records = (
+    await pb.collection('documents').getFullList({
+      sort: '-created'
+    })
+  ).map(
+    (record) =>
+      ({
+        ...record,
+        date: record.date ? parseDate(record.date.substr(0, 10)) : null
+      }) as RowMeta<Document>
+  );
   return records;
 };
 
