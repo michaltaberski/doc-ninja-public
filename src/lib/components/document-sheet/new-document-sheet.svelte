@@ -3,10 +3,9 @@
   import * as Sheet from '$lib/components/ui/sheet';
   import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
   import FilePreview from './file-preview.svelte';
-  import { Input } from '@/lib/components/ui/input';
-  import FormFiled from '@/lib/components/form-filed.svelte';
-  import type { Document, NewDocument } from '@/pb/types';
+  import type { NewDocument } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
+  import { today } from '@internationalized/date';
 
   let {
     open = $bindable(),
@@ -24,8 +23,8 @@
     files: [...(fileList || [])],
     supplier: '',
     reference: '',
-    issueDate: undefined,
-    validityPeriod: '',
+    issueDate: today(Intl.DateTimeFormat().resolvedOptions().timeZone),
+    validityPeriod: undefined,
     owner: ''
   });
 
