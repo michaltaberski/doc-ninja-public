@@ -17,6 +17,7 @@
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
+  import Calendar from '@/lib/components/ui/calendar/calendar.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
@@ -54,6 +55,8 @@
     open = false;
   };
   const editDocument = $derived(documents.find((doc) => doc.id === editId));
+
+  let calendarValue = $state(undefined);
 </script>
 
 {#snippet demo({ value, row }: { value: string; row: RowMeta<Document> })}
@@ -86,7 +89,10 @@
     <div class="grid gap-4 sm:grid-cols-2">
       <Card.Root>
         <Card.Header class="pb-2">
-          <Card.Description>...</Card.Description>
+          <Card.Description>
+            <Calendar bind:value={calendarValue} />
+            calendarValue: {calendarValue}
+          </Card.Description>
         </Card.Header>
         <Card.Content>
           <!--
