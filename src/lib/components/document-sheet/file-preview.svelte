@@ -32,10 +32,7 @@
 {#if fileType === 'Image'}
   <img {src} alt={file} class={className} />
 {:else if fileType === 'PDF'}
-  <PdfViewer
-    props={{ url: src, scale: 10 }}
-    class="mx-auto max-w-[100%] object-contain"
-  />
+  <PdfViewer props={{ url: src, scale: 2 }} class="mx-auto max-w-[100%] object-contain" />
 {:else}
   <div
     class="flex h-32 items-center justify-center bg-background/20 text-muted-foreground"
