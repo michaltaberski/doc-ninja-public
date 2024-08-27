@@ -12,7 +12,7 @@ export type Document = {
   files: string[];
   supplier?: string;
   reference?: string;
-  date?: CalendarDate;
+  issueDate?: CalendarDate;
   validityPeriod?: string;
   owner: string;
 };

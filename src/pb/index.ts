@@ -23,13 +23,13 @@ export const getUsers = async () => {
 export const getDocuments = async () => {
   const records = (
     await pb.collection('documents').getFullList({
-      sort: '-created'
+      sort: '-issueDate'
     })
   ).map(
     (record) =>
       ({
         ...record,
-        date: record.date ? parseDate(record.date.substr(0, 10)) : null
+        issueDate: record.issueDate ? parseDate(record.issueDate.substr(0, 10)) : null
       }) as RowMeta<Document>
   );
   return records;
@@ -42,12 +42,14 @@ export const saveDocument = async (document: NewDocument) => {
   });
   formData.append('supplier', document.supplier || '');
   formData.append('reference', document.reference || '');
-  formData.append('date', document.date || '');
+  formData.append('issueDate', document.issueDate?.toString() || '');
   formData.append('validityPeriod', document.validityPeriod || '');
   formData.append('owner', document.owner);
   return await pb.collection('documents').create<Document>(formData);
 };
 
 export const updateDocument = async (id: string, document: Partial<Document>) => {
-  return await pb.collection('documents').update(id, document);
+  return await pb
+    .collection('documents')
+    .update(id, { ...document, date: document.issueDate?.toString() || '' });
 };

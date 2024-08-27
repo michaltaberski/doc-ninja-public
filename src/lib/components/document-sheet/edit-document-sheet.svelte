@@ -89,9 +89,9 @@
       {/if}
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6">
-      <Button variant="outline" onclick={() => (open = false)} disabled={saving}
-        >Cancel</Button
-      >
+      <Button variant="outline" onclick={() => (open = false)} disabled={saving}>
+        Cancel
+      </Button>
       <Button onclick={() => editableDocument && onSave?.(editableDocument)}>Save</Button>
     </Sheet.Footer>
   </Sheet.Content>

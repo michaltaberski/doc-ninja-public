@@ -21,16 +21,11 @@
     <Input id="reference" bind:value={document.reference} {disabled} />
   </FormFiled>
   <div class="flex gap-6">
-    <FormFiled label="Date" for="date">
-      <Input id="date" bind:value={document.date} {disabled} />
+    <FormFiled label="Issue date">
+      <DatePicker bind:value={document.issueDate} />
     </FormFiled>
     <FormFiled label="Validity period" for="validity-period">
       <Input id="validity-period" bind:value={document.validityPeriod} {disabled} />
-    </FormFiled>
-  </div>
-  <div class="flex gap-6">
-    <FormFiled label="Date" for="date">
-      <DatePicker bind:value={document.date} />
     </FormFiled>
   </div>
 </div>

@@ -59,8 +59,10 @@
   let calendarValue = $state(undefined);
 </script>
 
-{#snippet demo({ value, row }: { value: string; row: RowMeta<Document> })}
-  <Badge class="text-xs" variant="outline">{dayjs(row.date).format('DD/MM/YYYY')}</Badge>
+{#snippet demo({ value }: { value: string })}
+  <Badge class="text-xs" variant="outline">
+    {value}
+  </Badge>
 {/snippet}
 
 <PreviewDocumentSheet
@@ -153,8 +155,7 @@
                 { label: 'Reference', key: 'reference' },
                 {
                   label: 'Date',
-                  key: 'date',
-                  format: (value) => dayjs(value as string).format('DD/MM/YYYY'),
+                  key: 'issueDate',
                   snippet: demo
                 },
                 {
