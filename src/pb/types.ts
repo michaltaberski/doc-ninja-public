@@ -22,4 +22,7 @@ export type NewDocument = Omit<Document, 'files'> & {
 };
 
 export type DurationUnit = 'DAY' | 'MONTH' | 'YEAR';
+
 export type Duration = `${string}-${DurationUnit}`;
+
+export type FileType = 'Image' | 'PDF' | 'File';

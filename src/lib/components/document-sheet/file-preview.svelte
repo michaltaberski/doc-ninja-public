@@ -1,24 +1,45 @@
 <script lang="ts">
-  const { file, class: className } = $props<{ file: File; class?: string }>();
+  import type { Document, FileType, RowMeta } from '@/pb/types';
+  import { PdfViewer } from 'svelte-pdf-simple';
+  const {
+    document,
+    file,
+    class: className
+  }: {
+    document: RowMeta<Document>;
+    file: string;
+    class?: string;
+  } = $props();
 
-  let imageSrc = $state<string | null | undefined>(null);
-  $effect(() => {
-    if (!file?.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const data = e.target?.result;
-      imageSrc = data as string;
-    };
-    reader.readAsDataURL(file);
+  const src = $derived(
+    ['https://db.doc.ninja/api/files', document?.collectionId, document?.id, file].join(
+      '/'
+    )
+  );
+
+  const fileType: FileType = $derived.by(() => {
+    const ext = file.toLocaleLowerCase().split('.').pop() as string;
+    if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(ext)) {
+      return 'Image';
+    }
+    if (['pdf'].includes(ext)) {
+      return 'PDF';
+    }
+    return 'File';
   });
 </script>
 
-{#if file.type.startsWith('image/')}
-  {#if imageSrc}
-    <img src={imageSrc} alt={file.name} class={className} />
-  {:else}
-    <p>Loading...</p>
-  {/if}
+{#if fileType === 'Image'}
+  <img {src} alt={file} class={className} />
+{:else if fileType === 'PDF'}
+  <PdfViewer
+    props={{ url: src, scale: 10 }}
+    class="mx-auto max-w-[100%] object-contain"
+  />
 {:else}
-  <p>Preview not available</p>
+  <div
+    class="flex h-32 items-center justify-center bg-background/20 text-muted-foreground"
+  >
+    <span class="text-sm">File type not supported</span>
+  </div>
 {/if}

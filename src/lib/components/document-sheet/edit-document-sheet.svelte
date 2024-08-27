@@ -4,6 +4,7 @@
   import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
+  import FilePreview from './file-preview.svelte';
 
   let {
     open = $bindable(),
@@ -19,17 +20,6 @@
     onCancel?: () => void;
   } = $props();
 
-  const fileUrls = $derived(
-    (document?.files || []).map((fileName) =>
-      [
-        'https://db.doc.ninja/api/files',
-        document?.collectionId,
-        document?.id,
-        fileName
-      ].join('/')
-    )
-  );
-
   let editableDocument = $state(document);
   let saving = $state(false);
   $effect(() => {
@@ -42,10 +32,12 @@
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header class="relative">
-      <div class="flex max-h-96 min-h-80 border-b">
-        {#each fileUrls as fileUrl}
-          <img src={fileUrl} class="object-contain" />
-        {/each}
+      <div class="flex max-h-96 min-h-96 border-b">
+        {#if document}
+          {#each document?.files || [] as file}
+            <FilePreview {document} {file} />
+          {/each}
+        {/if}
       </div>
       <div
         class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between border-b bg-background/40 px-4 py-2 backdrop-blur-md"

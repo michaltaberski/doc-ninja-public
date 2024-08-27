@@ -2,7 +2,7 @@
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
   import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
-  import FilePreview from './file-preview.svelte';
+  import LocalFilePreview from './local-file-preview.svelte';
   import type { NewDocument } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
   import { today } from '@internationalized/date';
@@ -43,7 +43,7 @@
     <Sheet.Header class="relative">
       <div class="flex max-h-96 border-b">
         {#each [...(fileList || [])] as file}
-          <FilePreview {file} class="object-contain" />
+          <LocalFilePreview {file} class="object-contain" />
         {/each}
       </div>
       <div
