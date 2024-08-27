@@ -35,12 +35,7 @@
           </Card.Description>
         </Card.Header>
         <Card.Footer>
-          <Button
-            onclick={async () => {
-              const a = await login('michal', 'taberski123');
-              console.log(a);
-            }}>Create New Order</Button
-          >
+          <Button>Create New Order</Button>
         </Card.Footer>
       </Card.Root>
       <Card.Root>

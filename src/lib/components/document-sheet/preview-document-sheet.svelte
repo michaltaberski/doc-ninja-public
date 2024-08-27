@@ -22,10 +22,6 @@
     onEdit?: () => void;
   } = $props();
 
-  $effect(() => {
-    console.log(document);
-  });
-
   const fileUrls = $derived(
     (document?.files || []).map((fileName) =>
       [
