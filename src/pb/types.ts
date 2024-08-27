@@ -13,10 +13,13 @@ export type Document = {
   supplier?: string;
   reference?: string;
   issueDate?: CalendarDate;
-  validityPeriod?: string;
+  validityPeriod?: Duration;
   owner: string;
 };
 
 export type NewDocument = Omit<Document, 'files'> & {
   files: File[];
 };
+
+export type DurationUnit = 'DAY' | 'MONTH' | 'YEAR';
+export type Duration = `${string}-${DurationUnit}`;

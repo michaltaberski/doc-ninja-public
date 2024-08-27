@@ -117,8 +117,8 @@
       <Tabs.Content value="week">
         <Card.Root>
           <Card.Header class="px-7">
-            <Card.Title>Orders</Card.Title>
-            <Card.Description>Recent orders from your store.</Card.Description>
+            <Card.Title>Documents</Card.Title>
+            <Card.Description>...</Card.Description>
           </Card.Header>
           <Card.Content>
             <DataTable

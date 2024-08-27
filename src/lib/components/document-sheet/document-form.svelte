@@ -3,6 +3,7 @@
   import FormFiled from '@/lib/components/form-filed.svelte';
   import type { Document } from '@/pb/types';
   import DatePicker from '../ui/date-picker.svelte';
+  import DurationSelect from '../duration-select.svelte';
 
   let {
     document = $bindable(),
@@ -25,7 +26,7 @@
       <DatePicker bind:value={document.issueDate} />
     </FormFiled>
     <FormFiled label="Validity period" for="validity-period">
-      <Input id="validity-period" bind:value={document.validityPeriod} {disabled} />
+      <DurationSelect bind:duration={document.validityPeriod} />
     </FormFiled>
   </div>
 </div>
