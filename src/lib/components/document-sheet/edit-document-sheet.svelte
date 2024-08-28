@@ -4,6 +4,7 @@
   import type { Document, RowMeta } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
   import FilePreview from './file-preview.svelte';
+  import ConfirmDialog from '../ui/confirm-dialog.svelte';
 
   let {
     open = $bindable(),
@@ -48,7 +49,13 @@
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">
       {#if documentId && onDelete}
-        <Button variant="destructive" onclick={() => onDelete(documentId)}>Delete</Button>
+        <ConfirmDialog
+          title="Delete document"
+          description="Are you sure you want to delete this document?"
+          onConfirm={() => onDelete(documentId)}
+        >
+          <Button variant="destructive">Delete</Button>
+        </ConfirmDialog>
       {/if}
       <div class="flex gap-2">
         <Button variant="outline" onclick={() => (open = false)} disabled={saving}>
