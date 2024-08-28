@@ -3,6 +3,7 @@
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
+  import * as Tooltip from '$lib/components/ui/tooltip';
   import { CircleCheck, CircleX, File, ListFilter } from 'lucide-svelte';
   import DemoTable from './table.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
@@ -83,21 +84,23 @@
 {#snippet validUntilCell({ row }: { row: Document })}
   {@const date = validUntil(row)}
   {#if date}
-    <div class="flex items-center gap-2">
-      {#if getIsFutureDate(date)}
-        <CircleCheck class="h-4 w-4 text-green-600" />
-      {:else}
-        <CircleX class="h-4 w-4 text-red-600" />
-      {/if}
-      <div class="flex flex-col">
-        {date && formatDate(date)}
-        {#if row.validityPeriod}
-          <div class="text-xs text-muted-foreground">
-            {getFormattedDuration(row.validityPeriod)}
-          </div>
-        {/if}
-      </div>
-    </div>
+    <Tooltip.Root>
+      <Tooltip.Trigger>
+        <div class="flex items-center gap-2">
+          {#if getIsFutureDate(date)}
+            <CircleCheck class="h-4 w-4 text-green-600" />
+          {:else}
+            <CircleX class="h-4 w-4 text-red-600" />
+          {/if}
+          {formatDate(date)}
+        </div>
+      </Tooltip.Trigger>
+      <Tooltip.Content>
+        <p>
+          Valid for {getFormattedDuration(row.validityPeriod)}
+        </p>
+      </Tooltip.Content>
+    </Tooltip.Root>
   {/if}
 {/snippet}
 
