@@ -42,9 +42,9 @@
       </div>
       <div class="flex flex-col gap-4 px-6">
         <ReadonlyField label="Issue date">{document?.issueDate}</ReadonlyField>
-        <ReadonlyField label="Validity period"
-          >{document?.validityPeriod || '-'}</ReadonlyField
-        >
+        <ReadonlyField label="Validity period">
+          {document?.validityPeriod || '-'}
+        </ReadonlyField>
       </div>
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">
