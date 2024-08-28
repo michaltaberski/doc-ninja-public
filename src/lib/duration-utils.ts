@@ -1,4 +1,11 @@
-import type { Duration, DurationUnit } from '@/pb/types';
+import type { Duration, DurationUnit, Document } from '@/pb/types';
+import {
+  DateFormatter,
+  getLocalTimeZone,
+  today,
+  type CalendarDate,
+  type DateDuration
+} from '@internationalized/date';
 
 export const DURATION_UNITS: DurationUnit[] = ['DAY', 'MONTH', 'YEAR'];
 
@@ -14,10 +21,51 @@ export const getDurationUnitLabel = (duration: Duration) => {
   const pluralSuffix = count === 1 ? '' : 's';
   switch (unit) {
     case 'DAY':
-      return 'Day' + pluralSuffix;
+      return 'day' + pluralSuffix;
     case 'MONTH':
-      return 'Month' + pluralSuffix;
+      return 'month' + pluralSuffix;
     case 'YEAR':
-      return 'Year' + pluralSuffix;
+      return 'year' + pluralSuffix;
   }
+};
+
+export const getFormattedDuration = (duration?: Duration) => {
+  const { count } = splitDuration(duration);
+  if (!duration || count === undefined) return '';
+  return `${count} ${getDurationUnitLabel(duration)}`;
+};
+
+const durationToDateDuration = (duration?: Duration): DateDuration | null => {
+  const { count, unit } = splitDuration(duration);
+  if (count === undefined) return null;
+  switch (unit) {
+    case 'DAY':
+      return { days: count };
+    case 'MONTH':
+      return { months: count };
+    case 'YEAR':
+      return { years: count };
+  }
+};
+
+export const validUntil = ({
+  validityPeriod,
+  issueDate
+}: Pick<Document, 'validityPeriod' | 'issueDate'>) => {
+  const dateDuration = durationToDateDuration(validityPeriod);
+  if (!dateDuration || !issueDate) return null;
+  return issueDate.add(dateDuration);
+};
+
+export const formatDate = (
+  date: CalendarDate,
+  style: 'full' | 'long' | 'medium' | 'short' = 'medium'
+) => {
+  const df = new DateFormatter('en-US', { dateStyle: style });
+  return df.format(date.toDate('UTC'));
+};
+
+export const getIsFutureDate = (date: CalendarDate) => {
+  const todayDate = today(getLocalTimeZone());
+  return date.compare(todayDate) > 0;
 };

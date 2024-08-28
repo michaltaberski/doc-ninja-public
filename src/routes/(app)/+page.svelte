@@ -3,18 +3,22 @@
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
-
-  import { File, ListFilter } from 'lucide-svelte';
-  // import pathToPdf from './file1.pdf';
-
+  import { CircleCheck, CircleX, File, ListFilter } from 'lucide-svelte';
   import DemoTable from './table.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import ConfirmDialog from '@/lib/components/ui/confirm-dialog.svelte';
-  // import { PdfViewer } from 'svelte-pdf-simple';
+  import {
+    formatDate,
+    getDurationUnitLabel,
+    getFormattedDuration,
+    getIsFutureDate,
+    validUntil
+  } from '@/lib/duration-utils';
+  import type { Document } from '@/pb/types';
+  import { CalendarDate } from '@internationalized/date';
 
   const { data } = $props();
   const documents = $derived(data.documents);
@@ -76,6 +80,27 @@
   }}
 />
 
+{#snippet validUntilCell({ row }: { row: Document })}
+  {@const date = validUntil(row)}
+  {#if date}
+    <div class="flex items-center gap-2">
+      {#if getIsFutureDate(date)}
+        <CircleCheck class="h-4 w-4 text-green-600" />
+      {:else}
+        <CircleX class="h-4 w-4 text-red-600" />
+      {/if}
+      <div class="flex flex-col">
+        {date && formatDate(date)}
+        {#if row.validityPeriod}
+          <div class="text-xs text-muted-foreground">
+            {getFormattedDuration(row.validityPeriod)}
+          </div>
+        {/if}
+      </div>
+    </div>
+  {/if}
+{/snippet}
+
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
     <Tabs.Root value="week">
@@ -124,7 +149,12 @@
               columns={[
                 { label: 'Supplier', key: 'supplier' },
                 { label: 'Reference', key: 'reference' },
-                { label: 'Date', key: 'issueDate' }
+                {
+                  label: 'Date',
+                  key: 'issueDate',
+                  format: (date) => formatDate(date as CalendarDate)
+                },
+                { label: 'Valid until', key: 'validityPeriod', snippet: validUntilCell }
               ]}
             />
           </Card.Content>
