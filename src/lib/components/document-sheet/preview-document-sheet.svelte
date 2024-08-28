@@ -10,16 +10,16 @@
   import type { Document, RowMeta } from '@/pb/types';
   import ReadonlyField from '../readonly-field.svelte';
   import FilePreview from './file-preview.svelte';
+  import ValidUntilCell from '../valid-until-cell.svelte';
+  import { formatDate } from '@/lib/duration-utils';
 
   let {
     open = $bindable(),
     document,
-    onEdit,
-    onCancel
+    onEdit
   }: {
     open?: boolean;
     document?: RowMeta<Document>;
-    onCancel?: () => void;
     onEdit?: () => void;
   } = $props();
 </script>
@@ -34,16 +34,22 @@
     <Sheet.Body>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-2xl">
-          {document ? document.reference : ''}
+          {document?.reference || '-'}
         </Sheet.Title>
         <Sheet.Description>
-          {document ? document.supplier : ''}
+          {document?.supplier || '-'}
         </Sheet.Description>
       </div>
       <div class="flex flex-col gap-4 px-6">
-        <ReadonlyField label="Issue date">{document?.issueDate}</ReadonlyField>
-        <ReadonlyField label="Validity period">
-          {document?.validityPeriod || '-'}
+        <ReadonlyField label="Issue date">
+          {#if document?.issueDate}
+            {formatDate(document.issueDate)}
+          {/if}
+        </ReadonlyField>
+        <ReadonlyField label="Validit until">
+          {#if document}
+            <ValidUntilCell {document} />
+          {/if}
         </ReadonlyField>
       </div>
     </Sheet.Body>

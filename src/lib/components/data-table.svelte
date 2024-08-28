@@ -21,7 +21,7 @@
   <Table.Header>
     <Table.Row>
       {#each table.headers as dataTableHeader}
-        <Table.Head>
+        <Table.Head class={dataTableHeader.class}>
           {dataTableHeader.label}
         </Table.Head>
       {/each}

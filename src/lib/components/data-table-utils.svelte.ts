@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 
 type DataTableHeader = {
   label: string;
+  class?: string;
 };
 
 type DataTableRow<TData> = {
@@ -15,6 +16,7 @@ type DataTableRow<TData> = {
 export type DataTableColumn<TData, TKey extends keyof TData = keyof TData> = {
   key: TKey;
   label: string;
+  headerClass?: string;
   sortable?: boolean;
   format?: (value: unknown) => string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,7 +37,7 @@ export const createDataTable = <T extends Record<string, any>>(
   const rows = $state<DataTableRow<T>[]>([]);
 
   options.columns.forEach((column) => {
-    headers.push({ label: column.label });
+    headers.push({ label: column.label, class: column.headerClass });
   });
 
   options.data.forEach((data) => {

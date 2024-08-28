@@ -20,6 +20,8 @@
   } from '@/lib/duration-utils';
   import type { Document } from '@/pb/types';
   import { CalendarDate } from '@internationalized/date';
+  import { head } from 'lodash';
+  import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
 
   const { data } = $props();
   const documents = $derived(data.documents);
@@ -82,26 +84,7 @@
 />
 
 {#snippet validUntilCell({ row }: { row: Document })}
-  {@const date = validUntil(row)}
-  {#if date}
-    <Tooltip.Root>
-      <Tooltip.Trigger>
-        <div class="flex items-center gap-2">
-          {#if getIsFutureDate(date)}
-            <CircleCheck class="h-4 w-4 text-green-600" />
-          {:else}
-            <CircleX class="h-4 w-4 text-red-600" />
-          {/if}
-          {formatDate(date)}
-        </div>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <p>
-          Valid for {getFormattedDuration(row.validityPeriod)}
-        </p>
-      </Tooltip.Content>
-    </Tooltip.Root>
-  {/if}
+  <ValidUntilCell document={row} />
 {/snippet}
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -150,14 +133,20 @@
               data={documents}
               onRowClick={(rowId) => (previewId = rowId)}
               columns={[
-                { label: 'Supplier', key: 'supplier' },
+                { label: 'Supplier', key: 'supplier', headerClass: 'w-[300px]' },
                 { label: 'Reference', key: 'reference' },
                 {
                   label: 'Date',
                   key: 'issueDate',
+                  headerClass: 'w-[140px]',
                   format: (date) => formatDate(date as CalendarDate)
                 },
-                { label: 'Valid until', key: 'validityPeriod', snippet: validUntilCell }
+                {
+                  label: 'Valid until',
+                  key: 'validityPeriod',
+                  headerClass: 'w-[180px]',
+                  snippet: validUntilCell
+                }
               ]}
             />
           </Card.Content>
