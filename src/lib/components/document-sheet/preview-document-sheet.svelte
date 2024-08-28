@@ -46,7 +46,7 @@
             {formatDate(document.issueDate)}
           {/if}
         </ReadonlyField>
-        <ReadonlyField label="Validit until">
+        <ReadonlyField label="Valid until">
           {#if document}
             <ValidUntilCell {document} />
           {/if}
