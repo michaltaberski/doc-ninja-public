@@ -13,6 +13,7 @@
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
+  import ConfirmDialog from '@/lib/components/ui/confirm-dialog.svelte';
   // import { PdfViewer } from 'svelte-pdf-simple';
 
   const { data } = $props();
@@ -115,7 +116,17 @@
         <Card.Root>
           <Card.Header class="px-7">
             <Card.Title>Documents</Card.Title>
-            <Card.Description>...</Card.Description>
+            <Card.Description>
+              <ConfirmDialog
+                title="Are you sure?"
+                description="This action cannot be undone."
+                onConfirm={async () => {
+                  await new Promise((resolve) => setTimeout(resolve, 1000));
+                }}
+              >
+                <Button>click</Button>
+              </ConfirmDialog>
+            </Card.Description>
           </Card.Header>
           <Card.Content>
             <DataTable
