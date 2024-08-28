@@ -4,7 +4,7 @@
   import { times } from 'lodash';
   import { DURATION_UNITS, getDurationUnitLabel } from '../duration-utils';
 
-  const durations = times(30, (i) => i + 1);
+  const durations = times(30, (i) => `${i + 1}`);
 
   let { duration = $bindable() }: { duration?: Duration } = $props();
 
