@@ -116,17 +116,6 @@
         <Card.Root>
           <Card.Header class="px-7">
             <Card.Title>Documents</Card.Title>
-            <Card.Description>
-              <ConfirmDialog
-                title="Are you sure?"
-                description="This action cannot be undone."
-                onConfirm={async () => {
-                  await new Promise((resolve) => setTimeout(resolve, 1000));
-                }}
-              >
-                <Button>click</Button>
-              </ConfirmDialog>
-            </Card.Description>
           </Card.Header>
           <Card.Content>
             <DataTable

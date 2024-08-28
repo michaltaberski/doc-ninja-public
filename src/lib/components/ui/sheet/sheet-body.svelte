@@ -10,5 +10,7 @@
 </script>
 
 <div class={cn('flex flex-1 flex-col', className)} {...restProps}>
-  <slot />
+  {#if children}
+    {@render children()}
+  {/if}
 </div>

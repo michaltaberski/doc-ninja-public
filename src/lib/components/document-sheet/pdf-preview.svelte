@@ -40,7 +40,7 @@
   };
 </script>
 
-<div class={cn('relative h-full', className)}>
+<div class={cn('relative', className)}>
   <PdfViewer
     bind:this={pdfViewer}
     props={{ url: src, scale: 2 }}
@@ -51,7 +51,7 @@
   />
   {#if isLoaded}
     <div
-      class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between border-b bg-background/40 px-4 py-2 backdrop-blur-md"
+      class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-background/40 px-4 py-2 backdrop-blur-md"
     >
       <div class="flex items-center gap-2">
         <Button

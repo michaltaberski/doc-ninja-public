@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Document, FileType, RowMeta } from '@/pb/types';
   import PdfPreview from './pdf-preview.svelte';
+  import { cn } from '@/lib/utils';
   const {
     document,
     file,
@@ -29,11 +30,11 @@
   });
 </script>
 
-<div class={className}>
+<div class={cn('border-b', className)}>
   {#if fileType === 'Image'}
-    <img {src} alt={file} class="object-contain" />
+    <img {src} alt={file} class="mx-auto h-full object-contain" />
   {:else if fileType === 'PDF'}
-    <PdfPreview {src} />
+    <PdfPreview {src} class="h-full" />
   {:else}
     <div
       class="flex h-32 items-center justify-center bg-background/20 text-muted-foreground"

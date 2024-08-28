@@ -41,7 +41,7 @@ export {
 };
 
 export const sheetVariants = tv({
-  base: 'fixed z-50 flex flex-col sm:p-6',
+  base: 'fixed z-50 flex flex-col sm:top-6 sm:right-6 sm:bottom-6',
   variants: {
     side: {
       top: 'inset-x-0 top-0',
