@@ -51,12 +51,7 @@
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">
       {#if documentId && onDelete}
-        <Button
-          variant="destructive"
-          onclick={() => {
-            onDelete(documentId);
-          }}>Delete</Button
-        >
+        <Button variant="destructive" onclick={() => onDelete(documentId)}>Delete</Button>
       {/if}
       <div class="flex gap-2">
         <Button variant="outline" onclick={() => (open = false)} disabled={saving}>
