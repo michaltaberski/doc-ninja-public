@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import { DownloadIcon, ChevronRightIcon, ChevronLeftIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
   import FilePreview from './file-preview.svelte';
@@ -10,14 +9,12 @@
     open = $bindable(),
     document,
     onDelete,
-    onSave,
-    onCancel
+    onSave
   }: {
     open?: boolean;
     document?: RowMeta<Document>;
     onSave?: (documentProps: Document) => Promise<void>;
     onDelete?: (id: string) => Promise<void>;
-    onCancel?: () => void;
   } = $props();
 
   let editableDocument = $state(document);
