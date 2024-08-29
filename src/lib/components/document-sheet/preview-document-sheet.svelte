@@ -18,18 +18,28 @@
     document?: RowMeta<Document>;
     onEdit?: () => void;
   } = $props();
+
+  let selectedFile = $state(document?.files[0]);
+  $effect(() => {
+    selectedFile = document?.files[0];
+  });
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header>
-      {#if document?.files.length}
-        <FilePreview {document} file={document.files[0]} class="h-96 max-h-96" />
+      {#if document && selectedFile}
+        <FilePreview {document} file={selectedFile} class="h-96 max-h-96" />
       {/if}
     </Sheet.Header>
     <Sheet.Body>
       <div class="px-6 pt-6">
-        <Select.Root>
+        <Select.Root
+          selected={{ value: selectedFile, label: selectedFile }}
+          onSelectedChange={(x) => {
+            selectedFile = x?.value;
+          }}
+        >
           <Select.Trigger>
             <Select.Value />
           </Select.Trigger>
@@ -41,6 +51,7 @@
             {/each}
           </Select.Content>
         </Select.Root>
+        {selectedFile}
       </div>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-2xl">
