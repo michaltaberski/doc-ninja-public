@@ -3,24 +3,16 @@
   import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Tabs from '$lib/components/ui/tabs';
-  import * as Tooltip from '$lib/components/ui/tooltip';
-  import { CircleCheck, CircleX, File, ListFilter } from 'lucide-svelte';
+  import { File, ListFilter } from 'lucide-svelte';
   import DemoTable from './table.svelte';
   import DataTable from '@/lib/components/data-table.svelte';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import {
-    formatDate,
-    getDurationUnitLabel,
-    getFormattedDuration,
-    getIsFutureDate,
-    validUntil
-  } from '@/lib/duration-utils';
+  import { formatDate } from '@/lib/duration-utils';
   import type { Document } from '@/pb/types';
   import { CalendarDate } from '@internationalized/date';
-  import { head } from 'lodash';
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
 
   const { data } = $props();
@@ -60,6 +52,10 @@
   const editDocument = $derived(documents.find((doc) => doc.id === editId));
 </script>
 
+{#snippet validUntilCell({ row }: { row: Document })}
+  <ValidUntilCell document={row} />
+{/snippet}
+
 <PreviewDocumentSheet
   bind:open
   document={previewDocument}
@@ -82,10 +78,6 @@
     openEdit = false;
   }}
 />
-
-{#snippet validUntilCell({ row }: { row: Document })}
-  <ValidUntilCell document={row} />
-{/snippet}
 
 <main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
