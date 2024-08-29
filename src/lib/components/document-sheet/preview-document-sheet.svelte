@@ -35,7 +35,13 @@
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
-  <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
+  <Sheet.Content
+    showClose={false}
+    class="w-full sm:max-w-2xl sm:rounded-lg"
+    onoutroend={() => {
+      console.log('outroend');
+    }}
+  >
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
       {#if document && selectedFile}
         <FilePreview

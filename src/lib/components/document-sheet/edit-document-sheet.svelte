@@ -5,6 +5,8 @@
   import DocumentForm from './document-form.svelte';
   import FilePreview from './file-preview.svelte';
   import ConfirmDialog from '../ui/confirm-dialog.svelte';
+  import { cn } from '@/lib/utils';
+  import PreviewFileNavigation from './preview-file-navigation.svelte';
 
   let {
     open = $bindable(),
@@ -25,13 +27,31 @@
   });
 
   const documentId = $derived(document?.id);
+
+  let selectedFile = $state(document?.files[0]);
+  $effect(() => {
+    selectedFile = document?.files[0];
+  });
+
+  let zoomedIn = $state(false);
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
-    <Sheet.Header>
-      {#if document?.files.length}
-        <FilePreview {document} file={document.files[0]} class="h-96 max-h-96" />
+    <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
+      {#if document && selectedFile}
+        <FilePreview
+          {document}
+          file={selectedFile}
+          class={cn(zoomedIn ? 'min-h-full' : 'h-96')}
+        />
+      {/if}
+      {#if selectedFile}
+        <PreviewFileNavigation
+          bind:currentFile={selectedFile}
+          bind:zoomedIn
+          files={document?.files || []}
+        />
       {/if}
     </Sheet.Header>
     <Sheet.Body>
