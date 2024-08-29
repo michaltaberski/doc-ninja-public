@@ -51,7 +51,6 @@
             {/each}
           </Select.Content>
         </Select.Root>
-        {selectedFile}
       </div>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-2xl">
