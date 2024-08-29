@@ -1,12 +1,8 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import {
-    DownloadIcon,
-    ChevronRightIcon,
-    ChevronLeftIcon,
-    PencilIcon
-  } from 'lucide-svelte';
+  import * as Select from '$lib/components/ui/select';
+  import { PencilIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
   import ReadonlyField from '../readonly-field.svelte';
   import FilePreview from './file-preview.svelte';
@@ -32,6 +28,20 @@
       {/if}
     </Sheet.Header>
     <Sheet.Body>
+      <div class="px-6 pt-6">
+        <Select.Root>
+          <Select.Trigger>
+            <Select.Value />
+          </Select.Trigger>
+          <Select.Content class="max-h-52 overflow-x-auto">
+            {#each document?.files || [] as file}
+              <Select.Item value={file} class="overflow-hidden text-ellipsis"
+                >{file}</Select.Item
+              >
+            {/each}
+          </Select.Content>
+        </Select.Root>
+      </div>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-2xl">
           {document?.reference || '-'}
