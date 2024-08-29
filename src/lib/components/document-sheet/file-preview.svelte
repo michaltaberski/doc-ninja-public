@@ -30,7 +30,7 @@
   });
 </script>
 
-<div class={cn('border-b', className)}>
+<div class={cn('border-b bg-gray-100', className)}>
   {#if fileType === 'Image'}
     <img {src} alt={file} class="mx-auto h-full object-contain" />
   {:else if fileType === 'PDF'}

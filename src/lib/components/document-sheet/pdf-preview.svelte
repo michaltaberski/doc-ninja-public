@@ -2,13 +2,7 @@
   import { cn } from '@/lib/utils';
   import { PdfViewer, type PdfLoadSuccess } from 'svelte-pdf-simple';
   import { Button } from '../ui/button';
-  import {
-    ChevronDown,
-    ChevronLeftIcon,
-    ChevronRightIcon,
-    ChevronUp,
-    DownloadIcon
-  } from 'lucide-svelte';
+  import { ChevronDown, ChevronUp } from 'lucide-svelte';
   const { src, class: className }: { src: string; class?: string } = $props();
 
   let pdfViewer: PdfViewer | undefined = $state();
@@ -46,7 +40,7 @@
   };
 </script>
 
-<div class={cn('relative bg-gray-100', className)}>
+<div class={cn('relative', className)}>
   <PdfViewer
     bind:this={pdfViewer}
     props={{ url: src, scale: 2 }}
@@ -55,7 +49,6 @@
     on:load_failure={handleLoadFailure}
     on:page_changed={handlePageChanged}
   />
-  <!-- START -->
   {#if isLoaded}
     <div class="absolute right-0 top-0 z-10 flex items-center justify-between px-4 py-2">
       <div class="mt-1 flex flex-col items-end gap-2">
@@ -79,42 +72,6 @@
         >
           <ChevronDown class="h-4 w-4" />
           <span class="sr-only">Next Page</span>
-        </Button>
-      </div>
-    </div>
-  {/if}
-  <!-- END -->
-  {#if isLoaded}
-    <div
-      class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-background/40 px-4 py-2 backdrop-blur-md"
-    >
-      <div class="flex items-center gap-2">
-        <Button
-          disabled={!hasPrevPage}
-          size="icon"
-          variant="outline"
-          onclick={() => navigatePages(false)}
-        >
-          <ChevronLeftIcon class="h-4 w-4" />
-          <span class="sr-only">Previous Page</span>
-        </Button>
-        <Button
-          disabled={!hasNextPage}
-          size="icon"
-          variant="outline"
-          onclick={() => navigatePages(true)}
-        >
-          <ChevronRightIcon class="h-4 w-4" />
-          <span class="sr-only">Next Page</span>
-        </Button>
-        <span class="text-sm text-muted-foreground">
-          Page {pageNumber} of {totalPages}
-        </span>
-      </div>
-      <div class="flex items-center gap-2">
-        <Button size="icon" variant="outline">
-          <DownloadIcon class="h-4 w-4" />
-          <span class="sr-only">Download PDF</span>
         </Button>
       </div>
     </div>
