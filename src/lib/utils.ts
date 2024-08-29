@@ -58,3 +58,13 @@ export const flyAndScale = (
     easing: cubicOut
   };
 };
+
+export const loadFileToSrc = async (file: File) =>
+  new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = e.target?.result;
+      resolve(data as string);
+    };
+    reader.readAsDataURL(file);
+  });

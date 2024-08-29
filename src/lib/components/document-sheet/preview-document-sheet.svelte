@@ -1,13 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import * as Select from '$lib/components/ui/select';
-  import {
-    ChevronLeftIcon,
-    ChevronRightIcon,
-    DownloadIcon,
-    PencilIcon
-  } from 'lucide-svelte';
+  import { PencilIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
   import ReadonlyField from '../readonly-field.svelte';
   import FilePreview from './file-preview.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import LocalFilePreview from './local-file-preview.svelte';
+  import LocalFilePreview from './file-preview-local.svelte';
   import type { NewDocument } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
   import { today } from '@internationalized/date';
