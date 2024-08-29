@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="T">
   import { Button } from '$lib/components/ui/button';
   import {
     ChevronLeftIcon,
@@ -13,9 +13,9 @@
     zoomedIn = $bindable(),
     files
   }: {
-    currentFile: string;
+    currentFile: T;
     zoomedIn: boolean;
-    files: string[];
+    files: T[];
   } = $props();
 
   const currentFileIndex = $derived(files.indexOf(currentFile));

@@ -1,24 +1,33 @@
 <script lang="ts">
-  const { file, class: className } = $props<{ file: File; class?: string }>();
+  import type { FileType } from '@/pb/types';
+  import LocalImageFilePreview from './local-image-file-preview.svelte';
+  import { cn } from '@/lib/utils';
+  import PdfPreview from './pdf-preview.svelte';
 
-  let imageSrc = $state<string | null | undefined>(null);
-  $effect(() => {
-    if (!file?.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const data = e.target?.result;
-      imageSrc = data as string;
-    };
-    reader.readAsDataURL(file);
+  const { file, class: className }: { file: File; class?: string } = $props();
+
+  const fileType: FileType = $derived.by(() => {
+    const ext = file.name.split('.').pop() as string;
+    if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(ext)) {
+      return 'Image';
+    }
+    if (['pdf'].includes(ext)) {
+      return 'PDF';
+    }
+    return 'File';
   });
 </script>
 
-{#if file.type.startsWith('image/')}
-  {#if imageSrc}
-    <img src={imageSrc} alt={file.name} class={className} />
+<div class={cn('border-b bg-gray-100', className)}>
+  {#if fileType === 'Image'}
+    <LocalImageFilePreview {file} class="mx-auto h-full object-contain" />
+  {:else if fileType === 'PDF'}
+    <PdfPreview {src} class="h-full" />
   {:else}
-    <p>Loading...</p>
+    <div
+      class="flex h-32 items-center justify-center bg-background/20 text-muted-foreground"
+    >
+      <span class="text-sm">File type not supported</span>
+    </div>
   {/if}
-{:else}
-  <p>Preview not available</p>
-{/if}
+</div>
