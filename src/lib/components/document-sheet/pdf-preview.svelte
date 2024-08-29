@@ -51,7 +51,7 @@
   />
   {#if isLoaded}
     <div
-      class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-background/40 px-4 py-2 backdrop-blur-md"
+      class="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between bg-background/40 px-6 py-2 backdrop-blur-md"
     >
       <div class="flex items-center gap-2">
         <Button
