@@ -11,11 +11,13 @@
   let {
     currentFile = $bindable(),
     zoomedIn = $bindable(),
-    files
+    files,
+    getFileName = (file: T) => file?.toString() || '-'
   }: {
     currentFile: T;
     zoomedIn: boolean;
     files: T[];
+    getFileName?: (file: T) => string;
   } = $props();
 
   const currentFileIndex = $derived(files.indexOf(currentFile));
@@ -49,7 +51,7 @@
         <span class="sr-only">Previous File</span>
       </Button>
     {/if}
-    <span class="text-sm text-muted-foreground">{currentFile}</span>
+    <span class="text-sm text-muted-foreground">{getFileName(currentFile)}</span>
   </div>
   <div class="flex items-center gap-2">
     {#if zoomedIn}

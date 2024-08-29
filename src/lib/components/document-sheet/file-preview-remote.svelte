@@ -29,4 +29,4 @@
   });
 </script>
 
-<FilePreviewSrc {src} {fileType} class={className} />
+<FilePreviewSrc {src} {fileType} fileName={file} class={className} />

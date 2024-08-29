@@ -58,7 +58,12 @@
         />
       {/if}
       {#if selectedFile}
-        <PreviewFileNavigation bind:currentFile={selectedFile} bind:zoomedIn {files} />
+        <PreviewFileNavigation
+          bind:currentFile={selectedFile}
+          bind:zoomedIn
+          {files}
+          getFileName={(file) => file.name}
+        />
       {/if}
     </Sheet.Header>
     <Sheet.Body>

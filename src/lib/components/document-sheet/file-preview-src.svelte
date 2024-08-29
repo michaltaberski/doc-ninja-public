@@ -5,17 +5,19 @@
   const {
     fileType,
     src,
+    fileName,
     class: className
   }: {
     fileType: FileType;
     src: string;
+    fileName: string;
     class?: string;
   } = $props();
 </script>
 
 <div class={cn('border-b bg-gray-100', className)}>
   {#if fileType === 'Image'}
-    <img {src} alt={src} class="mx-auto h-full object-contain" />
+    <img {src} alt={fileName} class="mx-auto h-full object-contain" />
   {:else if fileType === 'PDF'}
     <PdfPreview {src} class="h-full" />
   {:else}

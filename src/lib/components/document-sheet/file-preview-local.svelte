@@ -5,6 +5,7 @@
 
   const { file, class: className }: { file: File; class?: string } = $props();
 
+  const fileName = $derived(file.name);
   const fileType: FileType = $derived.by(() => {
     const ext = file.name.split('.').pop() as string;
     if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(ext)) {
@@ -20,5 +21,5 @@
 </script>
 
 {#await srcPromise then src}
-  <FilePreviewSrc {src} {fileType} class={className} />
+  <FilePreviewSrc {src} {fileType} {fileName} class={className} />
 {/await}
