@@ -1,12 +1,20 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
-  import { ChevronLeftIcon, ChevronRightIcon, DownloadIcon } from 'lucide-svelte';
+  import {
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    DownloadIcon,
+    ZoomInIcon,
+    ZoomOutIcon
+  } from 'lucide-svelte';
 
   let {
     currentFile = $bindable(),
+    zoomedIn = $bindable(),
     files
   }: {
     currentFile: string;
+    zoomedIn: boolean;
     files: string[];
   } = $props();
 
@@ -42,6 +50,17 @@
     <span class="text-sm text-muted-foreground">{currentFile}</span>
   </div>
   <div class="flex items-center gap-2">
+    {#if zoomedIn}
+      <Button size="icon" variant="outline" onclick={() => (zoomedIn = false)}>
+        <ZoomOutIcon class="h-4 w-4" />
+        <span class="sr-only">Zoom out</span>
+      </Button>
+    {:else}
+      <Button size="icon" variant="outline" onclick={() => (zoomedIn = true)}>
+        <ZoomInIcon class="h-4 w-4" />
+        <span class="sr-only">Zoom in</span>
+      </Button>
+    {/if}
     <Button size="icon" variant="outline">
       <DownloadIcon class="h-4 w-4" />
       <span class="sr-only">Download PDF</span>

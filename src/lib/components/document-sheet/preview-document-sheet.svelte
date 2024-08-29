@@ -14,6 +14,7 @@
   import ValidUntilCell from '../valid-until-cell.svelte';
   import { formatDate } from '@/lib/duration-utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
+  import { cn } from '@/lib/utils';
 
   let {
     open = $bindable(),
@@ -29,17 +30,24 @@
   $effect(() => {
     selectedFile = document?.files[0];
   });
+
+  let zoomedIn = $state(false);
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
-    <Sheet.Header class="relative">
+    <Sheet.Header class="relative max-h-full">
       {#if document && selectedFile}
-        <FilePreview {document} file={selectedFile} class="h-96 max-h-96" />
+        <FilePreview
+          {document}
+          file={selectedFile}
+          class={cn(zoomedIn ? 'h-full' : 'h-96')}
+        />
       {/if}
       {#if selectedFile}
         <PreviewFileNavigation
           bind:currentFile={selectedFile}
+          bind:zoomedIn
           files={document?.files || []}
         />
       {/if}
