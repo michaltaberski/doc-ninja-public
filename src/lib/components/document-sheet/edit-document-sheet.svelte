@@ -3,10 +3,10 @@
   import * as Sheet from '$lib/components/ui/sheet';
   import type { Document, RowMeta } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
-  import FilePreview from './file-preview.svelte';
   import ConfirmDialog from '../ui/confirm-dialog.svelte';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
+  import FilePreviewRemote from './file-preview-remote.svelte';
 
   let {
     open = $bindable(),
@@ -40,7 +40,7 @@
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
       {#if document && selectedFile}
-        <FilePreview
+        <FilePreviewRemote
           {document}
           file={selectedFile}
           class={cn(zoomedIn ? 'min-h-full' : 'h-96')}

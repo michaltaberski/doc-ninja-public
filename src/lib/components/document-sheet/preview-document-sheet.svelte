@@ -4,11 +4,11 @@
   import { PencilIcon } from 'lucide-svelte';
   import type { Document, RowMeta } from '@/pb/types';
   import ReadonlyField from '../readonly-field.svelte';
-  import FilePreview from './file-preview.svelte';
   import ValidUntilCell from '../valid-until-cell.svelte';
   import { formatDate } from '@/lib/duration-utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
   import { cn } from '@/lib/utils';
+  import FilePreviewRemote from './file-preview-remote.svelte';
 
   let {
     open = $bindable(),
@@ -38,7 +38,7 @@
   >
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
       {#if document && selectedFile}
-        <FilePreview
+        <FilePreviewRemote
           {document}
           file={selectedFile}
           class={cn(zoomedIn ? 'min-h-full' : 'h-96')}
