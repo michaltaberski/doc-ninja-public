@@ -8,16 +8,21 @@
   import { today } from '@internationalized/date';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
+  import { getDocuments } from '@/pb';
+  import DocumentSelect from '../document-select.svelte';
+  import FormFiled from '../form-filed.svelte';
 
   let {
     open = $bindable(),
     onCancel,
-    onSave,
+    onCreateNew,
+    onAddFilesToDocument,
     fileList
   }: {
     open?: boolean;
     onCancel?: () => void;
-    onSave?: (documentProps: NewDocument) => Promise<void>;
+    onCreateNew?: (documentProps: NewDocument) => Promise<void>;
+    onAddFilesToDocument?: (documentId: string, files: File[]) => Promise<void>;
     fileList?: FileList;
   } = $props();
 
@@ -33,10 +38,16 @@
   const files = $derived([...(fileList || [])]);
 
   let isSaving = $state(false);
-  const handleSave = async () => {
+  const handleCreateNew = async () => {
     isSaving = true;
     documentProps.files = files;
-    await onSave?.(documentProps);
+    await onCreateNew?.(documentProps);
+    isSaving = false;
+    onCancel?.();
+  };
+  const handleAddFilesToDocument = async () => {
+    isSaving = true;
+    await onAddFilesToDocument?.(selectedDocumentId!, files);
     isSaving = false;
     onCancel?.();
   };
@@ -47,6 +58,10 @@
   });
 
   let zoomedIn = $state(false);
+
+  const documentsPromise = getDocuments();
+  let selectedDocumentId = $state<string | undefined>(undefined);
+  let activeTab = $state<'new-document' | 'add-to-document'>('new-document');
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -68,7 +83,11 @@
       {/if}
     </Sheet.Header>
     <Sheet.Body>
-      <Tabs.Root value="new-document">
+      <Tabs.Root
+        value={activeTab}
+        onValueChange={(value) =>
+          value && (activeTab = value as 'new-document' | 'add-to-document')}
+      >
         <div class="flex p-6">
           <Tabs.List>
             <Tabs.Trigger value="new-document">Create new document</Tabs.Trigger>
@@ -79,13 +98,30 @@
           <DocumentForm bind:document={documentProps} disabled={isSaving} />
         </Tabs.Content>
         <Tabs.Content value="add-to-document">
-          <div class="px-6">TODO document selector</div>
+          {#await documentsPromise}
+            <div class="px-6">Loading documents...</div>
+          {:then documents}
+            <FormFiled label="Document" class="px-6">
+              <DocumentSelect {documents} bind:selectedId={selectedDocumentId} />
+            </FormFiled>
+          {:catch error}
+            <div class="px-6">Error: {error.message}</div>
+          {/await}
         </Tabs.Content>
       </Tabs.Root>
     </Sheet.Body>
     <Sheet.Footer class="border-t p-6">
       <Button variant="outline" onclick={onCancel}>Cancel</Button>
-      <Button onclick={handleSave}>Save</Button>
+      {#if activeTab === 'new-document'}
+        <Button onclick={handleCreateNew} disabled={isSaving}>Save</Button>
+      {:else if activeTab === 'add-to-document'}
+        <Button
+          onclick={handleAddFilesToDocument}
+          disabled={isSaving || !selectedDocumentId}
+        >
+          Add to document
+        </Button>
+      {/if}
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>

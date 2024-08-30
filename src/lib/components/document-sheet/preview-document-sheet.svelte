@@ -9,7 +9,7 @@
   import PreviewFileNavigation from './preview-file-navigation.svelte';
   import { cn } from '@/lib/utils';
   import FilePreviewRemote from './file-preview-remote.svelte';
-  import { deleteFile } from '@/pb';
+  import { deleteFileFromDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
 
   let {
@@ -52,7 +52,7 @@
           bind:zoomedIn
           files={document?.files || []}
           onFileDelete={(fileName) => {
-            document?.id && deleteFile(document?.id, fileName);
+            document?.id && deleteFileFromDocument(document?.id, fileName);
             invalidateAll();
           }}
         />

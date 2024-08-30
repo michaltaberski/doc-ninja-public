@@ -4,7 +4,7 @@
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import * as Sheet from '$lib/components/ui/sheet';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
-  import { logout, saveDocument } from '@/pb/index.js';
+  import { addFilesToDocument, logout, saveDocument } from '@/pb/index.js';
   import {
     Home,
     LineChart,
@@ -54,12 +54,15 @@
         openTray = false;
         droppedFiles = null;
       }}
-      onSave={async (documentProps) => {
+      onCreateNew={async (documentProps) => {
         if (data.currentUser) {
-          await saveDocument({
-            ...documentProps,
-            owner: data.currentUser.id
-          });
+          await saveDocument({ ...documentProps, owner: data.currentUser.id });
+          await invalidateAll();
+        }
+      }}
+      onAddFilesToDocument={async (documentId, files) => {
+        if (data.currentUser) {
+          await addFilesToDocument(documentId, files);
           await invalidateAll();
         }
       }}

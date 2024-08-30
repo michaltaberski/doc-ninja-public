@@ -58,6 +58,14 @@ export const deleteDocument = async (id: string) => {
   return await pb.collection('documents').delete(id);
 };
 
-export const deleteFile = async (documentId: string, file: string) => {
+export const deleteFileFromDocument = async (documentId: string, file: string) => {
   await pb.collection('documents').update(documentId, { 'files-': [file] });
+};
+
+export const addFilesToDocument = async (documentId: string, files: File[]) => {
+  const formData = new FormData();
+  files.forEach((file) => {
+    formData.append('files', file);
+  });
+  return await pb.collection('documents').update(documentId, formData);
 };
