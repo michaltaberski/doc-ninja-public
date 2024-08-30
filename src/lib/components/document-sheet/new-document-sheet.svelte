@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
+  import * as Tabs from '$lib/components/ui/tabs';
   import LocalFilePreview from './file-preview-local.svelte';
   import type { NewDocument } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
@@ -67,13 +68,20 @@
       {/if}
     </Sheet.Header>
     <Sheet.Body>
-      <div class="flex flex-col p-6">
-        <Sheet.Title class="text-2xl">New Document</Sheet.Title>
-        <Sheet.Description>
-          Fill out the form to add a new document to the library.
-        </Sheet.Description>
-      </div>
-      <DocumentForm bind:document={documentProps} disabled={isSaving} />
+      <Tabs.Root value="new-document">
+        <div class="flex p-6">
+          <Tabs.List>
+            <Tabs.Trigger value="new-document">Create new document</Tabs.Trigger>
+            <Tabs.Trigger value="add-to-document">Add to document</Tabs.Trigger>
+          </Tabs.List>
+        </div>
+        <Tabs.Content value="new-document">
+          <DocumentForm bind:document={documentProps} disabled={isSaving} />
+        </Tabs.Content>
+        <Tabs.Content value="add-to-document">
+          <div class="px-6">TODO document selector</div>
+        </Tabs.Content>
+      </Tabs.Root>
     </Sheet.Body>
     <Sheet.Footer class="border-t p-6">
       <Button variant="outline" onclick={onCancel}>Cancel</Button>

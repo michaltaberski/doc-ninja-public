@@ -1,9 +1,10 @@
 <script lang="ts" generics="T">
   import { Button } from '$lib/components/ui/button';
+  import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import {
     ChevronLeftIcon,
     ChevronRightIcon,
-    DownloadIcon,
+    EllipsisIcon,
     ZoomInIcon,
     ZoomOutIcon
   } from 'lucide-svelte';
@@ -65,9 +66,24 @@
         <span class="sr-only">Zoom in</span>
       </Button>
     {/if}
-    <Button size="icon" variant="outline">
-      <DownloadIcon class="h-4 w-4" />
-      <span class="sr-only">Download PDF</span>
-    </Button>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild let:builder>
+        <Button size="icon" variant="outline" builders={[builder]}>
+          <EllipsisIcon class="h-4 w-4" />
+          <span class="sr-only">Download PDF</span>
+        </Button>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content align="end">
+        <DropdownMenu.Item
+          class="text-red-600 data-[highlighted]:text-red-500"
+          onclick={() => {
+            console.log('Delete file');
+          }}
+        >
+          Delete
+        </DropdownMenu.Item>
+        <DropdownMenu.Item>Download</DropdownMenu.Item>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   </div>
 </div>

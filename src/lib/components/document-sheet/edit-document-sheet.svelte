@@ -2,8 +2,8 @@
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
   import type { Document, RowMeta } from '@/pb/types';
+  import ConfirmDialog from '$lib/components/ui/confirm-dialog.svelte';
   import DocumentForm from './document-form.svelte';
-  import ConfirmDialog from '../ui/confirm-dialog.svelte';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
   import FilePreviewRemote from './file-preview-remote.svelte';
