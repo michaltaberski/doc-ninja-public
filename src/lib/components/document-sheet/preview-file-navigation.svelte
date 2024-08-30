@@ -13,12 +13,14 @@
     currentFile = $bindable(),
     zoomedIn = $bindable(),
     files,
-    getFileName = (file: T) => file?.toString() || '-'
+    getFileName = (file: T) => file?.toString() || '-',
+    onFileDelete
   }: {
     currentFile: T;
     zoomedIn: boolean;
     files: T[];
     getFileName?: (file: T) => string;
+    onFileDelete?: (fileName: string) => void;
   } = $props();
 
   const currentFileIndex = $derived(files.indexOf(currentFile));
@@ -74,14 +76,14 @@
         </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content align="end">
-        <DropdownMenu.Item
-          class="text-red-600 data-[highlighted]:text-red-500"
-          onclick={() => {
-            console.log('Delete file');
-          }}
-        >
-          Delete
-        </DropdownMenu.Item>
+        {#if onFileDelete}
+          <DropdownMenu.Item
+            class="text-red-600 data-[highlighted]:text-red-500"
+            onclick={() => onFileDelete(getFileName(currentFile))}
+          >
+            Delete
+          </DropdownMenu.Item>
+        {/if}
         <DropdownMenu.Item>Download</DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>

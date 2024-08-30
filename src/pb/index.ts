@@ -57,3 +57,7 @@ export const updateDocument = async (id: string, document: Partial<Document>) =>
 export const deleteDocument = async (id: string) => {
   return await pb.collection('documents').delete(id);
 };
+
+export const deleteFile = async (documentId: string, file: string) => {
+  await pb.collection('documents').update(documentId, { 'files-': [file] });
+};
