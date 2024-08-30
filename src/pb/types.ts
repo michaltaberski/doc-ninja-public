@@ -17,6 +17,17 @@ export type Document = {
   owner: string;
 };
 
+type DocumentFileMeta = object | null;
+
+export type DocumentFile = {
+  filename?: string;
+  originFilename?: string;
+  meta?: DocumentFileMeta;
+  filetype?: 'image' | 'pdf';
+  file: string;
+  thumbnail?: string;
+};
+
 export type NewDocument = Omit<Document, 'files'> & {
   files: File[];
 };
