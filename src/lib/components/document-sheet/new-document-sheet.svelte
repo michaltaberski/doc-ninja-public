@@ -52,6 +52,7 @@
     onCancel?.();
   };
 
+  // svelte-ignore state_referenced_locally
   let selectedFile = $state(files[0]);
   $effect(() => {
     selectedFile = files[0];
@@ -64,6 +65,7 @@
   let activeTab = $state<'new-document' | 'add-to-document'>('new-document');
 </script>
 
+<!-- svelte-ignore state_referenced_locally -->
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
