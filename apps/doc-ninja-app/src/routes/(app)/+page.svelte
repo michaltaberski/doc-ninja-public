@@ -79,7 +79,9 @@
   }}
 />
 
-<main class="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+<main
+  class="flex flex-1 flex-col items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:gap-6 lg:p-6"
+>
   <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
     <Tabs.Root value="week">
       <div class="flex items-center">
