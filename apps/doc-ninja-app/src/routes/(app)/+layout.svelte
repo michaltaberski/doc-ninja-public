@@ -15,6 +15,7 @@
     PanelLeft
   } from 'lucide-svelte';
   import Sidebar from './sidebar.svelte';
+  import Sidebar2 from './sidebar-2.svelte';
   import { fileDrop } from './file-drop-action';
   import SmartDialog from './smart-dialog.svelte';
   import NewDocumentSheet from '@/lib/components/document-sheet/new-document-sheet.svelte';
@@ -68,6 +69,10 @@
       }}
     />
     <Sidebar />
+    <Sidebar2
+      playlists={['Discover', 'Listen Now', 'Browse', 'Playlists']}
+      class="r-5 fixed h-full w-56"
+    />
     <div class="flex flex-col pt-[72px] sm:gap-4 sm:pb-4 sm:pl-14">
       <header
         class="bg-background fixed left-14 right-0 top-0 z-10 flex h-[57px] items-center justify-between gap-1 border-b px-4"
