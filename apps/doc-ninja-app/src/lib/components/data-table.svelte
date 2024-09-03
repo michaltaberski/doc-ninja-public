@@ -6,10 +6,17 @@
     columns: DataTableColumn<T>[];
     data: T[];
     idKey?: keyof T;
+    class?: string;
     onRowClick?: (rowId: string, rowData: T) => void;
   };
 
-  const { columns, data, idKey = 'id', onRowClick }: Props<T> = $props();
+  const {
+    columns,
+    data,
+    idKey = 'id',
+    onRowClick,
+    class: classNames
+  }: Props<T> = $props();
 
   const table = $derived(createDataTable({ data, columns, idKey }));
   const dataByKey = $derived(
@@ -17,7 +24,7 @@
   );
 </script>
 
-<Table.Root>
+<Table.Root class={classNames}>
   <Table.Header>
     <Table.Row>
       {#each table.headers as dataTableHeader}

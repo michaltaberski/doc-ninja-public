@@ -79,83 +79,56 @@
   }}
 />
 
-<main
-  class="flex flex-1 flex-col items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:gap-6 lg:p-6"
->
-  <div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-    <Tabs.Root value="week">
-      <div class="flex items-center">
-        <Tabs.List>
-          <Tabs.Trigger value="week">Week</Tabs.Trigger>
-          <Tabs.Trigger value="month">Month</Tabs.Trigger>
-          <Tabs.Trigger value="year">Year</Tabs.Trigger>
-        </Tabs.List>
-        <div class="ml-auto flex items-center gap-2">
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild let:builder>
-              <Button
-                variant="outline"
-                size="sm"
-                class="h-7 gap-1 text-sm"
-                builders={[builder]}
-              >
-                <ListFilter class="h-3.5 w-3.5" />
-                <span class="sr-only sm:not-sr-only">Filter</span>
-              </Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content align="end">
-              <DropdownMenu.Label>Filter by</DropdownMenu.Label>
-              <DropdownMenu.Separator />
-              <DropdownMenu.CheckboxItem checked>Fulfilled</DropdownMenu.CheckboxItem>
-              <DropdownMenu.CheckboxItem>Declined</DropdownMenu.CheckboxItem>
-              <DropdownMenu.CheckboxItem>Refunded</DropdownMenu.CheckboxItem>
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-          <Button size="sm" variant="outline" class="h-7 gap-1 text-sm">
-            <File class="h-3.5 w-3.5" />
-            <span class="sr-only sm:not-sr-only">Export</span>
+<div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+  <div class="flex items-center">
+    <h1 class="text-lg font-semibold md:text-2xl">Documents</h1>
+    <div class="ml-auto flex items-center gap-2">
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger asChild let:builder>
+          <Button
+            variant="outline"
+            size="sm"
+            class="h-7 gap-1 text-sm"
+            builders={[builder]}
+          >
+            <ListFilter class="h-3.5 w-3.5" />
+            <span class="sr-only sm:not-sr-only">Filter</span>
           </Button>
-        </div>
-      </div>
-      <Tabs.Content value="week">
-        <Card.Root>
-          <Card.Header class="px-7">
-            <Card.Title>Documents</Card.Title>
-          </Card.Header>
-          <Card.Content>
-            <DataTable
-              data={documents}
-              onRowClick={(rowId) => (previewId = rowId)}
-              columns={[
-                { label: 'Supplier', key: 'supplier', headerClass: 'w-[300px]' },
-                { label: 'Reference', key: 'reference' },
-                {
-                  label: 'Date',
-                  key: 'issueDate',
-                  headerClass: 'w-[140px]',
-                  format: (date) => formatDate(date as CalendarDate)
-                },
-                {
-                  label: 'Valid until',
-                  key: 'validityPeriod',
-                  headerClass: 'w-[180px]',
-                  snippet: validUntilCell
-                }
-              ]}
-            />
-          </Card.Content>
-        </Card.Root>
-      </Tabs.Content>
-      <Tabs.Content value="month">
-        <Card.Root>
-          <Card.Header class="px-7">
-            <Card.Title>Month</Card.Title>
-          </Card.Header>
-          <Card.Content>
-            <DemoTable />
-          </Card.Content>
-        </Card.Root>
-      </Tabs.Content>
-    </Tabs.Root>
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content align="end">
+          <DropdownMenu.Label>Filter by</DropdownMenu.Label>
+          <DropdownMenu.Separator />
+          <DropdownMenu.CheckboxItem checked>Fulfilled</DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem>Declined</DropdownMenu.CheckboxItem>
+          <DropdownMenu.CheckboxItem>Refunded</DropdownMenu.CheckboxItem>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+      <Button size="sm" variant="outline" class="h-7 gap-1 text-sm">
+        <File class="h-3.5 w-3.5" />
+        <span class="sr-only sm:not-sr-only">Export</span>
+      </Button>
+    </div>
   </div>
-</main>
+  <div class="rounded border">
+    <DataTable
+      data={documents}
+      onRowClick={(rowId) => (previewId = rowId)}
+      columns={[
+        { label: 'Supplier', key: 'supplier', headerClass: 'w-[300px]' },
+        { label: 'Reference', key: 'reference' },
+        {
+          label: 'Date',
+          key: 'issueDate',
+          headerClass: 'w-[140px]',
+          format: (date) => formatDate(date as CalendarDate)
+        },
+        {
+          label: 'Valid until',
+          key: 'validityPeriod',
+          headerClass: 'w-[180px]',
+          snippet: validUntilCell
+        }
+      ]}
+    />
+  </div>
+</div>
