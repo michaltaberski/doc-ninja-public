@@ -4,6 +4,7 @@
   import Logo from './doc-ninja-logo-2.svg';
   import { Home, LineChart, Package, ShoppingCart, Bell, Users } from 'lucide-svelte';
   import { Badge } from '@/lib/components/ui/badge';
+  import { cn } from '@/lib/utils';
 </script>
 
 <aside class="bg-muted/40 hidden border-r md:block">
@@ -42,7 +43,7 @@
           </a>
           <a
             href="##"
-            class="bg-muted text-primary hover:text-primary flex items-center gap-3 rounded-lg px-3 py-2 transition-all"
+            class="text-primary hover:text-primary flex items-center gap-3 rounded-lg bg-slate-200 px-3 py-2 transition-all"
           >
             <Package class="h-4 w-4" />
             Products
