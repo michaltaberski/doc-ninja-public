@@ -28,7 +28,7 @@
 
 <AuthGuard currentUser={data.currentUser}>
   <div
-    class="flex min-h-screen w-full flex-col bg-muted/40"
+    class="bg-muted/40 flex min-h-screen w-full flex-col"
     use:fileDrop={{
       onDragEnter: () => {
         open = true;
@@ -70,10 +70,11 @@
     <Sidebar />
     <div class="flex flex-col pt-[72px] sm:gap-4 sm:pb-4 sm:pl-14">
       <header
-        class="fixed left-14 right-0 top-0 z-10 flex h-[57px] items-center justify-between gap-1 border-b bg-background px-4"
+        class="bg-background fixed left-14 right-0 top-0 z-10 flex h-[57px] items-center justify-between gap-1 border-b px-4"
       >
         <div class="flex items-center gap-2">
           <h1 class="text-xl font-semibold">DocNinja</h1>
+          {openTray ? 'nd opened' : 'nd closed'}
           <Sheet.Root>
             <Sheet.Trigger asChild let:builder>
               <Button
@@ -90,39 +91,39 @@
               <nav class="grid gap-6 text-lg font-medium">
                 <a
                   href="/"
-                  class="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                  class="bg-primary text-primary-foreground group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:text-base"
                 >
                   <Package2 class="h-5 w-5 transition-all group-hover:scale-110" />
                   <span class="sr-only">Acme Inc</span>
                 </a>
                 <a
                   href="/"
-                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  class="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
                 >
                   <Home class="h-5 w-5" />
                   Dashboard
                 </a>
-                <a href="/" class="flex items-center gap-4 px-2.5 text-foreground">
+                <a href="/" class="text-foreground flex items-center gap-4 px-2.5">
                   <ShoppingCart class="h-5 w-5" />
                   Orders
                 </a>
                 <a
                   href="/"
-                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  class="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
                 >
                   <Package class="h-5 w-5" />
                   Products
                 </a>
                 <a
                   href="/"
-                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  class="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
                 >
                   <UsersRound class="h-5 w-5" />
                   Customers
                 </a>
                 <a
                   href="/"
-                  class="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  class="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
                 >
                   <LineChart class="h-5 w-5" />
                   Settings
@@ -139,7 +140,7 @@
               class="overflow-hidden rounded-full"
               builders={[builder]}
             >
-              <div class="h-9 w-9 overflow-hidden rounded-full bg-primary"></div>
+              <div class="bg-primary h-9 w-9 overflow-hidden rounded-full"></div>
             </Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content align="end">

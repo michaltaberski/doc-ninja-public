@@ -9,7 +9,10 @@
     document = $bindable(),
     disabled
   }: {
-    document: Omit<Document, 'files'>;
+    document: Pick<
+      Document,
+      'issueDate' | 'supplier' | 'reference' | 'issueDate' | 'validityPeriod'
+    >;
     disabled?: boolean;
   } = $props();
 </script>

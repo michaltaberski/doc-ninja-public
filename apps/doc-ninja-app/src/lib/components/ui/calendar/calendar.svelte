@@ -2,8 +2,11 @@
   import { Calendar as CalendarPrimitive } from 'bits-ui';
   import * as Calendar from './index.js';
   import { cn } from '$lib/utils.js';
+  import { toCalendarDate, type CalendarDate } from '@internationalized/date';
 
-  type $$Props = CalendarPrimitive.Props;
+  type $$Props = Omit<CalendarPrimitive.Props, 'value'> & {
+    value: CalendarDate | undefined;
+  };
 
   type $$Events = CalendarPrimitive.Events;
 
@@ -18,7 +21,7 @@
 
 <CalendarPrimitive.Root
   {value}
-  onValueChange={(newValue) => (value = newValue)}
+  onValueChange={(newValue) => (value = newValue ? toCalendarDate(newValue) : undefined)}
   bind:placeholder
   {weekdayFormat}
   class={cn('p-3', className)}

@@ -13,7 +13,7 @@
   import FormFiled from '../form-filed.svelte';
 
   let {
-    open = $bindable(),
+    open,
     onCancel,
     onCreateNew,
     onAddFilesToDocument,
@@ -26,22 +26,18 @@
     fileList?: FileList;
   } = $props();
 
-  let documentProps = $state<NewDocument>({
-    files: [...(fileList || [])],
+  const files = $derived([...(fileList || [])]);
+  let documentProps = $state<Omit<NewDocument, 'owner' | 'files'>>({
     supplier: '',
     reference: '',
     issueDate: today(Intl.DateTimeFormat().resolvedOptions().timeZone),
-    validityPeriod: undefined,
-    owner: ''
+    validityPeriod: undefined
   });
-
-  const files = $derived([...(fileList || [])]);
 
   let isSaving = $state(false);
   const handleCreateNew = async () => {
     isSaving = true;
-    documentProps.files = files;
-    await onCreateNew?.(documentProps);
+    await onCreateNew?.({ ...documentProps, owner: '', files });
     isSaving = false;
     onCancel?.();
   };
@@ -65,8 +61,14 @@
   let activeTab = $state<'new-document' | 'add-to-document'>('new-document');
 </script>
 
-<!-- svelte-ignore state_referenced_locally -->
-<Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
+<Sheet.Root
+  {open}
+  onOpenChange={(newState) => {
+    if (newState === false) {
+      onCancel?.();
+    }
+  }}
+>
   <Sheet.Content showClose={false} class="w-full sm:max-w-2xl sm:rounded-lg">
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
       {#if document && selectedFile}
