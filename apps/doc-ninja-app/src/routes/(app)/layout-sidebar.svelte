@@ -42,7 +42,7 @@
     class={cn(
       'text-muted-foreground hover:text-primary group flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-slate-300/20',
       {
-        'text-primary hover:text-primary bg-slate-300/60 hover:bg-slate-300/70':
+        'text-primary hover:text-primary bg-slate-300/40 hover:bg-slate-300/50':
           route.href === $page.url.pathname
       }
     )}

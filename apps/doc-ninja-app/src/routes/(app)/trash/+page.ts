@@ -1,7 +1,7 @@
-import { getDocuments } from '@/pb';
+import { getDeletedDocuments } from '@/pb';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
-  const documents = await getDocuments();
+  const documents = await getDeletedDocuments();
   return { documents };
 };
