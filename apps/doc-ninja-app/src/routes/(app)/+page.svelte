@@ -1,19 +1,15 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
-  import * as Card from '$lib/components/ui/card';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-  import * as Tabs from '$lib/components/ui/tabs';
   import { File, ListFilter } from 'lucide-svelte';
-  import DemoTable from './table.svelte';
-  import DataTable from '@/lib/components/data-table.svelte';
   import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import { formatDate } from '@/lib/duration-utils';
   import type { Document } from '@/pb/types';
-  import { CalendarDate } from '@internationalized/date';
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
+  import EmptyState from '@/lib/components/empty-state.svelte';
+  import DocumentTable from '@/lib/components/document-table.svelte';
 
   const { data } = $props();
   const documents = $derived(data.documents);
@@ -79,7 +75,7 @@
   }}
 />
 
-<div class="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+<div class="flex h-full flex-col gap-8">
   <div class="flex items-center">
     <h1 class="text-lg font-semibold md:text-2xl">Documents</h1>
     <div class="ml-auto flex items-center gap-2">
@@ -109,26 +105,16 @@
       </Button>
     </div>
   </div>
-  <div class="rounded border">
-    <DataTable
-      data={documents}
-      onRowClick={(rowId) => (previewId = rowId)}
-      columns={[
-        { label: 'Supplier', key: 'supplier', headerClass: 'w-[300px]' },
-        { label: 'Reference', key: 'reference' },
-        {
-          label: 'Date',
-          key: 'issueDate',
-          headerClass: 'w-[140px]',
-          format: (date) => formatDate(date as CalendarDate)
-        },
-        {
-          label: 'Valid until',
-          key: 'validityPeriod',
-          headerClass: 'w-[180px]',
-          snippet: validUntilCell
-        }
-      ]}
+  {#if documents.length > 0}
+    <DocumentTable {documents} onRowClick={(rowId) => (previewId = rowId)} />
+  {:else}
+    <EmptyState
+      title="You have no documents"
+      subtitle="Drag and drop a file or click the button below to upload a document."
+      buttonLabel="Add Document"
+      onClick={() => {
+        open = true;
+      }}
     />
-  </div>
+  {/if}
 </div>
