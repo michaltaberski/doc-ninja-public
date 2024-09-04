@@ -1,1 +1,1 @@
-This is inbox
+This is trash

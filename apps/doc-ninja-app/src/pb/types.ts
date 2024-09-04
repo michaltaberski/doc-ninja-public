@@ -13,6 +13,7 @@ export type Document = {
   supplier?: string;
   reference?: string;
   issueDate?: CalendarDate;
+  deletedDate?: CalendarDate;
   validityPeriod?: Duration;
   owner: string;
 };

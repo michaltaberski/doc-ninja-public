@@ -20,6 +20,10 @@ export const getUsers = async () => {
   return records;
 };
 
+const transformDate = (date: string) => {
+  return date ? parseDate(date.substr(0, 10)) : null;
+};
+
 export const getDocuments = async () => {
   const records = (
     await pb.collection('documents').getFullList({
@@ -29,7 +33,8 @@ export const getDocuments = async () => {
     (record) =>
       ({
         ...record,
-        issueDate: record.issueDate ? parseDate(record.issueDate.substr(0, 10)) : null
+        issueDate: transformDate(record.issueDate),
+        deletedDate: transformDate(record.deletedDate)
       }) as RowMeta<Document>
   );
   return records;

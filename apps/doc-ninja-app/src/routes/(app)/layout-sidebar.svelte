@@ -4,17 +4,7 @@
   import Logo from './doc-ninja-logo-2.svg';
   import { page } from '$app/stores';
 
-  import {
-    Home,
-    LineChart,
-    Package,
-    ShoppingCart,
-    Bell,
-    Users,
-    Icon,
-    FileTextIcon,
-    InboxIcon
-  } from 'lucide-svelte';
+  import { Bell, Icon, FileTextIcon, InboxIcon, Trash2Icon } from 'lucide-svelte';
   import { Badge } from '@/lib/components/ui/badge';
   import type { ComponentType } from 'svelte';
   import { cn } from '@/lib/utils';
@@ -37,6 +27,11 @@
       label: 'Inbox',
       href: '/inbox',
       icon: InboxIcon
+    },
+    {
+      label: 'Trash',
+      href: '/trash',
+      icon: Trash2Icon
     }
   ];
 </script>
@@ -71,8 +66,8 @@
 <aside class="bg-muted/40 hidden border-r md:block">
   <div class="flex h-full max-h-screen flex-col gap-2">
     <div class="flex h-[60px] min-h-[60px] items-center border-b px-4 lg:px-6">
-      <a href="/" class="flex items-center gap-2 text-lg font-semibold">
-        <img src={Logo} alt="DocNinja" class="h-8 w-8 transition hover:scale-110" />
+      <a href="/" class="group flex items-center gap-2 text-lg font-semibold">
+        <img src={Logo} alt="DocNinja" class="h-8 w-8 transition group-hover:scale-110" />
         DocNinja
       </a>
       <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
