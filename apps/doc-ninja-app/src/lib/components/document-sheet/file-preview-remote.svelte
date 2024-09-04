@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Document, FileType, RowMeta } from '@/pb/types';
   import FilePreviewSrc from './file-preview-src.svelte';
+  import { getDocumentFilePublicUrl } from '@/pb/document-utils';
   const {
     document,
     file,
@@ -11,11 +12,7 @@
     class?: string;
   } = $props();
 
-  const src = $derived(
-    ['https://db.doc.ninja/api/files', document?.collectionId, document?.id, file].join(
-      '/'
-    )
-  );
+  const src = $derived(getDocumentFilePublicUrl(document, file));
 
   const fileType: FileType = $derived.by(() => {
     const ext = file.toLocaleLowerCase().split('.').pop() as string;

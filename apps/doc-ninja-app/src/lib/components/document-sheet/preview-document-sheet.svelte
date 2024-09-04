@@ -7,10 +7,11 @@
   import ValidUntilCell from '../valid-until-cell.svelte';
   import { formatDate } from '@/lib/duration-utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
-  import { cn } from '@/lib/utils';
+  import { cn, triggerFileDownload } from '@/lib/utils';
   import FilePreviewRemote from './file-preview-remote.svelte';
   import { deleteFileFromDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
+  import { getDocumentFilePublicUrl } from '@/pb/document-utils';
 
   let {
     open = $bindable(),
@@ -28,6 +29,12 @@
   });
 
   let zoomedIn = $state(false);
+
+  const handleDownloadFile = $derived((filename: string) => {
+    if (!document) return;
+    const publicFileUrl = getDocumentFilePublicUrl(document, filename);
+    return triggerFileDownload(publicFileUrl, filename);
+  });
 </script>
 
 <Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
@@ -55,6 +62,7 @@
             document?.id && deleteFileFromDocument(document?.id, fileName);
             invalidateAll();
           }}
+          onFileDownload={(fileName) => handleDownloadFile(fileName)}
         />
       {/if}
     </Sheet.Header>

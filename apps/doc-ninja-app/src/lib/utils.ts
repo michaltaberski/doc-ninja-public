@@ -68,3 +68,25 @@ export const loadFileToSrc = async (file: File) =>
     };
     reader.readAsDataURL(file);
   });
+
+export const triggerFileDownload = (url: string, filename: string) =>
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob(); // Get the response as a blob
+    })
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      const a = window.document.createElement('a');
+      a.href = blobUrl;
+      a.download = filename;
+      window.document.body.appendChild(a);
+      a.click();
+      window.document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl); // Clean up the URL.createObjectURL reference
+    })
+    .catch((error) => {
+      console.error('There was a problem with the fetch operation:', error);
+    });

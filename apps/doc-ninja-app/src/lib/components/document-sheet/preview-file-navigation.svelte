@@ -14,20 +14,22 @@
     zoomedIn = $bindable(),
     files,
     getFileName = (file: T) => file?.toString() || '-',
-    onFileDelete
+    onFileDelete,
+    onFileDownload
   }: {
     currentFile: T;
     zoomedIn: boolean;
     files: T[];
     getFileName?: (file: T) => string;
     onFileDelete?: (fileName: string) => void;
+    onFileDownload?: (file: T) => void;
   } = $props();
 
   const currentFileIndex = $derived(files.indexOf(currentFile));
 </script>
 
 <div
-  class="absolute bottom-0 flex w-full items-center justify-between border-b bg-background/80 px-4 py-2 backdrop-blur-md"
+  class="bg-background/80 absolute bottom-0 flex w-full items-center justify-between border-b px-4 py-2 backdrop-blur-md"
 >
   <div class="flex items-center gap-2">
     {#if files.length > 1}
@@ -54,7 +56,7 @@
         <span class="sr-only">Previous File</span>
       </Button>
     {/if}
-    <span class="text-sm text-muted-foreground">{getFileName(currentFile)}</span>
+    <span class="text-muted-foreground text-sm">{getFileName(currentFile)}</span>
   </div>
   <div class="flex items-center gap-2">
     {#if zoomedIn}
@@ -72,7 +74,7 @@
       <DropdownMenu.Trigger asChild let:builder>
         <Button size="icon" variant="outline" builders={[builder]}>
           <EllipsisIcon class="h-4 w-4" />
-          <span class="sr-only">Download PDF</span>
+          <span class="sr-only">Menu</span>
         </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content align="end">
@@ -84,7 +86,11 @@
             Delete
           </DropdownMenu.Item>
         {/if}
-        <DropdownMenu.Item>Download</DropdownMenu.Item>
+        {#if onFileDownload}
+          <DropdownMenu.Item onclick={() => onFileDownload(currentFile)}>
+            Download
+          </DropdownMenu.Item>
+        {/if}
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   </div>
