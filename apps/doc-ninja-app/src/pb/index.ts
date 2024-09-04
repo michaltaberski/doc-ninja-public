@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
-import type { Document, NewDocument, RowMeta } from './types';
-import { parseDate } from '@internationalized/date';
+import type { Document, NewDocument } from './types';
+import { transformDocument } from './pb-utils';
 
 const pb = new PocketBase('https://db.doc.ninja');
 
@@ -20,24 +20,22 @@ export const getUsers = async () => {
   return records;
 };
 
-const transformDate = (date: string) => {
-  return date ? parseDate(date.substr(0, 10)) : null;
+export const getAllDocuments = async ({ filter }: { filter?: string }) => {
+  const records = (
+    await pb.collection('documents').getFullList({
+      sort: '-issueDate',
+      filter
+    })
+  ).map(transformDocument);
+  return records;
 };
 
 export const getDocuments = async () => {
-  const records = (
-    await pb.collection('documents').getFullList({
-      sort: '-issueDate'
-    })
-  ).map(
-    (record) =>
-      ({
-        ...record,
-        issueDate: transformDate(record.issueDate),
-        deletedDate: transformDate(record.deletedDate)
-      }) as RowMeta<Document>
-  );
-  return records;
+  return getAllDocuments({ filter: 'deletedDate = NULL' });
+};
+
+export const getDeletedDocuments = async () => {
+  return getAllDocuments({ filter: 'deletedDate != NULL' });
 };
 
 export const saveDocument = async (document: NewDocument) => {
@@ -60,6 +58,12 @@ export const updateDocument = async (id: string, document: Partial<Document>) =>
 };
 
 export const deleteDocument = async (id: string) => {
+  return await pb
+    .collection('documents')
+    .update(id, { deletedDate: new Date().toISOString() });
+};
+
+export const deleteDocumentPermanently = async (id: string) => {
   return await pb.collection('documents').delete(id);
 };
 
