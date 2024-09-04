@@ -2,10 +2,71 @@
   import { Button } from '$lib/components/ui/button';
   import * as Card from '$lib/components/ui/card';
   import Logo from './doc-ninja-logo-2.svg';
-  import { Home, LineChart, Package, ShoppingCart, Bell, Users } from 'lucide-svelte';
+  import { page } from '$app/stores';
+
+  import {
+    Home,
+    LineChart,
+    Package,
+    ShoppingCart,
+    Bell,
+    Users,
+    Icon,
+    FileTextIcon,
+    InboxIcon
+  } from 'lucide-svelte';
   import { Badge } from '@/lib/components/ui/badge';
+  import type { ComponentType } from 'svelte';
   import { cn } from '@/lib/utils';
+
+  type Route = {
+    label: string;
+    href: string;
+    badge?: number;
+    icon: ComponentType<Icon>;
+  };
+
+  const routes: Route[] = [
+    {
+      label: 'Documents',
+      href: '/',
+      badge: 6,
+      icon: FileTextIcon
+    },
+    {
+      label: 'Inbox',
+      href: '/inbox',
+      icon: InboxIcon
+    }
+  ];
 </script>
+
+{#snippet routeLink(route: Route)}
+  <a
+    href={route.href}
+    class={cn(
+      'text-muted-foreground hover:text-primary group flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-slate-300/20',
+      {
+        'text-primary hover:text-primary bg-slate-300/60 hover:bg-slate-300/70':
+          route.href === $page.url.pathname
+      }
+    )}
+  >
+    <svelte:component
+      this={route.icon}
+      class="size-4 group-hover:scale-110"
+      aria-hidden="true"
+    />
+    {route.label}
+    {#if route.badge}
+      <Badge
+        class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+      >
+        {route.badge}
+      </Badge>
+    {/if}
+  </a>
+{/snippet}
 
 <aside class="bg-muted/40 hidden border-r md:block">
   <div class="flex h-full max-h-screen flex-col gap-2">
@@ -21,47 +82,10 @@
     </div>
     <div class="flex flex-1 flex-col justify-between overflow-y-auto">
       <div class="flex-1">
-        <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
-          <a
-            href="##"
-            class="text-muted-foreground hover:text-primary flex items-center gap-3 rounded-lg px-3 py-2 transition-all"
-          >
-            <Home class="h-4 w-4" />
-            Dashboard
-          </a>
-          <a
-            href="##"
-            class="text-muted-foreground hover:text-primary flex items-center gap-3 rounded-lg px-3 py-2 transition-all"
-          >
-            <ShoppingCart class="h-4 w-4" />
-            Orders
-            <Badge
-              class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
-            >
-              6
-            </Badge>
-          </a>
-          <a
-            href="##"
-            class="text-primary hover:text-primary flex items-center gap-3 rounded-lg bg-slate-200 px-3 py-2 transition-all"
-          >
-            <Package class="h-4 w-4" />
-            Products
-          </a>
-          <a
-            href="##"
-            class="text-muted-foreground hover:text-primary flex items-center gap-3 rounded-lg px-3 py-2 transition-all"
-          >
-            <Users class="h-4 w-4" />
-            Customers
-          </a>
-          <a
-            href="##"
-            class="text-muted-foreground hover:text-primary flex items-center gap-3 rounded-lg px-3 py-2 transition-all"
-          >
-            <LineChart class="h-4 w-4" />
-            Analytics
-          </a>
+        <nav class="grid items-start gap-1 px-2 text-sm font-medium lg:px-4">
+          {#each routes as route}
+            {@render routeLink(route)}
+          {/each}
         </nav>
       </div>
       <div class="mt-auto p-4">
