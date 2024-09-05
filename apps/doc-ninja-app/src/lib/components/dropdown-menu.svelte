@@ -7,6 +7,7 @@
     getIsSeparator,
     type DropdownMenuOption
   } from './dropdown-menu-utils';
+  import { cn } from '../utils';
 
   const {
     options,
@@ -23,7 +24,12 @@
   {#if getIsSeparator(option)}
     <DropdownMenu.Separator />
   {:else if getIsItem(option)}
-    <DropdownMenu.Item onclick={option.onclick}>{option.label}</DropdownMenu.Item>
+    <DropdownMenu.Item
+      onclick={option.onclick}
+      class={cn({
+        '!text-red-500': option.variant === 'danger'
+      })}>{option.label}</DropdownMenu.Item
+    >
   {:else if getIsSectionLabel(option)}
     <DropdownMenu.Label>{option.sectionLabel}</DropdownMenu.Label>
   {/if}

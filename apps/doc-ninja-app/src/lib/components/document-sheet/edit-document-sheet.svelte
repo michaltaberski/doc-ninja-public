@@ -74,7 +74,7 @@
           description="Are you sure you want to delete this document?"
           onConfirm={() => onDelete(documentId)}
         >
-          <Button variant="destructive">Delete</Button>
+          <Button variant="danger">Delete</Button>
         </ConfirmDialog>
       {/if}
       <div class="flex gap-2">

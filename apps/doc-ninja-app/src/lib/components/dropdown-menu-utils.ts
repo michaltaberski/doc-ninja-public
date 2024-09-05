@@ -1,7 +1,11 @@
 // Types
 type DropdownMenuSectionLabel = { sectionLabel: string };
 
-type DropdownMenuItem = { label: string; onclick: () => void };
+type DropdownMenuItem = {
+  label: string;
+  onclick: () => void;
+  variant?: 'default' | 'danger';
+};
 
 export type DropdownMenuOption =
   | 'SEPARATOR'

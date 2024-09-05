@@ -24,6 +24,7 @@
       },
       {
         label: 'Delete permanently',
+        variant: 'danger',
         onclick: async () => {
           await deleteDocumentPermanently(row.id);
           toast.success('Document deleted permanently');
@@ -33,5 +34,5 @@
     ]}
   />
 {:else}
-  <EmptyState title="Your trash is empty" />
+  <EmptyState title="Your trash is empty" subtitle="Deleted documents goes here" />
 {/if}
