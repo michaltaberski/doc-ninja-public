@@ -1,16 +1,21 @@
 // Types
-type DropdownMenuLabel = { label: string };
+type DropdownMenuSectionLabel = { sectionLabel: string };
 
-type DropdownMenuItem = { item: string; onclick: () => void };
+type DropdownMenuItem = { label: string; onclick: () => void };
 
-export type DropdownMenuOption = 'SEPARATOR' | DropdownMenuLabel | DropdownMenuItem;
+export type DropdownMenuOption =
+  | 'SEPARATOR'
+  | DropdownMenuSectionLabel
+  | DropdownMenuItem;
 
 // Type guards
 export const getIsSeparator = (option: DropdownMenuOption): option is 'SEPARATOR' =>
   option === 'SEPARATOR';
 
 export const getIsItem = (option: DropdownMenuOption): option is DropdownMenuItem =>
-  !getIsSeparator(option) && 'item' in option;
-
-export const getIsLabel = (option: DropdownMenuOption): option is DropdownMenuLabel =>
   !getIsSeparator(option) && 'label' in option;
+
+export const getIsSectionLabel = (
+  option: DropdownMenuOption
+): option is DropdownMenuSectionLabel =>
+  !getIsSeparator(option) && 'sectionLabel' in option;

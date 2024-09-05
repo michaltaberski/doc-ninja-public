@@ -3,7 +3,7 @@
   import type { Builder } from 'bits-ui';
   import {
     getIsItem,
-    getIsLabel,
+    getIsSectionLabel,
     getIsSeparator,
     type DropdownMenuOption
   } from './dropdown-menu-utils';
@@ -23,9 +23,9 @@
   {#if getIsSeparator(option)}
     <DropdownMenu.Separator />
   {:else if getIsItem(option)}
-    <DropdownMenu.Item onclick={option.onclick}>{option.item}</DropdownMenu.Item>
-  {:else if getIsLabel(option)}
-    <DropdownMenu.Label>{option.label}</DropdownMenu.Label>
+    <DropdownMenu.Item onclick={option.onclick}>{option.label}</DropdownMenu.Item>
+  {:else if getIsSectionLabel(option)}
+    <DropdownMenu.Label>{option.sectionLabel}</DropdownMenu.Label>
   {/if}
 {/snippet}
 

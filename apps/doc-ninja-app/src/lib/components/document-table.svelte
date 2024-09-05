@@ -4,25 +4,42 @@
   import type { Document, RowMeta } from '@/pb/types';
   import { CalendarDate } from '@internationalized/date';
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
+  import type { DropdownMenuOption } from './dropdown-menu-utils';
+  import DropdownMenu from './dropdown-menu.svelte';
+  import { EllipsisIcon } from 'lucide-svelte';
+  import { Button } from './ui/button';
 
   const {
     documents,
-    onRowClick
+    onRowClick,
+    getActionsMenu
   }: {
+    getActionsMenu?: (row: RowMeta<Document>) => DropdownMenuOption[];
     documents: RowMeta<Document>[];
     onRowClick?: (rowId: string) => void;
   } = $props();
 </script>
 
-{#snippet validUntilCell({ row }: { row: Document })}
+{#snippet validUntilCell({ row }: { row: RowMeta<Document> })}
   <ValidUntilCell document={row} />
 {/snippet}
 
-{#snippet documentCell({ row }: { row: Document })}
+{#snippet documentCell({ row }: { row: RowMeta<Document> })}
   <div class="flex flex-col">
     <div>{row.reference}</div>
     <div class="text-muted-foreground text-xs">{row.supplier || '-'}</div>
   </div>
+{/snippet}
+
+{#snippet dropdownActionsMenu({ row }: { row: RowMeta<Document> })}
+  <DropdownMenu options={getActionsMenu?.(row) || []} align="end">
+    {#snippet children({ builders })}
+      <Button {builders} variant="outline" size="icon" class="ml-auto h-8 w-8">
+        <EllipsisIcon class="h-4 w-4" />
+        <span class="sr-only">Toggle notifications</span>
+      </Button>
+    {/snippet}
+  </DropdownMenu>
 {/snippet}
 
 <div class="overflow-hidden rounded-lg border">
@@ -49,6 +66,12 @@
         key: 'validityPeriod',
         headerClass: 'w-[160px]',
         snippet: validUntilCell
+      },
+      !!getActionsMenu && {
+        label: '',
+        key: 'id',
+        headerClass: 'w-[60px]',
+        snippet: dropdownActionsMenu
       }
     ]}
   />

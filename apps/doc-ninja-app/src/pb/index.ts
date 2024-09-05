@@ -64,6 +64,14 @@ export const deleteDocument = async (id: string) => {
     .update(id, { deletedDate: new Date().toISOString() });
 };
 
+export const deletePermanentlyDocument = async (id: string) => {
+  return await pb.collection('documents').delete(id);
+};
+
+export const restoreDocument = async (id: string) => {
+  return await pb.collection('documents').update(id, { deletedDate: null });
+};
+
 export const deleteDocumentPermanently = async (id: string) => {
   return await pb.collection('documents').delete(id);
 };

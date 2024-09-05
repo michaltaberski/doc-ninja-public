@@ -1,6 +1,8 @@
 <script lang="ts">
+  import { invalidateAll } from '$app/navigation';
   import DocumentTable from '@/lib/components/document-table.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
+  import { deleteDocumentPermanently, restoreDocument } from '@/pb/index.js';
 
   const { data } = $props();
   const documents = $derived(data.deletedDocuments);
@@ -8,7 +10,25 @@
 
 <h1 class="text-lg font-semibold md:text-2xl">Trash</h1>
 {#if documents.length > 0}
-  <DocumentTable {documents} />
+  <DocumentTable
+    {documents}
+    getActionsMenu={(row) => [
+      {
+        label: 'Restore',
+        onclick: async () => {
+          await restoreDocument(row.id);
+          invalidateAll();
+        }
+      },
+      {
+        label: 'Delete permanently',
+        onclick: async () => {
+          await deleteDocumentPermanently(row.id);
+          invalidateAll();
+        }
+      }
+    ]}
+  />
 {:else}
   <EmptyState title="Your trash is empty" />
 {/if}

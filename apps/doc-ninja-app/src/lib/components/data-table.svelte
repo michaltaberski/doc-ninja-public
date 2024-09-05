@@ -3,7 +3,7 @@
   import { createDataTable, type DataTableColumn } from './data-table-utils.svelte';
 
   type Props<T> = {
-    columns: DataTableColumn<T>[];
+    columns: (DataTableColumn<T> | false)[];
     data: T[];
     idKey?: keyof T;
     class?: string;
@@ -12,14 +12,15 @@
   };
 
   const {
-    columns,
     data,
     idKey = 'id',
     onRowClick,
     cellClass,
-    class: classNames
+    class: classNames,
+    ...props
   }: Props<T> = $props();
 
+  const columns = $derived(props.columns.filter(Boolean) as DataTableColumn<T>[]);
   const table = $derived(createDataTable({ data, columns, idKey }));
   const dataByKey = $derived(
     Object.fromEntries(data.map((row) => [row[idKey] as string, row]))

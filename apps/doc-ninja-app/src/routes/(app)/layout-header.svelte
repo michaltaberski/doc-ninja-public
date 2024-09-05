@@ -13,13 +13,13 @@
   <DropdownMenu
     align="end"
     options={[
-      { label: 'My Account' },
+      { sectionLabel: 'My Account' },
       'SEPARATOR',
-      { item: 'Settings', onclick: () => console.log('Settings') },
-      { item: 'Support', onclick: () => console.log('Support') },
+      { label: 'Settings', onclick: () => console.log('Settings') },
+      { label: 'Support', onclick: () => console.log('Support') },
       'SEPARATOR',
       {
-        item: 'Logout',
+        label: 'Logout',
         onclick: () => {
           logout();
           invalidateAll();
