@@ -14,6 +14,10 @@ export function fileDrop(
   function handleDragEnter(event: DragEvent) {
     event.preventDefault();
     dragCounter++;
+
+    const dataTransfer = event.dataTransfer;
+    if (!dataTransfer || dataTransfer.items[0].kind !== 'file') return;
+
     if (dragCounter === 1 && onDragEnter) {
       onDragEnter(event); // Invoke the onDragEnter callback
       node.classList.add('drag-over');

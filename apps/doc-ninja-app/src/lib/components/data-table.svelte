@@ -7,6 +7,7 @@
     data: T[];
     idKey?: keyof T;
     class?: string;
+    cellClass?: string;
     onRowClick?: (rowId: string, rowData: T) => void;
   };
 
@@ -15,6 +16,7 @@
     data,
     idKey = 'id',
     onRowClick,
+    cellClass,
     class: classNames
   }: Props<T> = $props();
 
@@ -26,7 +28,7 @@
 
 <Table.Root class={classNames}>
   <Table.Header>
-    <Table.Row>
+    <Table.Row class="bg-slate-50 hover:bg-slate-50">
       {#each table.headers as dataTableHeader}
         <Table.Head class={dataTableHeader.class}>
           {dataTableHeader.label}
@@ -38,7 +40,7 @@
     {#each table.rows as row (row.id)}
       <Table.Row onclick={() => onRowClick?.(row.id, dataByKey[row.id])}>
         {#each row.cells as cell}
-          <Table.Cell>
+          <Table.Cell class={cellClass}>
             {#if cell.snippet}
               {@render cell.snippet({
                 value: cell.value,

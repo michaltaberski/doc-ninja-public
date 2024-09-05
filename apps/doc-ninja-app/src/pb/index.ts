@@ -3,6 +3,7 @@ import type { Document, NewDocument } from './types';
 import { transformDocument } from './pb-utils';
 
 const pb = new PocketBase('https://db.doc.ninja');
+pb.autoCancellation(false);
 
 // Auth
 export const login = async (usernameOrEmail: string, password: string) => {
@@ -20,17 +21,17 @@ export const getUsers = async () => {
   return records;
 };
 
-export const getAllDocuments = async ({ filter }: { filter?: string }) => {
+export const getAllDocuments = async ({ filter }: { filter?: string } = {}) => {
   const records = (
     await pb.collection('documents').getFullList({
       sort: '-issueDate',
-      filter
+      ...(filter ? { filter } : {})
     })
   ).map(transformDocument);
   return records;
 };
 
-export const getDocuments = async () => {
+export const getActiveDocuments = async () => {
   return getAllDocuments({ filter: 'deletedDate = NULL' });
 };
 

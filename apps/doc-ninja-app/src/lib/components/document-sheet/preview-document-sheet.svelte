@@ -68,7 +68,7 @@
     </Sheet.Header>
     <Sheet.Body class="overflow-y-auto">
       <div class="flex flex-col p-6">
-        <Sheet.Title class="text-2xl">
+        <Sheet.Title class="text-xl">
           {document?.reference || '-'}
         </Sheet.Title>
         <Sheet.Description>

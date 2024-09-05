@@ -3,7 +3,7 @@
   import EmptyState from '@/lib/components/empty-state.svelte';
 
   const { data } = $props();
-  const documents = $derived(data.documents);
+  const documents = $derived(data.deletedDocuments);
 </script>
 
 <h1 class="text-lg font-semibold md:text-2xl">Trash</h1>

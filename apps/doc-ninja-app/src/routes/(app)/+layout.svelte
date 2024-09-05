@@ -10,6 +10,8 @@
 
   const { data, children } = $props();
 
+  $inspect(data);
+
   let open = $state(false);
   let openTray = $state(false);
   let droppedFiles = $state<FileList | null>(null);
@@ -59,12 +61,13 @@
     <div
       class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]"
     >
-      <LayoutSidebar />
+      <LayoutSidebar
+        activeDocuments={data.activeDocuments}
+        deletedDocuments={data.deletedDocuments}
+      />
       <div class="flex max-h-[100vh] flex-col">
         <LayoutHeader />
-        <main
-          class="flex h-full flex-1 flex-col gap-4 overflow-y-auto bg-white p-4 lg:gap-6 lg:p-6"
-        >
+        <main class="flex h-full flex-1 flex-col gap-6 overflow-y-auto bg-white p-4 p-6">
           {@render children()}
         </main>
       </div>

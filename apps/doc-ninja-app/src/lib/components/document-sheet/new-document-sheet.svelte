@@ -8,7 +8,7 @@
   import { today } from '@internationalized/date';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
-  import { getDocuments } from '@/pb';
+  import { getActiveDocuments } from '@/pb';
   import DocumentSelect from '../document-select.svelte';
   import FormFiled from '../form-filed.svelte';
 
@@ -56,7 +56,7 @@
 
   let zoomedIn = $state(false);
 
-  const documentsPromise = getDocuments();
+  const documentsPromise = getActiveDocuments();
   let selectedDocumentId = $state<string | undefined>(undefined);
   let activeTab = $state<'new-document' | 'add-to-document'>('new-document');
 </script>

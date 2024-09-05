@@ -12,6 +12,6 @@
 </script>
 
 <div class={cn('flex flex-col ', className)}>
-  <div class="text-sm text-muted-foreground">{label}</div>
-  <div class="font-medium">{@render children()}</div>
+  <div class="text-muted-foreground text-sm">{label}</div>
+  <div class="mt-1 text-sm font-medium">{@render children()}</div>
 </div>

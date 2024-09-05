@@ -18,13 +18,26 @@
   <ValidUntilCell document={row} />
 {/snippet}
 
-<div class="rounded-lg border">
+{#snippet documentCell({ row }: { row: Document })}
+  <div class="flex flex-col">
+    <div>{row.reference}</div>
+    <div class="text-muted-foreground text-xs">{row.supplier || '-'}</div>
+  </div>
+{/snippet}
+
+<div class="overflow-hidden rounded-lg border">
   <DataTable
     data={documents}
     {onRowClick}
+    cellClass="py-1 h-[45px]"
     columns={[
-      { label: 'Supplier', key: 'supplier', headerClass: 'w-[300px]' },
-      { label: 'Reference', key: 'reference' },
+      {
+        label: 'Document',
+        key: 'id',
+        snippet: documentCell
+      },
+      // { label: 'Supplier', key: 'supplier', headerClass: 'w-[250px]' },
+      // { label: 'Reference', key: 'reference' },
       {
         label: 'Date',
         key: 'issueDate',
@@ -34,7 +47,7 @@
       {
         label: 'Valid until',
         key: 'validityPeriod',
-        headerClass: 'w-[180px]',
+        headerClass: 'w-[160px]',
         snippet: validUntilCell
       }
     ]}

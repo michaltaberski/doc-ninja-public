@@ -8,6 +8,15 @@
   import { Badge } from '@/lib/components/ui/badge';
   import type { ComponentType } from 'svelte';
   import { cn } from '@/lib/utils';
+  import type { Document, RowMeta } from '@/pb/types';
+
+  const {
+    activeDocuments,
+    deletedDocuments
+  }: {
+    activeDocuments: RowMeta<Document>[];
+    deletedDocuments: RowMeta<Document>[];
+  } = $props();
 
   type Route = {
     label: string;
@@ -16,11 +25,11 @@
     icon: ComponentType<Icon>;
   };
 
-  const routes: Route[] = [
+  const routes: Route[] = $derived([
     {
       label: 'Documents',
       href: '/',
-      badge: 6,
+      badge: activeDocuments.length,
       icon: FileTextIcon
     },
     {
@@ -31,9 +40,10 @@
     {
       label: 'Trash',
       href: '/trash',
+      badge: deletedDocuments.length,
       icon: Trash2Icon
     }
-  ];
+  ]);
 </script>
 
 {#snippet routeLink(route: Route)}
@@ -47,15 +57,15 @@
       }
     )}
   >
-    <svelte:component
+    <!-- <svelte:component
       this={route.icon}
       class="size-4 group-hover:scale-110"
       aria-hidden="true"
-    />
+    /> -->
     {route.label}
     {#if route.badge}
       <Badge
-        class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+        class="ml-auto flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full"
       >
         {route.badge}
       </Badge>
