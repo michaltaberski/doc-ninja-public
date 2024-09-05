@@ -38,11 +38,11 @@
     class={cn(sheetVariants({ side }), className)}
     {...$$restProps}
   >
-    <div class="flex h-full flex-col bg-background shadow-lg sm:rounded sm:border">
+    <div class="bg-background flex h-full flex-col shadow-lg sm:rounded sm:border">
       <slot />
       {#if showClose}
         <SheetPrimitive.Close
-          class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
+          class="ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         >
           <X class="h-4 w-4" />
           <span class="sr-only">Close</span>

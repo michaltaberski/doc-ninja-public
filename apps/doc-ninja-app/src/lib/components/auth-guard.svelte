@@ -17,6 +17,6 @@
   <slot />
 {:else}
   <div class="flex h-full items-center justify-center">
-    <p class="text-lg font-semibold text-muted-foreground">Loading...</p>
+    <p class="text-muted-foreground text-lg font-semibold">Loading...</p>
   </div>
 {/if}

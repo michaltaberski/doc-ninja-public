@@ -28,12 +28,18 @@ importers:
       lucide-svelte:
         specifier: ^0.427.0
         version: 0.427.0(svelte@5.0.0-next.243)
+      mode-watcher:
+        specifier: ^0.4.1
+        version: 0.4.1(svelte@5.0.0-next.243)
       pocketbase:
         specifier: ^0.21.4
         version: 0.21.5
       svelte-pdf-simple:
         specifier: ^2.0.0
         version: 2.0.0
+      svelte-sonner:
+        specifier: ^0.3.27
+        version: 0.3.27(svelte@5.0.0-next.243)
       tailwind-merge:
         specifier: ^2.5.2
         version: 2.5.2
@@ -1211,6 +1217,11 @@ packages:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
 
+  mode-watcher@0.4.1:
+    resolution: {integrity: sha512-bNC+1NXmwEFZtziCdZSgP7HFQTpqJPcQn9GwwJQGSf6SBF3neEPYV1uRwkYuAQwbsvsXIYtzaqgedDzJ7D1mhg==}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.1
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -1670,6 +1681,11 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-sonner@0.3.27:
+    resolution: {integrity: sha512-+PvbuePNTyTNCepCWqKcFeu+Lo27yYuwfSc7zJvrWjCRMJrWAmccPg3j7jO1W13QoN3TySXU5Trb956VBQiM5Q==}
+    peerDependencies:
+      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
   svelte@5.0.0-next.243:
     resolution: {integrity: sha512-+oXjRInUyBfZXAEY8hmpf3F0eghAVCoWasotz1iOp2G5CyH4KR7jPxWOgjbgsgpL4zlMiN32MEYU1+I+QsC+nQ==}
@@ -2943,6 +2959,10 @@ snapshots:
     dependencies:
       minimist: 1.2.8
 
+  mode-watcher@0.4.1(svelte@5.0.0-next.243):
+    dependencies:
+      svelte: 5.0.0-next.243
+
   mri@1.2.0: {}
 
   mrmime@2.0.0: {}
@@ -3303,6 +3323,10 @@ snapshots:
       postcss: 8.4.42
       postcss-load-config: 4.0.2(postcss@8.4.42)
       typescript: 5.5.4
+
+  svelte-sonner@0.3.27(svelte@5.0.0-next.243):
+    dependencies:
+      svelte: 5.0.0-next.243
 
   svelte@5.0.0-next.243:
     dependencies:

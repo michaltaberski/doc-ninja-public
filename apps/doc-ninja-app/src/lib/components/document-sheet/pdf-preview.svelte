@@ -52,7 +52,7 @@
   {#if isLoaded}
     <div class="absolute right-0 top-0 z-10 flex items-center justify-between px-4 py-2">
       <div class="mt-1 flex flex-col items-end gap-2">
-        <div class="rounded bg-background px-2 py-0.5 text-xs text-muted-foreground">
+        <div class="bg-background text-muted-foreground rounded px-2 py-0.5 text-xs">
           Page {pageNumber} of {totalPages}
         </div>
         {#if totalPages > 1}

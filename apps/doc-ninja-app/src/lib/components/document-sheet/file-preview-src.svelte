@@ -22,7 +22,7 @@
     <PdfPreview {src} class="h-full" />
   {:else}
     <div
-      class="flex h-32 items-center justify-center bg-background/20 text-muted-foreground"
+      class="bg-background/20 text-muted-foreground flex h-32 items-center justify-center"
     >
       <span class="text-sm">File type not supported</span>
     </div>

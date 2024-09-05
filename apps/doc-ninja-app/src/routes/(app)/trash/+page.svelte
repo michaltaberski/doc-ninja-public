@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { toast } from 'svelte-sonner';
   import { invalidateAll } from '$app/navigation';
   import DocumentTable from '@/lib/components/document-table.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
@@ -17,6 +18,7 @@
         label: 'Restore',
         onclick: async () => {
           await restoreDocument(row.id);
+          toast.success('Document restored');
           invalidateAll();
         }
       },
@@ -24,6 +26,7 @@
         label: 'Delete permanently',
         onclick: async () => {
           await deleteDocumentPermanently(row.id);
+          toast.success('Document deleted permanently');
           invalidateAll();
         }
       }
