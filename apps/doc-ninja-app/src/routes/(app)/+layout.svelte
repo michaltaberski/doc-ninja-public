@@ -7,10 +7,12 @@
   import LayoutHeader from './layout-header.svelte';
   import LayoutSidebar from './layout-sidebar.svelte';
   import { fileDrop } from '@/lib/file-drop-action';
+  import { setDocumentPreviewState } from '@/lib/document-preview-state.svelte';
+  import DocumentPreviewProvider from '@/lib/components/document-sheet/document-preview-provider.svelte';
+
+  setDocumentPreviewState();
 
   const { data, children } = $props();
-
-  $inspect(data);
 
   let open = $state(false);
   let openTray = $state(false);
@@ -18,6 +20,7 @@
 </script>
 
 <AuthGuard currentUser={data.currentUser}>
+  <DocumentPreviewProvider />
   <div
     class="bg-muted/40 flex min-h-screen w-full flex-col"
     use:fileDrop={{

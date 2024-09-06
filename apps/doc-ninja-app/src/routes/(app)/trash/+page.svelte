@@ -4,15 +4,23 @@
   import DocumentTable from '@/lib/components/document-table.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
   import { deleteDocumentPermanently, restoreDocument } from '@/pb/index.js';
+  import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte';
 
   const { data } = $props();
   const documents = $derived(data.deletedDocuments);
+  const documentPreviewCtx = getDocumentPreviewState();
 </script>
 
 <h1 class="text-lg font-semibold md:text-2xl">Trash</h1>
 {#if documents.length > 0}
   <DocumentTable
     {documents}
+    onRowClick={(rowId) => {
+      const document = documents.find((doc) => doc.id === rowId);
+      if (document) {
+        documentPreviewCtx.openDocumentPreview(document);
+      }
+    }}
     getActionsMenu={(row) => [
       {
         label: 'Restore',
