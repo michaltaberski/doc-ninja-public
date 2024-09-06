@@ -9,8 +9,11 @@
   import { fileDrop } from '@/lib/file-drop-action';
   import { setDocumentPreviewState } from '@/lib/document-preview-state.svelte';
   import DocumentPreviewProvider from '@/lib/components/document-sheet/document-preview-provider.svelte';
+  import ConfirmDialogProvider from '@/lib/components/ui/confirm-dialog-provider.svelte';
+  import { setConfirmDialogState } from '@/lib/confirm-dialog-state.svelte';
 
   setDocumentPreviewState();
+  setConfirmDialogState();
 
   const { data, children } = $props();
 
@@ -21,6 +24,7 @@
 
 <AuthGuard currentUser={data.currentUser}>
   <DocumentPreviewProvider />
+  <ConfirmDialogProvider />
   <div
     class="bg-muted/40 flex min-h-screen w-full flex-col"
     use:fileDrop={{

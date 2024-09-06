@@ -11,10 +11,12 @@
   import EmptyState from '@/lib/components/empty-state.svelte';
   import DocumentTable from '@/lib/components/document-table.svelte';
   import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte.js';
+  import { getConfirmDialogState } from '@/lib/confirm-dialog-state.svelte.js';
 
   const { data } = $props();
   const documents = $derived(data.activeDocuments);
   const documentPreviewCtx = getDocumentPreviewState();
+  const confirmDialgoCtx = getConfirmDialogState();
 
   let openEdit = $state(false);
   let editId = $state<string | null>(null);
@@ -79,7 +81,22 @@
         <DropdownMenu.CheckboxItem>Refunded</DropdownMenu.CheckboxItem>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-    <Button size="sm" variant="outline" class="h-7 gap-1 text-sm">
+
+    <Button
+      size="sm"
+      variant="outline"
+      class="h-7 gap-1 text-sm"
+      onclick={() => {
+        confirmDialgoCtx.openConfirmDialog({
+          title: 'Export Documents',
+          description: 'Are you sure you want to export all documents?',
+          onConfirm: async () => {
+            await new Promise((r) => setTimeout(r, 1000));
+            console.log('Exporting documents');
+          }
+        });
+      }}
+    >
       <File class="h-3.5 w-3.5" />
       <span class="sr-only sm:not-sr-only">Export</span>
     </Button>
