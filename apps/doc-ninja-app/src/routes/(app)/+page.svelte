@@ -2,7 +2,7 @@
   import { Button } from '$lib/components/ui/button';
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import { File, ListFilter } from 'lucide-svelte';
-  import PreviewDocumentSheet from '@/lib/components/document-sheet/preview-document-sheet.svelte';
+  import DocumentPreviewSheet from '@/lib/components/document-sheet/document-preview-sheet.svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
   import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
@@ -52,7 +52,7 @@
   <ValidUntilCell document={row} />
 {/snippet}
 
-<PreviewDocumentSheet
+<DocumentPreviewSheet
   bind:open
   document={previewDocument}
   onEdit={() => {

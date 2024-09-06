@@ -1,11 +1,12 @@
 <script lang="ts">
   import { getDocumentPreviewState } from '$lib/document-preview-state.svelte';
-  import PreviewDocumentSheet from './preview-document-sheet.svelte';
+  import PreviewDocumentSheet from './document-preview-sheet.svelte';
 
   const documentPreviewState = getDocumentPreviewState();
+  const document = $derived(documentPreviewState.documentPreviewProps.document);
   let open = $state(false);
   $effect(() => {
-    if (documentPreviewState.document) {
+    if (document) {
       open = true;
     }
   });
@@ -16,4 +17,4 @@
   });
 </script>
 
-<PreviewDocumentSheet bind:open document={documentPreviewState.document} />
+<PreviewDocumentSheet bind:open {...documentPreviewState.documentPreviewProps} />

@@ -89,10 +89,14 @@
       </div>
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">
-      <Button variant="default" onclick={onEdit}>
-        <PencilIcon class="mr-2 h-4 w-4" />
-        Edit
-      </Button>
+      {#if onEdit}
+        <Button variant="default" onclick={onEdit}>
+          <PencilIcon class="mr-2 h-4 w-4" />
+          Edit
+        </Button>
+      {:else}
+        <div></div>
+      {/if}
       <Button variant="outline" onclick={() => (open = false)}>Cancel</Button>
     </Sheet.Footer>
   </Sheet.Content>

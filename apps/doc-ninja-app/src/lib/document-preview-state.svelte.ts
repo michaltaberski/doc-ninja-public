@@ -1,16 +1,21 @@
-import { getContext, setContext } from 'svelte';
-import { type RowMeta, type Document } from '@/pb/types';
+import { getContext, setContext, type ComponentProps } from 'svelte';
+import DocumentPreviewSheet from '@/lib/components/document-sheet/document-preview-sheet.svelte';
+
+export type DocumentPreviewSheetProps = Omit<
+  ComponentProps<DocumentPreviewSheet>,
+  'open'
+>;
 
 export class DocumentPreviewState {
-  document = $state<RowMeta<Document> | undefined>(undefined);
+  documentPreviewProps = $state<DocumentPreviewSheetProps>({});
   toastToTimeoutMap = new Map<string, number>();
 
-  openDocumentPreview(document: RowMeta<Document>) {
-    this.document = document;
+  openDocumentPreview(documentPreviewSheetProps: DocumentPreviewSheetProps) {
+    this.documentPreviewProps = documentPreviewSheetProps;
   }
 
   closeDocumentPreview() {
-    this.document = undefined;
+    this.documentPreviewProps = {};
   }
 }
 

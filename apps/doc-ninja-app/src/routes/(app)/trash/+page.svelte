@@ -18,7 +18,7 @@
     onRowClick={(rowId) => {
       const document = documents.find((doc) => doc.id === rowId);
       if (document) {
-        documentPreviewCtx.openDocumentPreview(document);
+        documentPreviewCtx.openDocumentPreview({ document });
       }
     }}
     getActionsMenu={(row) => [
