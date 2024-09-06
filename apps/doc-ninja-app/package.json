@@ -40,6 +40,7 @@
     "@internationalized/date": "^3.5.5",
     "bits-ui": "^0.21.13",
     "clsx": "^2.1.1",
+    "cmdk-sv": "^0.0.18",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "lucide-svelte": "^0.427.0",
