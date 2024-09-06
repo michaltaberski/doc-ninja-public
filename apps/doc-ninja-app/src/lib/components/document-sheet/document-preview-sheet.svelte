@@ -16,11 +16,13 @@
   let {
     open = $bindable(),
     document,
-    onEdit
+    onEdit,
+    onCloseComplete
   }: {
-    open?: boolean;
+    open: boolean;
     document?: RowMeta<Document>;
     onEdit?: () => void;
+    onCloseComplete?: () => void;
   } = $props();
 
   let selectedFile = $state(document?.files[0]);
@@ -37,13 +39,16 @@
   });
 </script>
 
-<Sheet.Root {open} onOpenChange={(newState) => (open = newState)}>
+<Sheet.Root
+  {open}
+  onOpenChange={(newState) => {
+    open = newState;
+  }}
+>
   <Sheet.Content
     showClose={false}
     class="w-full sm:max-w-2xl sm:rounded-lg"
-    onoutroend={() => {
-      console.log('outroend');
-    }}
+    onoutroend={onCloseComplete}
   >
     <Sheet.Header class={cn('relative max-h-full', zoomedIn && 'min-h-full')}>
       {#if document && selectedFile}

@@ -8,13 +8,18 @@ export type DocumentPreviewSheetProps = Omit<
 
 export class DocumentPreviewState {
   documentPreviewProps = $state<DocumentPreviewSheetProps>({});
-  toastToTimeoutMap = new Map<string, number>();
+  open = $state(false);
 
   openDocumentPreview(documentPreviewSheetProps: DocumentPreviewSheetProps) {
     this.documentPreviewProps = documentPreviewSheetProps;
+    this.open = true;
   }
 
   closeDocumentPreview() {
+    this.open = false;
+  }
+
+  onCloseComplete() {
     this.documentPreviewProps = {};
   }
 }

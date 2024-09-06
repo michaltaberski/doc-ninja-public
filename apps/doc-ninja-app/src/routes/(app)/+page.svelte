@@ -10,23 +10,11 @@
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
   import DocumentTable from '@/lib/components/document-table.svelte';
+  import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte.js';
 
   const { data } = $props();
   const documents = $derived(data.activeDocuments);
-
-  let open = $state(false);
-  let previewId = $state<string | null>(null);
-  $effect(() => {
-    if (previewId) {
-      open = true;
-    }
-  });
-  $effect(() => {
-    if (!open) {
-      previewId = null;
-    }
-  });
-  const previewDocument = $derived(documents.find((doc) => doc.id === previewId));
+  const documentPreviewCtx = getDocumentPreviewState();
 
   let openEdit = $state(false);
   let editId = $state<string | null>(null);
@@ -42,8 +30,8 @@
   });
 
   const onEdit = () => {
-    editId = previewId;
-    open = false;
+    editId = documentPreviewCtx.documentPreviewProps.document?.id || null;
+    documentPreviewCtx.closeDocumentPreview();
   };
   const editDocument = $derived(documents.find((doc) => doc.id === editId));
 </script>
@@ -52,13 +40,6 @@
   <ValidUntilCell document={row} />
 {/snippet}
 
-<DocumentPreviewSheet
-  bind:open
-  document={previewDocument}
-  onEdit={() => {
-    onEdit();
-  }}
-/>
 <EditDocumentSheet
   bind:open={openEdit}
   document={editDocument}
@@ -105,14 +86,19 @@
   </div>
 </div>
 {#if documents.length > 0}
-  <DocumentTable {documents} onRowClick={(rowId) => (previewId = rowId)} />
+  <DocumentTable
+    {documents}
+    onRowClick={(rowId) => {
+      const document = documents.find((doc) => doc.id === rowId);
+      if (document) {
+        documentPreviewCtx.openDocumentPreview({ document, onEdit });
+      }
+    }}
+  />
 {:else}
   <EmptyState
     title="You have no documents"
     subtitle="Drag and drop a file or click the button below to upload a document."
     buttonLabel="Add Document"
-    onClick={() => {
-      open = true;
-    }}
   />
 {/if}
