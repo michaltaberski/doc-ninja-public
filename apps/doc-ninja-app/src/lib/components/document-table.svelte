@@ -34,7 +34,13 @@
 {#snippet dropdownActionsMenu({ row }: { row: RowMeta<Document> })}
   <DropdownMenu options={getActionsMenu?.(row) || []} align="end">
     {#snippet children({ builders })}
-      <Button {builders} variant="outline" size="icon" class="ml-auto h-8 w-8">
+      <Button
+        {builders}
+        variant="outline"
+        size="icon"
+        class="ml-auto h-8 w-8"
+        onclick={(e: Event) => e.stopPropagation()}
+      >
         <EllipsisIcon class="h-4 w-4" />
         <span class="sr-only">Toggle notifications</span>
       </Button>
