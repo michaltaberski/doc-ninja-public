@@ -5,10 +5,12 @@
   import EmptyState from '@/lib/components/empty-state.svelte';
   import { deleteDocumentPermanently, restoreDocument } from '@/pb/index.js';
   import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte';
+  import { getConfirmDialogState } from '@/lib/confirm-dialog-state.svelte.js';
 
   const { data } = $props();
   const documents = $derived(data.deletedDocuments);
   const documentPreviewCtx = getDocumentPreviewState();
+  const confirmDialogCtx = getConfirmDialogState();
 </script>
 
 <h1 class="text-lg font-semibold md:text-2xl">Trash</h1>
@@ -34,9 +36,16 @@
         label: 'Delete permanently',
         variant: 'danger',
         onclick: async () => {
-          await deleteDocumentPermanently(row.id);
-          toast.success('Document deleted permanently');
-          invalidateAll();
+          confirmDialogCtx.openConfirmDialog({
+            title: 'Delete permanently',
+            message: 'Are you sure you want to delete this document permanently?',
+            confirmLabel: 'Delete permanently',
+            onConfirm: async () => {
+              await deleteDocumentPermanently(row.id);
+              toast.success('Document deleted permanently');
+              invalidateAll();
+            }
+          });
         }
       }
     ]}

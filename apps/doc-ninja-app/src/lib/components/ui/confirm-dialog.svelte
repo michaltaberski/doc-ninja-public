@@ -1,33 +1,32 @@
 <script lang="ts">
   import * as AlertDialog from '$lib/components/ui/alert-dialog';
-  import type { Snippet } from 'svelte';
   import { Button } from './button';
 
-  let isOpened = $state(false);
   let isConfirming = $state(false);
-
-  const {
-    children,
+  let {
+    open = $bindable(),
     confirmLabel = 'Ok',
     title,
     description,
-    onConfirm
+    onConfirm,
+    onCloseComplete
   }: {
-    children?: Snippet<[]>;
+    open?: boolean;
     confirmLabel?: string;
     title?: string;
     description?: string;
     onConfirm?: () => Promise<void>;
+    onCloseComplete?: () => void;
   } = $props();
 </script>
 
-<AlertDialog.Root open={isOpened} onOpenChange={(newState) => (isOpened = newState)}>
-  {#if children}
-    <AlertDialog.Trigger>
-      {@render children()}
-    </AlertDialog.Trigger>
-  {/if}
-  <AlertDialog.Content>
+<AlertDialog.Root
+  {open}
+  onOpenChange={(newState) => {
+    open = newState;
+  }}
+>
+  <AlertDialog.Content onoutroend={onCloseComplete} class="z-50">
     <AlertDialog.Header>
       <AlertDialog.Title>{title}</AlertDialog.Title>
       <AlertDialog.Description>
@@ -37,18 +36,17 @@
     <AlertDialog.Footer>
       <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
       <Button
+        disabled={isConfirming}
         onclick={async () => {
           isConfirming = true;
           await onConfirm?.();
           isConfirming = false;
-          isOpened = false;
+          open = false;
         }}
       >
-        {#if isConfirming}
-          ...
-        {/if}
-        {confirmLabel}</Button
-      >
+        {confirmLabel}
+        {isConfirming ? '...' : ''}
+      </Button>
     </AlertDialog.Footer>
   </AlertDialog.Content>
 </AlertDialog.Root>

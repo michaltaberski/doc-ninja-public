@@ -23,8 +23,6 @@
 </script>
 
 <AuthGuard currentUser={data.currentUser}>
-  <DocumentPreviewProvider />
-  <ConfirmDialogProvider />
   <div
     class="bg-muted/40 flex min-h-screen w-full flex-col"
     use:fileDrop={{
@@ -80,4 +78,6 @@
       </div>
     </div>
   </div>
+  <DocumentPreviewProvider />
+  <ConfirmDialogProvider />
 </AuthGuard>

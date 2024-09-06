@@ -1,11 +1,11 @@
 <script lang="ts">
   import { getConfirmDialogState } from '@/lib/confirm-dialog-state.svelte';
-  import ConfirmDialogNew from './confirm-dialog-new.svelte';
+  import ConfirmDialog from './confirm-dialog.svelte';
 
   const confirmDialogState = getConfirmDialogState();
 </script>
 
-<ConfirmDialogNew
+<ConfirmDialog
   open={confirmDialogState.open}
   {...confirmDialogState.confirmDialogProps}
 />
