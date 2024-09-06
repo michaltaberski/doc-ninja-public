@@ -2,11 +2,11 @@
   import { invalidateAll } from '$app/navigation';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
   import { addFilesToDocument, saveDocument } from '@/pb/index.js';
-  import { fileDrop } from './file-drop-action';
   import SmartDialog from './smart-dialog.svelte';
   import NewDocumentSheet from '@/lib/components/document-sheet/new-document-sheet.svelte';
   import LayoutHeader from './layout-header.svelte';
   import LayoutSidebar from './layout-sidebar.svelte';
+  import { fileDrop } from '@/lib/file-drop-action';
 
   const { data, children } = $props();
 

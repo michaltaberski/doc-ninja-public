@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Card from '$lib/components/ui/card';
-  import Logo from './doc-ninja-logo-2.svg';
+  import Logo from '@/assets/doc-ninja-logo.svg';
   import { page } from '$app/stores';
 
   import { Bell, Icon, FileTextIcon, InboxIcon, Trash2Icon } from 'lucide-svelte';
