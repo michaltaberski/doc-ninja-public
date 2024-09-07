@@ -13,6 +13,7 @@
   import { invalidateAll } from '$app/navigation';
   import { getDocumentFilePublicUrl } from '@/pb/document-utils';
   import Autocomplete from '../ui/autocomplete.svelte';
+  import Input from '../ui/input/input.svelte';
 
   let {
     open = $bindable(),
@@ -73,7 +74,19 @@
       {/if}
     </Sheet.Header>
     <Sheet.Body class="overflow-y-auto">
-      <Autocomplete />
+      <div class="m-4 flex gap-4">
+        <Autocomplete
+          options={[
+            { value: '1', label: 'Anna' },
+            { value: '2', label: 'Antoni' },
+            { value: '3', label: 'Jan' }
+          ]}
+          onCreate={(newValue) => console.log('New value:', newValue)}
+          onSelect={(value) => console.log('Selected:', value)}
+          placeholder="Select an option..."
+        />
+        <Input placeholder="Search..." />
+      </div>
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-xl">
           {document?.reference || '-'}
