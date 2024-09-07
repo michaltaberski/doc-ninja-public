@@ -12,6 +12,7 @@
   import { deleteFileFromDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
   import { getDocumentFilePublicUrl } from '@/pb/document-utils';
+  import Autocomplete from '../ui/autocomplete.svelte';
 
   let {
     open = $bindable(),
@@ -72,6 +73,7 @@
       {/if}
     </Sheet.Header>
     <Sheet.Body class="overflow-y-auto">
+      <Autocomplete />
       <div class="flex flex-col p-6">
         <Sheet.Title class="text-xl">
           {document?.reference || '-'}

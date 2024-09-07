@@ -6,6 +6,8 @@
   import * as Popover from './popover';
   import * as Command from './command';
   import { Button } from './button';
+  import { Input } from './input';
+  import { SearchIcon } from 'lucide-svelte';
 
   const frameworks = $state([
     {
@@ -63,29 +65,17 @@
     </Button>
   </Popover.Trigger>
   <Popover.Content class="w-[200px] p-0">
-    <Command.Root>
-      <Command.Input placeholder="Search framework..." bind:value={search} />
-      <Command.Empty>No framework found. {search}</Command.Empty>
-      <Command.Group>
-        {#each frameworks as framework (framework.value)}
-          <Command.Item
-            value={framework.value}
-            onSelect={(currentValue) => {
-              value = currentValue;
-              closeAndFocusTrigger(ids.trigger);
-            }}
-          >
-            <Check
-              class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')}
-            />
-            {framework.label}
-          </Command.Item>
-        {/each}
-        <Command.Item value={search}>
-          <Check class={cn('mr-2 h-4 w-4')} />
-          {search}
-        </Command.Item>
-      </Command.Group>
-    </Command.Root>
+    <div class="flex items-center border-b px-2">
+      <SearchIcon class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+      <input
+        placeholder="Search..."
+        class="placeholder:text-muted-foreground flex h-9 w-full rounded-md bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
+      />
+    </div>
+    <div class="flex flex-col gap-0.5 p-1">
+      <div class="hover:bg-accent rounded px-2 py-1 text-sm">Value 1</div>
+      <div class="hover:bg-accent rounded px-2 py-1 text-sm">Value 1</div>
+      <div class="hover:bg-accent rounded px-2 py-1 text-sm">Value 1</div>
+    </div>
   </Popover.Content>
 </Popover.Root>
