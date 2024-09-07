@@ -88,7 +88,7 @@
       onclick={() => {
         confirmDialgoCtx.openConfirmDialog({
           title: 'Export Documents',
-          description: 'Are you sure you want to export all documents?',
+          message: 'Are you sure you want to export all documents?',
           onConfirm: async () => {
             await new Promise((r) => setTimeout(r, 1000));
             console.log('Exporting documents');

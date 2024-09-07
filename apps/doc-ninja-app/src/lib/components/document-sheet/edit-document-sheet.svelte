@@ -65,7 +65,7 @@
         </Sheet.Description>
       </div>
       {#if editableDocument}
-        <DocumentForm bind:document={editableDocument} disabled={saving} />
+        <DocumentForm bind:document={editableDocument} />
       {/if}
     </Sheet.Body>
     <Sheet.Footer class="flex border-t p-6 sm:justify-between">
@@ -75,7 +75,7 @@
           onclick={() => {
             confirmDialgoCtx.openConfirmDialog({
               title: 'Delete document',
-              description: 'Are you sure you want to delete this document?',
+              message: 'Are you sure you want to delete this document?',
               onConfirm: () => onDelete(documentId)
             });
           }}>Delete</Button

@@ -7,14 +7,14 @@
     open = $bindable(),
     confirmLabel = 'Ok',
     title,
-    description,
+    message,
     onConfirm,
     onCloseComplete
   }: {
     open?: boolean;
     confirmLabel?: string;
     title?: string;
-    description?: string;
+    message?: string;
     onConfirm?: () => Promise<void>;
     onCloseComplete?: () => void;
   } = $props();
@@ -30,7 +30,7 @@
     <AlertDialog.Header>
       <AlertDialog.Title>{title}</AlertDialog.Title>
       <AlertDialog.Description>
-        {description}
+        {message}
       </AlertDialog.Description>
     </AlertDialog.Header>
     <AlertDialog.Footer>

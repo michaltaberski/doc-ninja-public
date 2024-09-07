@@ -1,12 +1,8 @@
 <script lang="ts">
-  import Check from 'lucide-svelte/icons/check';
   import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
-  import { cn } from '$lib/utils.js';
   import { tick } from 'svelte';
   import * as Popover from './popover';
-  import * as Command from './command';
   import { Button } from './button';
-  import { Input } from './input';
   import { SearchIcon } from 'lucide-svelte';
 
   const frameworks = $state([
