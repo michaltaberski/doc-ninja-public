@@ -11,8 +11,9 @@
   };
 
   type Props<T> = {
-    value?: T;
     options: Option<T>[];
+    class?: string;
+    value?: T;
     onSelect?: (value: T) => void;
     placeholder?: string;
     onCreate?: (newValue: string) => void;
@@ -20,6 +21,7 @@
 
   let {
     value = $bindable(),
+    class: className,
     options,
     placeholder,
     onCreate,
@@ -79,7 +81,7 @@
       variant="outline"
       role="combobox"
       aria-expanded={open}
-      class="w-[200px] justify-between"
+      class={cn('justify-between', className)}
     >
       {selectedLabel}
       {#if !selectedLabel}
@@ -88,7 +90,7 @@
       <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
     </Button>
   </Popover.Trigger>
-  <Popover.Content class="w-[200px] p-0">
+  <Popover.Content class="p-0" sameWidth>
     <div class="flex items-center border-b px-2">
       <SearchIcon class="mr-2 h-4 w-4 shrink-0 opacity-50" />
       <input
@@ -139,6 +141,8 @@
         >
           Create "{search}"
         </div>
+      {:else if filteredOptions.length === 0}
+        <span class="px-2 py-1 text-sm">Type to create</span>
       {/if}
     </div>
   </Popover.Content>

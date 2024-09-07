@@ -4,6 +4,7 @@
   import type { Document } from '@/pb/types';
   import DatePicker from '../ui/date-picker.svelte';
   import DurationSelect from '../duration-select.svelte';
+  import Autocomplete from '../ui/autocomplete.svelte';
 
   let {
     document = $bindable(),
@@ -21,12 +22,17 @@
   <FormFiled label="Supplier" for="supplier">
     <Input id="supplier" bind:value={document.supplier} {disabled} />
   </FormFiled>
-  <FormFiled label="Reference" for="reference">
-    <Input id="reference" bind:value={document.reference} {disabled} />
-  </FormFiled>
+  <div class="flex gap-6">
+    <FormFiled label="Reference" for="reference">
+      <Input id="reference" bind:value={document.reference} {disabled} />
+    </FormFiled>
+    <FormFiled label="Category">
+      <Autocomplete options={[]} onCreate={() => {}} />
+    </FormFiled>
+  </div>
   <div class="flex gap-6">
     <FormFiled label="Issue date">
-      <DatePicker bind:value={document.issueDate} />
+      <DatePicker bind:value={document.issueDate} class="w-auto" />
     </FormFiled>
     <FormFiled label="Validity period" for="validity-period">
       <DurationSelect bind:duration={document.validityPeriod} />

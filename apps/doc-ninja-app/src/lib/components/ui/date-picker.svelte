@@ -10,7 +10,10 @@
     dateStyle: 'long'
   });
 
-  let { value = $bindable() }: { value: CalendarDate | undefined } = $props();
+  let {
+    value = $bindable(),
+    class: className
+  }: { value: CalendarDate | undefined; class?: string } = $props();
 </script>
 
 <Popover.Root>
@@ -19,7 +22,8 @@
       variant="outline"
       class={cn(
         'w-[280px] justify-start text-left font-normal',
-        !value && 'text-muted-foreground'
+        !value && 'text-muted-foreground',
+        className
       )}
       builders={[builder]}
     >
