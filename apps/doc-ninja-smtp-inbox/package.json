@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
+    "dev": "tsx src/index.ts",
     "demo": "swaks --to test@domain.com --from sender@domain.com --server localhost:2525 --body \"Hello World\" --header \"Subject: Test Email\""
   },
   "keywords": [],
@@ -16,5 +16,11 @@
     "axios": "^1.7.7",
     "mailparser": "^3.7.1",
     "smtp-server": "^3.13.5"
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.4.4",
+    "@types/smtp-server": "^3.5.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.0.0"
   }
 }
