@@ -1,0 +1,20 @@
+{
+  "name": "doc-ninja-smtp-inbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "demo": "swaks --to test@domain.com --from sender@domain.com --server localhost:2525 --body \"Hello World\" --header \"Subject: Test Email\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "mailparser": "^3.7.1",
+    "smtp-server": "^3.13.5"
+  }
+}
