@@ -6,7 +6,6 @@ export * from './types';
 export * from './document-utils';
 export * from './pb-utils';
 export * from './pb';
-export * from './inbox-collection';
 
 // Auth
 export const login = async (usernameOrEmail: string, password: string) => {
