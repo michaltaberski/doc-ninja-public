@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as Select from '$lib/components/ui/select';
-  import type { Document, RowMeta } from '@/pb/types';
+  import type { Document, RowMeta } from '@doc-ninja/data-layer';
 
   let {
     selectedId = $bindable(),

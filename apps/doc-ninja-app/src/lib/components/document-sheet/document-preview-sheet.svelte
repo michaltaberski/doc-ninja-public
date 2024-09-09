@@ -2,16 +2,19 @@
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
   import { PencilIcon } from 'lucide-svelte';
-  import type { Document, RowMeta } from '@/pb/types';
+  import {
+    deleteFileFromDocument,
+    getDocumentFilePublicUrl,
+    type Document,
+    type RowMeta
+  } from '@doc-ninja/data-layer';
   import ReadonlyField from '../readonly-field.svelte';
   import ValidUntilCell from '../valid-until-cell.svelte';
   import { formatDate } from '@/lib/duration-utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
   import { cn, triggerFileDownload } from '@/lib/utils';
   import FilePreviewRemote from './file-preview-remote.svelte';
-  import { deleteFileFromDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import { getDocumentFilePublicUrl } from '@/pb/document-utils';
 
   let {
     open = $bindable(),

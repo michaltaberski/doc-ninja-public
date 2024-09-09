@@ -3,14 +3,13 @@
   import * as Sheet from '$lib/components/ui/sheet';
   import * as Tabs from '$lib/components/ui/tabs';
   import LocalFilePreview from './file-preview-local.svelte';
-  import type { NewDocument } from '@/pb/types';
   import DocumentForm from './document-form.svelte';
   import { today } from '@internationalized/date';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';
-  import { getActiveDocuments } from '@/pb';
   import DocumentSelect from '../document-select.svelte';
   import FormFiled from '../form-filed.svelte';
+  import { getActiveDocuments, type NewDocument } from '@doc-ninja/data-layer';
 
   let {
     open,

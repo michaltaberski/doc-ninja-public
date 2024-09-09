@@ -1,7 +1,11 @@
 <script lang="ts">
-  import type { Document, FileType, RowMeta } from '@/pb/types';
+  import {
+    getDocumentFilePublicUrl,
+    type Document,
+    type FileType,
+    type RowMeta
+  } from '@doc-ninja/data-layer';
   import FilePreviewSrc from './file-preview-src.svelte';
-  import { getDocumentFilePublicUrl } from '@/pb/document-utils';
   const {
     document,
     file,

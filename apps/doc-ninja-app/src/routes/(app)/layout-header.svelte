@@ -2,8 +2,8 @@
   import { invalidateAll } from '$app/navigation';
   import { Button } from '$lib/components/ui/button';
   import DropdownMenu from '$lib/components/dropdown-menu.svelte';
-  import { logout } from '@/pb/index.js';
   import { CircleUser } from 'lucide-svelte';
+  import { logout } from '@doc-ninja/data-layer';
 </script>
 
 <header

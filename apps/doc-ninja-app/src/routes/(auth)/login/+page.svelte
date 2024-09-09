@@ -4,10 +4,10 @@
   import * as Card from '@/lib/components/ui/card';
   import { Input } from '@/lib/components/ui/input';
   import { Label } from '@/lib/components/ui/label';
-  import { login } from '@/pb';
   import { createForm } from './create-form.svelte';
   import { cn } from '@/lib/utils';
   import { Loader } from 'lucide-svelte';
+  import { login } from '@doc-ninja/data-layer';
 
   const { data } = $props();
 

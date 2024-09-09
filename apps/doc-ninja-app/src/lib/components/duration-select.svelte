@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as Select from '$lib/components/ui/select';
-  import type { Duration, DurationUnit } from '@/pb/types';
+  import type { Duration, DurationUnit } from '@doc-ninja/data-layer';
   import { times } from 'lodash';
   import { DURATION_UNITS, getDurationUnitLabel } from '../duration-utils';
 

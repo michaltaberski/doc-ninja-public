@@ -3,9 +3,9 @@
   import { invalidateAll } from '$app/navigation';
   import DocumentTable from '@/lib/components/document-table.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
-  import { deleteDocumentPermanently, restoreDocument } from '@/pb/index.js';
   import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte';
   import { getConfirmDialogState } from '@/lib/confirm-dialog-state.svelte.js';
+  import { deleteDocumentPermanently, restoreDocument } from '@doc-ninja/data-layer';
 
   const { data } = $props();
   const documents = $derived(data.deletedDocuments);

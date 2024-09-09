@@ -1,4 +1,4 @@
-import { getAllDocuments } from '@/pb';
+import { getAllDocuments } from '@doc-ninja/data-layer';
 import type { LayoutLoad } from './$types';
 import groupBy from 'lodash/groupBy';
 

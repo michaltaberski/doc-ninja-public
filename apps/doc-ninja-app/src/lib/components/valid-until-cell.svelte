@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CircleCheck, CircleX } from 'lucide-svelte';
   import { formatDate, getIsFutureDate, validUntil } from '@/lib/duration-utils';
-  import type { Document } from '@/pb/types';
+  import type { Document } from '@doc-ninja/data-layer';
 
   const { document }: { document: Document } = $props();
 

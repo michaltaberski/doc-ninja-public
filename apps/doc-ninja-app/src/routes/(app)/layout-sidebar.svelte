@@ -8,7 +8,7 @@
   import { Badge } from '@/lib/components/ui/badge';
   import type { ComponentType } from 'svelte';
   import { cn } from '@/lib/utils';
-  import type { Document, RowMeta } from '@/pb/types';
+  import type { Document, RowMeta } from '@doc-ninja/data-layer';
 
   const {
     activeDocuments,

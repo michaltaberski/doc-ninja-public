@@ -1,7 +1,7 @@
 <script lang="ts">
   import DataTable from '@/lib/components/data-table.svelte';
   import { formatDate } from '@/lib/duration-utils';
-  import type { Document, RowMeta } from '@/pb/types';
+  import type { Document, RowMeta } from '@doc-ninja/data-layer';
   import { CalendarDate } from '@internationalized/date';
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
   import type { DropdownMenuOption } from './dropdown-menu-utils';

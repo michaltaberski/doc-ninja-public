@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import * as Sheet from '$lib/components/ui/sheet';
-  import type { Document, RowMeta } from '@/pb/types';
+  import type { Document, RowMeta } from '@doc-ninja/data-layer';
   import DocumentForm from './document-form.svelte';
   import { cn } from '@/lib/utils';
   import PreviewFileNavigation from './preview-file-navigation.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { FileType } from '@/pb/types';
+  import type { FileType } from '@doc-ninja/data-layer';
   import PdfPreview from './pdf-preview.svelte';
   import { cn } from '@/lib/utils';
   const {

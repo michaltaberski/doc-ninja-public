@@ -3,14 +3,14 @@
   import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
   import { File, ListFilter } from 'lucide-svelte';
   import EditDocumentSheet from '@/lib/components/document-sheet/edit-document-sheet.svelte';
-  import { deleteDocument, updateDocument } from '@/pb';
   import { invalidateAll } from '$app/navigation';
-  import type { Document } from '@/pb/types';
   import ValidUntilCell from '@/lib/components/valid-until-cell.svelte';
   import EmptyState from '@/lib/components/empty-state.svelte';
   import DocumentTable from '@/lib/components/document-table.svelte';
   import { getDocumentPreviewState } from '@/lib/document-preview-state.svelte.js';
   import { getConfirmDialogState } from '@/lib/confirm-dialog-state.svelte.js';
+  import { deleteDocument, updateDocument } from '@doc-ninja/data-layer';
+  import type { Document } from '@doc-ninja/data-layer';
 
   const { data } = $props();
   const documents = $derived(data.activeDocuments);

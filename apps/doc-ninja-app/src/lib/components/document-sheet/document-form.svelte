@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Input } from '@/lib/components/ui/input';
   import FormFiled from '@/lib/components/form-filed.svelte';
-  import type { Document } from '@/pb/types';
+  import type { Document } from '@doc-ninja/data-layer';
   import DatePicker from '../ui/date-picker.svelte';
   import DurationSelect from '../duration-select.svelte';
   import Autocomplete from '../ui/autocomplete.svelte';

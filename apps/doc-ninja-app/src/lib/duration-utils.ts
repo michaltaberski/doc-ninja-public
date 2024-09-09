@@ -1,4 +1,4 @@
-import type { Duration, DurationUnit, Document } from '@/pb/types';
+import type { Duration, DurationUnit, Document } from '@doc-ninja/data-layer';
 import {
   DateFormatter,
   getLocalTimeZone,

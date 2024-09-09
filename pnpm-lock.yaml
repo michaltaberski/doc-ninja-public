@@ -10,6 +10,9 @@ importers:
 
   apps/doc-ninja-app:
     dependencies:
+      '@doc-ninja/data-layer':
+        specifier: workspace:*
+        version: link:../../packages/data-layer
       '@internationalized/date':
         specifier: ^3.5.5
         version: 3.5.5
@@ -138,6 +141,9 @@ importers:
 
   packages/data-layer:
     dependencies:
+      '@internationalized/date':
+        specifier: ^3.5.5
+        version: 3.5.5
       pocketbase:
         specifier: ^0.21.4
         version: 0.21.5

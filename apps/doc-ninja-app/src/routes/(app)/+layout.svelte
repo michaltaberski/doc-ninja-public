@@ -1,7 +1,6 @@
 <script lang="ts">
   import { invalidateAll } from '$app/navigation';
   import AuthGuard from '@/lib/components/auth-guard.svelte';
-  import { addFilesToDocument, saveDocument } from '@/pb/index.js';
   import SmartDialog from './smart-dialog.svelte';
   import NewDocumentSheet from '@/lib/components/document-sheet/new-document-sheet.svelte';
   import LayoutHeader from './layout-header.svelte';
@@ -11,6 +10,7 @@
   import DocumentPreviewProvider from '@/lib/components/document-sheet/document-preview-provider.svelte';
   import ConfirmDialogProvider from '@/lib/components/ui/confirm-dialog-provider.svelte';
   import { setConfirmDialogState } from '@/lib/confirm-dialog-state.svelte';
+  import { addFilesToDocument, saveDocument } from '@doc-ninja/data-layer';
 
   setDocumentPreviewState();
   setConfirmDialogState();

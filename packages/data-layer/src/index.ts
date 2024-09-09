@@ -2,6 +2,7 @@ import PocketBase from 'pocketbase';
 import type { Document, NewDocument } from './types';
 import { transformDocument } from './pb-utils';
 
+export type { CalendarDate } from '@internationalized/date';
 export * from './types';
 export * from './document-utils';
 export * from './pb-utils';

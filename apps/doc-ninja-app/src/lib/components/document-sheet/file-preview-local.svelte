@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { FileType } from '@/pb/types';
+  import type { FileType } from '@doc-ninja/data-layer';
   import { cn, loadFileToSrc } from '@/lib/utils';
   import FilePreviewSrc from './file-preview-src.svelte';
 
