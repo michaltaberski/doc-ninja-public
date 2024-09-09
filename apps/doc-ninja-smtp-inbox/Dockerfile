@@ -1,42 +1,22 @@
-# Stage 1: Build Stage
-FROM node:20-alpine AS build
-
-# Install pnpm
+# Step 1: Use an official Node.js runtime as the base image
+FROM node:20-alpine
+# Install pnpm globally
 RUN npm install -g pnpm
 
-# Set the working directory
+# Step 2: Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and pnpm-lock.yaml for dependency installation
-COPY package.json pnpm-lock.yaml ./
+# Step 3: Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
-# Install all dependencies using pnpm
+# Step 4: Install dependencies
 RUN pnpm install
 
-# Copy the rest of the app source code
+# Step 5: Copy the rest of the application code
 COPY . .
 
-# Build the project (TypeScript to JavaScript)
-RUN pnpm run build
-
-# Stage 2: Production Stage
-FROM node:20-alpine
-
-# Install pnpm
-RUN npm install -g pnpm
-
-# Set the working directory in the production image
-WORKDIR /app
-
-# Copy only the necessary files for the production stage
-COPY package.json pnpm-lock.yaml ./
-COPY --from=build /app/dist ./dist
-
-# Install only production dependencies
-RUN pnpm install --prod
-
-# Expose port 2525 for the SMTP server
+# Step 7: Expose the port on which your app will run (adjust if necessary)
 EXPOSE 2525
 
-# Start the application using the compiled JavaScript files
-CMD ["node", "dist/index.js"]
+# Step 8: Define the command to run the app (adjust if necessary)
+CMD ["pnpm", "dev"]
