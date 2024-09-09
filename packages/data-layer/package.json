@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "pocketbase": "^0.21.4",
+    "@doc-ninja/data-layer": "workspace:*",
     "@internationalized/date": "^3.5.5"
   }
 }

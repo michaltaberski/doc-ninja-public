@@ -7,16 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "demo": "swaks --to test@domain.com --from sender@domain.com --server localhost:2525 --body \"Hello World\" --header \"Subject: Test Email\""
+    "demo": "swaks --to test@domain.com --from sender@domain.com --server localhost:2525 --body \"Hello World\" --header \"Subject: Test Email\" --attach @demo-assets/demo-document.pdf --attach @demo-assets/demo-2.pdf"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@doc-ninja/data-layer": "workspace:*",
     "axios": "^1.7.7",
     "mailparser": "^3.7.1",
-    "@doc-ninja/data-layer": "workspace:*",
     "smtp-server": "^3.13.5"
   },
   "devDependencies": {

@@ -8,6 +8,14 @@ export type RowMeta<T = object> = {
   updated: string;
 } & T;
 
+export type DurationUnit = 'DAY' | 'MONTH' | 'YEAR';
+
+export type Duration = `${string}-${DurationUnit}`;
+
+export type FileType = 'Image' | 'PDF' | 'File';
+
+// Collection items
+
 export type Document = {
   files: string[];
   supplier?: string;
@@ -22,8 +30,7 @@ export type NewDocument = Omit<Document, 'files'> & {
   files: File[];
 };
 
-export type DurationUnit = 'DAY' | 'MONTH' | 'YEAR';
-
-export type Duration = `${string}-${DurationUnit}`;
-
-export type FileType = 'Image' | 'PDF' | 'File';
+export type InboxItem = {
+  meta: Object;
+  files: string[];
+};

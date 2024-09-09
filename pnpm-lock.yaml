@@ -138,6 +138,9 @@ importers:
 
   packages/data-layer:
     dependencies:
+      '@doc-ninja/data-layer':
+        specifier: workspace:*
+        version: 'link:'
       '@internationalized/date':
         specifier: ^3.5.5
         version: 3.5.5

@@ -1,13 +1,12 @@
-import PocketBase from 'pocketbase';
 import type { Document, NewDocument } from './types';
 import { transformDocument } from './pb-utils';
+import { pb } from './pb';
 
 export * from './types';
 export * from './document-utils';
 export * from './pb-utils';
-
-const pb = new PocketBase('https://db.doc.ninja');
-pb.autoCancellation(false);
+export * from './pb';
+export * from './inbox-collection';
 
 // Auth
 export const login = async (usernameOrEmail: string, password: string) => {
