@@ -1,0 +1,9 @@
+{
+  "name": "@doc-ninja/data-layer",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  }
+}

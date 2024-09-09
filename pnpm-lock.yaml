@@ -110,6 +110,9 @@ importers:
 
   apps/doc-ninja-smtp-inbox:
     dependencies:
+      '@doc-ninja/data-layer':
+        specifier: workspace:*
+        version: link:../../packages/data-layer
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -132,6 +135,8 @@ importers:
       typescript:
         specifier: ^5.0.0
         version: 5.5.4
+
+  packages/data-layer: {}
 
 packages:
 

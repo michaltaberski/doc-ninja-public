@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^1.7.7",
     "mailparser": "^3.7.1",
+    "@doc-ninja/data-layer": "workspace:*",
     "smtp-server": "^3.13.5"
   },
   "devDependencies": {
