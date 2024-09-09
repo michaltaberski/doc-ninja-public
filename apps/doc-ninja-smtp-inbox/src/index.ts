@@ -13,6 +13,7 @@ const server = new SMTPServer({
 
       console.log('Received email:');
       console.log('From:', parsed.from?.text);
+      // @ts-ignore
       console.log('To:', parsed.to.text);
       console.log('Subject:', parsed.subject);
       console.log('Text Body:', parsed.text);

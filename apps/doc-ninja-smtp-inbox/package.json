@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx src/index.ts",
+    "build": "tsc",
     "demo": "swaks --to test@domain.com --from sender@domain.com --server localhost:2525 --body \"Hello World\" --header \"Subject: Test Email\""
   },
   "keywords": [],
