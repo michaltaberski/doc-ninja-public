@@ -136,7 +136,11 @@ importers:
         specifier: ^5.0.0
         version: 5.5.4
 
-  packages/data-layer: {}
+  packages/data-layer:
+    dependencies:
+      pocketbase:
+        specifier: ^0.21.4
+        version: 0.21.5
 
 packages:
 
